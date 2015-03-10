@@ -1,0 +1,311 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Openfire系列之管理员登录 | 沧海为水</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="摘要：主要分析Openfire管理员后台无法登陆问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Openfire系列之管理员登录">
+<meta property="og:url" content="http://yazone.github.com/2015/03/10/Openfire系列之管理员登录/index.html">
+<meta property="og:site_name" content="沧海为水">
+<meta property="og:description" content="摘要：主要分析Openfire管理员后台无法登陆问题">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Openfire系列之管理员登录">
+<meta name="twitter:description" content="摘要：主要分析Openfire管理员后台无法登陆问题">
+  
+    <link rel="alternative" href="/atom.xml" title="沧海为水" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">沧海为水</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">这是一个程序员的地方，聊聊程序吧</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">文章列表</a>
+        
+          <a class="main-nav-link" href="/">关于我</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="yazone.github.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-Openfire系列之管理员登录" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/03/10/Openfire系列之管理员登录/" class="article-date">
+  <time datetime="2015-03-10T06:17:16.000Z" itemprop="datePublished">2015-03-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/程序思维/">程序思维</a>►<a class="article-category-link" href="/categories/程序思维/Openfire/">Openfire</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Openfire系列之管理员登录
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>摘要：主要分析Openfire管理员后台无法登陆问题<a id="more"></a></p>
+<h1 id="问题">问题</h1><p>在安装Openfire后，讨论群里经常有人说初始化后在管理员页面输入帐号admin和密码admin后无法登陆到服务器，或者更改了某些配置导致无法登录，如下：</p>
+<h1 id="原因">原因</h1><p>可能的原因有多种情况，需要一步步分析，通常有以下可能:</p>
+<ol>
+<li>权限问题（帐号不是管理员、帐号密码错误、限制IP等）</li>
+<li>服务器域与管理员域不一致（这种情况通常是修改域后导致）</li>
+<li>重载了provider问题（有用户不是在官网上下载openfire安装后出现这类问题）</li>
+</ol>
+<h1 id="分析">分析</h1><p>首先需要了解加载管理员帐号过程，登录页源码在openfire_src\src\web\login.jsp文件中，认证代码为：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Check that a username was provided before trying to verify credentials</span></span><br><span class="line"><span class="keyword">if</span> (loginUsername != <span class="keyword">null</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (LoginLimitManager.getInstance().hasHitConnectionLimit(loginUsername, request.getRemoteAddr())) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnauthorizedException(<span class="string">"User '"</span> + loginUsername +<span class="string">"' or address '"</span> + request.getRemoteAddr() + <span class="string">"' has his login attempt limit."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!AdminManager.getInstance().isUserAdmin(loginUsername, <span class="keyword">true</span>)) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnauthorizedException(<span class="string">"User '"</span> + loginUsername + <span class="string">"' not allowed to login."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    authToken = AuthFactory.authenticate(loginUsername, password);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    errors.put(<span class="string">"unauthorized"</span>, LocaleUtils.getLocalizedString(<span class="string">"login.failed.unauthorized"</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="第一步_判断是否IP地址限制连接">第一步 判断是否IP地址限制连接</h2><p>LoginLimitManager::hasHitConnectionLimit位于org.jivesoftware.admin.LoginLimitManager，用来判断是否尝试连接次数过多，防止暴力破解。</p>
+<h2 id="第二步_判断用户是否有管理员权限">第二步 判断用户是否有管理员权限</h2><p>AdminManager::isUserAdmin位于org.jivesoftware.openfire.admin.AdminManager，用来判断用户是否在管理员列表中。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isUserAdmin</span><span class="params">(String username, <span class="keyword">boolean</span> allowAdminIfEmpty)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (adminList == <span class="keyword">null</span>) &#123;</span><br><span class="line">        loadAdminList();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (allowAdminIfEmpty &amp;&amp; adminList.isEmpty()) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"admin"</span>.equals(username);</span><br><span class="line">    &#125;</span><br><span class="line">    JID userJID = XMPPServer.getInstance().createJID(username, <span class="keyword">null</span>);</span><br><span class="line">    <span class="keyword">return</span> adminList.contains(userJID);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="加载管理员列表">加载管理员列表</h3><p>AdminManager保存了管理员列表adminList，如果为空将首先从provider中加载。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">loadAdminList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    adminList = provider.getAdmins();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中provider通过属性provider.admin.className来获取，意为管理员提供者，通过查询openfire数据库中的ofProperty属性表可知默认情况下provider对象为org.jivesoftware.openfire.admin.DefaultAdminProvider的实例，ofProperty表如下：</p>
+<p>继续跟踪DefaultAdminProvider::getAdmins()<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;JID&gt; <span class="title">getAdmins</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    List&lt;JID&gt; adminList = <span class="keyword">new</span> ArrayList&lt;JID&gt;();</span><br><span class="line">    <span class="comment">// 获取管理员纯JID</span></span><br><span class="line">    String jids = JiveGlobals.getProperty(<span class="string">"admin.authorizedJIDs"</span>);</span><br><span class="line">    jids = (jids == <span class="keyword">null</span> || jids.trim().length() == <span class="number">0</span>) ? <span class="string">""</span> : jids;</span><br><span class="line">    <span class="comment">// 获取每个JID添加到管理员列表中，数据库中保存时以符号","分隔</span></span><br><span class="line">    StringTokenizer tokenizer = <span class="keyword">new</span> StringTokenizer(jids, <span class="string">","</span>);</span><br><span class="line">    <span class="keyword">while</span> (tokenizer.hasMoreTokens()) &#123;</span><br><span class="line">        String jid = tokenizer.nextToken().toLowerCase().trim();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            adminList.add(<span class="keyword">new</span> JID(jid));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> (IllegalArgumentException e) &#123;</span><br><span class="line">            …</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 未记录时添加默认的</span></span><br><span class="line">    <span class="keyword">if</span> (adminList.isEmpty()) &#123;</span><br><span class="line">        <span class="comment">// Add default admin account when none was specified</span></span><br><span class="line">        adminList.add(<span class="keyword">new</span> JID(<span class="string">"admin"</span>, XMPPServer.getInstance().getServerInfo().getXMPPDomain(), <span class="keyword">null</span>, <span class="keyword">true</span>));</span><br><span class="line">    &#125;</span><br><span class="line">        <span class="keyword">return</span> adminList;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里会去获取属性值admin.authorizeJIDs，以上图为例返回的是admin@bfc,yzw@bfc，现在管理员列表中有admin@bfc以及yzw@bfc的JID。</p>
+<h3 id="创建JID">创建JID</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JID userJID = XMPPServer.getInstance().createJID(username, <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
+<p>这句通过用户名来创建资源ID为空的JID，例如当前输入帐号为yzw，当前域为bfc，那么创建的值为yzw@bfc的纯JID。如果当前服务器域为bbk，那么创建的为yzw@bbk。其中域通过ofProperty表中的xmpp.domain来获取。</p>
+<h3 id="比较JID">比较JID</h3><p><pre><code>        return adminList.contains(userJID);</code></pre><br>这里判断是否在管理员列表里是否有登录用户的JID。如果用户登录服务器的域和管理员的域不一致，那么就不能登录了。</p>
+<h2 id="第三步_认证">第三步 认证</h2><p>AuthFactory.authenticate位于org.jivesoftware.openfire.auth. AuthFactory，用来验证帐号密码是否错误，并且返回认证信令。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> AuthToken <span class="title">authenticate</span><span class="params">(String username, String password)</span></span><br><span class="line">            <span class="keyword">throws</span> UnauthorizedException, ConnectionException, InternalUnauthenticatedException </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (LockOutManager.getInstance().isAccountDisabled(username)) &#123;</span><br><span class="line">        LockOutManager.getInstance().recordFailedLogin(username);</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnauthorizedException();</span><br><span class="line">    &#125;</span><br><span class="line">    authProvider.authenticate(username, password);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> AuthToken(username);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>LockOutManager.getInstance().isAccountDisabled用来判断是否帐号被禁用了。执行到authProvider.authenticate(username, password)，通过查看数据库表ofProperty表中的provider.auth.className可知默认情况下authProvider指向org.jivesoftware.openfire.auth.DefaultAuthProvider。执行DefaultAuthProvider:: authenticate(String,String):<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">authenticate</span><span class="params">(String username, String password)</span> <span class="keyword">throws</span> UnauthorizedException </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (username == <span class="keyword">null</span> || password == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnauthorizedException();</span><br><span class="line">    &#125;</span><br><span class="line">    username = username.trim().toLowerCase();</span><br><span class="line">    <span class="keyword">if</span> (username.contains(<span class="string">"@"</span>)) &#123;</span><br><span class="line">        <span class="comment">// Check that the specified domain matches the server's domain</span></span><br><span class="line">        <span class="keyword">int</span> index = username.indexOf(<span class="string">"@"</span>);</span><br><span class="line">        String domain = username.substring(index + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (domain.equals(XMPPServer.getInstance().getServerInfo().getXMPPDomain())) &#123;</span><br><span class="line">            username = username.substring(<span class="number">0</span>, index);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// Unknown domain. Return authentication failed.</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> UnauthorizedException();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!password.equals(getPassword(username))) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> UnauthorizedException();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (UserNotFoundException unfe) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnauthorizedException();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Got this far, so the user must be authorized.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果登录帐号有域的话需要认证域是否相同，然后认证密码是否正确。注意用户名是不含域的，所以比较后需要先去掉域的部分再获取密码。getPassword默认情况是从ofUser表中去获取密码，默认admin密码为明文的admin。</p>
+<h1 id="总结">总结</h1><p>在ofProperty表登录认证的最主要的几个值为：</p>
+<ul>
+<li>admin.authorizeJIDs提供了管理员帐号，包括了所在域，例如admin@bfc。</li>
+<li>provider.admin.className对应的类提供了管理员列表，默认从admin.authorizeJIDs加载。</li>
+<li>provider.auth.className对应的类实现了认证方法。</li>
+<li>xmpp.domain指出了服务器所在的域。</li>
+</ul>
+<p>如果在初始化之后无法登录管理员，需要只修改上述几个值，在ofUser表中添加admin帐号，明文密码admin后即可用admin登录。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yazone.github.com/2015/03/10/Openfire系列之管理员登录/" data-id="ci73bxq3v0000acw7tur09u9e" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://yazone.github.com/2015/03/10/Openfire系列之管理员登录/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Openfire/">Openfire</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/03/09/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2015/03/10/Openfire系列之管理员登录/" data-title="Openfire系列之管理员登录" data-url="http://yazone.github.com/2015/03/10/Openfire系列之管理员登录/"></div>
+  </section>
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/信口雌黄/">信口雌黄</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/程序思维/">程序思维</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/程序思维/Openfire/">Openfire</a><span class="category-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Openfire/">Openfire</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Openfire/" style="font-size: NaNpx;">Openfire</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/03/10/Openfire系列之管理员登录/">Openfire系列之管理员登录</a>
+          </li>
+        
+          <li>
+            <a href="/2015/03/09/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://taoyuanxiaoqi.com" target="_blank">桃园小七</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Modify Theme from <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">文章列表</a>
+  
+    <a href="/" class="mobile-nav-link">关于我</a>
+  
+</nav>
+  <!-- totop start -->
+
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"11080769"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>
