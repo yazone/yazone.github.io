@@ -432,13 +432,13 @@ body {
   padding: 5px 10px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
-  color: #687e91;
+  color: #fff;
 }
 #subtitle {
   font-size: 16px;
   line-height: 16px;
   letter-spacing: 1px;
-  color: #687e91;
+  color: #999;
 }
 #subtitle-wrap {
   margin-top: 16px;
