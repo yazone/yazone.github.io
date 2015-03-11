@@ -12,6 +12,8 @@
 <meta property="og:url" content="http://yazone.github.com/2015/03/10/Openfire系列之管理员登录/index.html">
 <meta property="og:site_name" content="沧海为水">
 <meta property="og:description" content="摘要：主要分析Openfire管理员后台无法登陆问题">
+<meta property="og:image" content="http://note.youdao.com/yws/public/resource/07e7e5be0518eee9720f60755557912a/1E3DFBB48E1742DB8D39732D5E52DCED">
+<meta property="og:image" content="http://note.youdao.com/yws/public/resource/07e7e5be0518eee9720f60755557912a/8A8411D8D95D4575B5C9AAAE8741D2A4">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Openfire系列之管理员登录">
 <meta name="twitter:description" content="摘要：主要分析Openfire管理员后台无法登陆问题">
@@ -100,6 +102,8 @@
       
         <p>摘要：主要分析Openfire管理员后台无法登陆问题<a id="more"></a></p>
 <h1 id="问题">问题</h1><p>在安装Openfire后，讨论群里经常有人说初始化后在管理员页面输入帐号admin和密码admin后无法登陆到服务器，或者更改了某些配置导致无法登录，如下：</p>
+<center><br><img src="http://note.youdao.com/yws/public/resource/07e7e5be0518eee9720f60755557912a/1E3DFBB48E1742DB8D39732D5E52DCED" alt="图：登录错误"><br></center>
+
 <h1 id="原因">原因</h1><p>可能的原因有多种情况，需要一步步分析，通常有以下可能:</p>
 <ol>
 <li>权限问题（帐号不是管理员、帐号密码错误、限制IP等）</li>
@@ -111,6 +115,8 @@
 <h2 id="第二步_判断用户是否有管理员权限">第二步 判断用户是否有管理员权限</h2><p>AdminManager::isUserAdmin位于org.jivesoftware.openfire.admin.AdminManager，用来判断用户是否在管理员列表中。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isUserAdmin</span><span class="params">(String username, <span class="keyword">boolean</span> allowAdminIfEmpty)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (adminList == <span class="keyword">null</span>) &#123;</span><br><span class="line">        loadAdminList();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (allowAdminIfEmpty &amp;&amp; adminList.isEmpty()) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"admin"</span>.equals(username);</span><br><span class="line">    &#125;</span><br><span class="line">    JID userJID = XMPPServer.getInstance().createJID(username, <span class="keyword">null</span>);</span><br><span class="line">    <span class="keyword">return</span> adminList.contains(userJID);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="加载管理员列表">加载管理员列表</h3><p>AdminManager保存了管理员列表adminList，如果为空将首先从provider中加载。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">loadAdminList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    adminList = provider.getAdmins();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>其中provider通过属性provider.admin.className来获取，意为管理员提供者，通过查询openfire数据库中的ofProperty属性表可知默认情况下provider对象为org.jivesoftware.openfire.admin.DefaultAdminProvider的实例，ofProperty表如下：</p>
+<center><br><img src="http://note.youdao.com/yws/public/resource/07e7e5be0518eee9720f60755557912a/8A8411D8D95D4575B5C9AAAE8741D2A4" alt="图：数据库属性表"><br></center>
+
 <p>继续跟踪DefaultAdminProvider::getAdmins()<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;JID&gt; <span class="title">getAdmins</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    List&lt;JID&gt; adminList = <span class="keyword">new</span> ArrayList&lt;JID&gt;();</span><br><span class="line">    <span class="comment">// 获取管理员纯JID</span></span><br><span class="line">    String jids = JiveGlobals.getProperty(<span class="string">"admin.authorizedJIDs"</span>);</span><br><span class="line">    jids = (jids == <span class="keyword">null</span> || jids.trim().length() == <span class="number">0</span>) ? <span class="string">""</span> : jids;</span><br><span class="line">    <span class="comment">// 获取每个JID添加到管理员列表中，数据库中保存时以符号","分隔</span></span><br><span class="line">    StringTokenizer tokenizer = <span class="keyword">new</span> StringTokenizer(jids, <span class="string">","</span>);</span><br><span class="line">    <span class="keyword">while</span> (tokenizer.hasMoreTokens()) &#123;</span><br><span class="line">        String jid = tokenizer.nextToken().toLowerCase().trim();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            adminList.add(<span class="keyword">new</span> JID(jid));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> (IllegalArgumentException e) &#123;</span><br><span class="line">            …</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 未记录时添加默认的</span></span><br><span class="line">    <span class="keyword">if</span> (adminList.isEmpty()) &#123;</span><br><span class="line">        <span class="comment">// Add default admin account when none was specified</span></span><br><span class="line">        adminList.add(<span class="keyword">new</span> JID(<span class="string">"admin"</span>, XMPPServer.getInstance().getServerInfo().getXMPPDomain(), <span class="keyword">null</span>, <span class="keyword">true</span>));</span><br><span class="line">    &#125;</span><br><span class="line">        <span class="keyword">return</span> adminList;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>这里会去获取属性值admin.authorizeJIDs，以上图为例返回的是admin@bfc,yzw@bfc，现在管理员列表中有admin@bfc以及yzw@bfc的JID。</p>
 <h3 id="创建JID">创建JID</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JID userJID = XMPPServer.getInstance().createJID(username, <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
@@ -132,7 +138,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yazone.github.com/2015/03/10/Openfire系列之管理员登录/" data-id="ci73bxq3v0000acw7tur09u9e" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://yazone.github.com/2015/03/10/Openfire系列之管理员登录/" data-id="ci74079j100001glpjpl7ucqd" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -271,7 +277,7 @@
 
 <!-- 多说公共js代码 start -->
 <script type="text/javascript">
-var duoshuoQuery = {short_name:"11080769"};
+var duoshuoQuery = {short_name:"yazone"};
   (function() {
     var ds = document.createElement('script');
     ds.type = 'text/javascript';ds.async = true;

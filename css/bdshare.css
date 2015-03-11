@@ -35,7 +35,7 @@ body:after {
   padding: 0 15px;
   color: #000;
   outline: none;
-  border: 1px solid #ddd;
+  border: 1px solid #999;
   -webkit-border-radius: 3px 3px 0 0;
   border-radius: 3px 3px 0 0;
   height: 36px;

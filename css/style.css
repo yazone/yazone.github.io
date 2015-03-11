@@ -297,7 +297,7 @@ body {
 }
 .article-entry hr,
 .widget hr {
-  border: 1px dashed #ddd;
+  border: 1px dashed #999;
 }
 .article-entry strong,
 .widget strong {
@@ -371,7 +371,7 @@ body {
 #header {
   height: 120px;
   position: relative;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #999;
 }
 #header:before {
   content: "";
@@ -693,11 +693,11 @@ a.article-title:hover {
 }
 .article-entry th {
   font-weight: bold;
-  border-bottom: 3px solid #ddd;
+  border-bottom: 3px solid #999;
   padding-bottom: 0.5em;
 }
 .article-entry td {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #999;
   padding: 10px 0;
 }
 .article-entry blockquote {
@@ -774,7 +774,7 @@ a.article-title:hover {
   zoom: 1;
   font-size: 0.85em;
   line-height: 1.6em;
-  border-top: 2px solid #ddd;
+  border-top: 2px solid #999;
   padding-top: 1.6em;
   margin: 0 20px 20px;
 }
@@ -845,7 +845,7 @@ a.article-title:hover {
     content: "";
     -webkit-border-radius: 50%;
     border-radius: 50%;
-    background: #ddd;
+    background: #999;
     -webkit-box-shadow: 0 1px 2px #fff;
     box-shadow: 0 1px 2px #fff;
   }
@@ -887,7 +887,7 @@ a.article-title:hover {
 .article-nav-caption {
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: #ddd;
+  color: #999;
   line-height: 1em;
   font-weight: bold;
 }
@@ -928,7 +928,7 @@ a.article-title:hover {
   -webkit-box-shadow: 1px 2px 3px #ddd;
   box-shadow: 1px 2px 3px #ddd;
   padding: 20px;
-  border: 1px solid #ddd;
+  border: 1px solid #999;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   margin: 50px 0;
@@ -1014,7 +1014,7 @@ a.article-title:hover {
   background: #fff;
   -webkit-box-shadow: 1px 2px 3px #ddd;
   box-shadow: 1px 2px 3px #ddd;
-  border: 1px solid #ddd;
+  border: 1px solid #999;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   text-align: center;
@@ -1062,12 +1062,12 @@ a.article-title:hover {
   font-weight: bold;
 }
 #page-nav .space {
-  color: #ddd;
+  color: #999;
 }
 #footer {
   background: #262a30;
   padding: 50px 0;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #999;
   color: #999;
 }
 #footer a {
@@ -1087,7 +1087,7 @@ a.article-title:hover {
   margin: 0 -20px;
   padding: 15px 20px;
   border-style: solid;
-  border-color: #ddd;
+  border-color: #999;
   border-width: 1px 0;
   overflow: auto;
   color: #f8f8f2;
@@ -1158,7 +1158,7 @@ a.article-title:hover {
 .article-entry .gist {
   margin: 0 -20px;
   border-style: solid;
-  border-color: #ddd;
+  border-color: #999;
   border-width: 1px 0;
   background: #272822;
   padding: 15px 20px 15px 0;
@@ -1312,8 +1312,8 @@ pre .javascript .function {
   color: #777;
   text-shadow: 0 1px #fff;
   background: #fff;
-  -webkit-box-shadow: 1px 2px 3px #ddd;
-  box-shadow: 1px 2px 3px #ddd;
+  -webkit-box-shadow: 1px 2px 3px #999;
+  box-shadow: 1px 2px 3px #999;
   padding: 15px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
