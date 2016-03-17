@@ -1,0 +1,335 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>自定义界面脚本引擎XModeEngine-（三）变量与函数 | 云景中天</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="&amp;#x6458;&amp;#x8981;&amp;#xFF1A;&amp;#x672C;&amp;#x6587;&amp;#x63CF;&amp;#x8FF0;&amp;#x81EA;&amp;#x5B9A;&amp;#x4E49;&amp;#x754C;&amp;#x9762;&amp;#x811A;&amp;#x672C;&amp;#x5F15;&amp;#x64CE;XModeEngine&amp;#x53D8;&amp;#x91CF;&amp;#x4E0E;&amp;#x51FD;&amp;#x6570;&amp;#x3002;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自定义界面脚本引擎XModeEngine-（三）变量与函数">
+<meta property="og:url" content="http://www.laiwangyo.com/2016/03/03/自定义界面脚本引擎XModeEngine-（三）变量与函数/index.html">
+<meta property="og:site_name" content="云景中天">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;&amp;#xFF1A;&amp;#x672C;&amp;#x6587;&amp;#x63CF;&amp;#x8FF0;&amp;#x81EA;&amp;#x5B9A;&amp;#x4E49;&amp;#x754C;&amp;#x9762;&amp;#x811A;&amp;#x672C;&amp;#x5F15;&amp;#x64CE;XModeEngine&amp;#x53D8;&amp;#x91CF;&amp;#x4E0E;&amp;#x51FD;&amp;#x6570;&amp;#x3002;">
+<meta property="og:image" content="/2016/03/03/自定义界面脚本引擎XModeEngine-（三）变量与函数/变量.png">
+<meta property="og:image" content="/2016/03/03/自定义界面脚本引擎XModeEngine-（三）变量与函数/函数.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自定义界面脚本引擎XModeEngine-（三）变量与函数">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;&amp;#xFF1A;&amp;#x672C;&amp;#x6587;&amp;#x63CF;&amp;#x8FF0;&amp;#x81EA;&amp;#x5B9A;&amp;#x4E49;&amp;#x754C;&amp;#x9762;&amp;#x811A;&amp;#x672C;&amp;#x5F15;&amp;#x64CE;XModeEngine&amp;#x53D8;&amp;#x91CF;&amp;#x4E0E;&amp;#x51FD;&amp;#x6570;&amp;#x3002;">
+  
+    <link rel="alternative" href="/atom.xml" title="云景中天" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">云景中天</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">代码中带点唏嘘，生命中带点惊喜</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">文章列表</a>
+        
+          <a class="main-nav-link" href="/me">关于我</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="www.laiwangyo.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-自定义界面脚本引擎XModeEngine-（三）变量与函数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/03/自定义界面脚本引擎XModeEngine-（三）变量与函数/" class="article-date">
+  <time datetime="2016-03-03T06:20:00.000Z" itemprop="datePublished">2016-03-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/XModeEngine脚本引擎/">XModeEngine脚本引擎</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      自定义界面脚本引擎XModeEngine-（三）变量与函数
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div class="toc-wrap">
+        	<div class="toc-title">Index</div>
+        	<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-_变量"><span class="toc-number">1.</span> <span class="toc-text">1. 变量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1_系统变量"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 系统变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2_元素属性变量"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 元素属性变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3_脚本变量"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 脚本变量</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-_函数"><span class="toc-number">2.</span> <span class="toc-text">2. 函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1_本地系统函数"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 本地系统函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2_自定义脚本函数"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 自定义脚本函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-示例"><span class="toc-number">3.</span> <span class="toc-text">3.示例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-总结"><span class="toc-number">4.</span> <span class="toc-text">4.总结</span></a></li></ol>
+    		</div>
+
+        <p>&#x6458;&#x8981;&#xFF1A;&#x672C;&#x6587;&#x63CF;&#x8FF0;&#x81EA;&#x5B9A;&#x4E49;&#x754C;&#x9762;&#x811A;&#x672C;&#x5F15;&#x64CE;XModeEngine&#x53D8;&#x91CF;&#x4E0E;&#x51FD;&#x6570;&#x3002;<a id="more"></a></p>
+<p>&#x3000;&#x3000;XModeEngine&#x6267;&#x884C;&#x811A;&#x672C;&#x65F6;&#x9700;&#x8981;&#x8003;&#x8651;&#x5F15;&#x64CE;&#x73AF;&#x5883;&#x4E0B;&#x7684;&#x811A;&#x672C;&#x53D8;&#x91CF;&#x3001;&#x51FD;&#x6570;&#x95EE;&#x9898;&#x3002;</p>
+<h1 id="1-_&#x53D8;&#x91CF;">1. &#x53D8;&#x91CF;</h1><p>&#x3000;&#x3000;&#x53D8;&#x91CF;&#x5206;&#x4E3A;&#x7CFB;&#x7EDF;&#x53D8;&#x91CF;&#x3001;&#x5143;&#x7D20;&#x5C5E;&#x6027;&#x53D8;&#x91CF;&#x3001;&#x811A;&#x672C;&#x53D8;&#x91CF;&#xFF0C;&#x5206;&#x522B;&#x7531;XModeEngine&#x5F15;&#x64CE;&#x3001;XModeDocument&#x5E03;&#x5C40;&#x3001;XModeScript&#x811A;&#x672C;&#x4E2D;&#x58F0;&#x660E;&#x3002;&#x53D8;&#x91CF;&#x5173;&#x7CFB;&#x5982;&#x4E0B;&#xFF1A;<br><img src="/2016/03/03/&#x81EA;&#x5B9A;&#x4E49;&#x754C;&#x9762;&#x811A;&#x672C;&#x5F15;&#x64CE;XModeEngine-&#xFF08;&#x4E09;&#xFF09;&#x53D8;&#x91CF;&#x4E0E;&#x51FD;&#x6570;/&#x53D8;&#x91CF;.png" alt="&#x53D8;&#x91CF;&#x5173;&#x7CFB;&#x56FE;"></p>
+<h2 id="1-1_&#x7CFB;&#x7EDF;&#x53D8;&#x91CF;">1.1 &#x7CFB;&#x7EDF;&#x53D8;&#x91CF;</h2><p>&#x3000;&#x3000;&#x7CFB;&#x7EDF;&#x53D8;&#x91CF;&#x7528;&#x6765;&#x8868;&#x793A;&#x7CFB;&#x7EDF;&#x7684;&#x67D0;&#x4E2A;&#x72B6;&#x6001;&#xFF0C;&#x4F8B;&#x5982;&#x5F53;&#x524D;&#x65F6;&#x95F4;&#x3001;&#x5C4F;&#x5E55;&#x5BBD;&#x9AD8;&#x7B49;&#x3002;</p>
+<h2 id="1-2_&#x5143;&#x7D20;&#x5C5E;&#x6027;&#x53D8;&#x91CF;">1.2 &#x5143;&#x7D20;&#x5C5E;&#x6027;&#x53D8;&#x91CF;</h2><p>&#x3000;&#x3000;&#x5BF9;&#x4E8E;&#x5E03;&#x5C40;&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x6BCF;&#x4E00;&#x4E2A;&#x89C6;&#x56FE;&#x5143;&#x7D20;&#xFF0C;&#x90FD;&#x5177;&#x6709;&#x4E00;&#x5B9A;&#x7684;&#x5C5E;&#x6027;&#xFF0C;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x901A;&#x8FC7;&#x5143;&#x7D20;&#x5C5E;&#x6027;&#x53D8;&#x91CF;&#x7528;&#x6765;&#x8868;&#x793A;&#xFF0C;&#x4F8B;&#x5982;&#x89C6;&#x56FE;&#x7684;&#x5BBD;&#x3001;&#x9AD8;&#x3001;&#x4F4D;&#x7F6E;&#x7B49;&#x3002;</p>
+<h2 id="1-3_&#x811A;&#x672C;&#x53D8;&#x91CF;">1.3 &#x811A;&#x672C;&#x53D8;&#x91CF;</h2><p>&#x3000;&#x3000;&#x811A;&#x672C;&#x53D8;&#x91CF;&#x5728;&#x811A;&#x672C;&#x4E2D;&#x7684;&#x5B9A;&#x4E49;&#xFF0C;&#x7528;&#x4E8E;&#x811A;&#x672C;&#x6267;&#x884C;&#x65F6;&#x5B58;&#x50A8;&#x76F8;&#x5173;&#x4FE1;&#x606F;&#xFF0C;&#x5B83;&#x5206;&#x4E3A;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#x4E0E;&#x5C40;&#x90E8;&#x53D8;&#x91CF;&#x3002;</p>
+<h1 id="2-_&#x51FD;&#x6570;">2. &#x51FD;&#x6570;</h1><p>&#x3000;&#x3000;&#x811A;&#x672C;&#x4E2D;&#x51FD;&#x6570;&#x5206;&#x4E3A;&#x672C;&#x5730;&#x7CFB;&#x7EDF;&#x51FD;&#x6570;&#x3001;&#x81EA;&#x5B9A;&#x4E49;&#x811A;&#x672C;&#x51FD;&#x6570;&#x3002;<br><img src="/2016/03/03/&#x81EA;&#x5B9A;&#x4E49;&#x754C;&#x9762;&#x811A;&#x672C;&#x5F15;&#x64CE;XModeEngine-&#xFF08;&#x4E09;&#xFF09;&#x53D8;&#x91CF;&#x4E0E;&#x51FD;&#x6570;/&#x51FD;&#x6570;.png" alt="&#x51FD;&#x6570;&#x5173;&#x7CFB;&#x56FE;"></p>
+<h2 id="2-1_&#x672C;&#x5730;&#x7CFB;&#x7EDF;&#x51FD;&#x6570;">2.1 &#x672C;&#x5730;&#x7CFB;&#x7EDF;&#x51FD;&#x6570;</h2><p>&#x3000;&#x3000;&#x672C;&#x5730;&#x7CFB;&#x7EDF;&#x51FD;&#x6570;&#x5B9E;&#x73B0;&#x662F;&#x5728;&#x5F15;&#x64CE;&#x6846;&#x67B6;&#x4E2D;&#xFF0C;&#x811A;&#x672C;&#x80FD;&#x591F;&#x901A;&#x8FC7;&#x89E3;&#x91CA;&#x673A;&#x5236;&#x76F4;&#x63A5;&#x6267;&#x884C;JAVA&#x4EE3;&#x7801;&#x3002;&#x5B83;&#x4E3B;&#x8981;&#x6709;&#x4E24;&#x65B9;&#x9762;&#x4F5C;&#x7528;&#xFF0C;&#x4E00;&#x4E2A;&#x7528;&#x6765;&#x83B7;&#x53D6;&#x7CFB;&#x7EDF;&#x53D8;&#x91CF;&#x4EE5;&#x53CA;&#x5404;&#x5143;&#x7D20;&#x53D8;&#x91CF;&#xFF0C;&#x4E8C;&#x662F;&#x6267;&#x884C;&#x7CFB;&#x7EDF;&#x529F;&#x80FD;&#xFF0C;&#x4F8B;&#x5982;&#x89E3;&#x9501;&#x3001;&#x542F;&#x52A8;Acitivity&#x3001;&#x8BBE;&#x7F6E;&#x5B9A;&#x65F6;&#x5668;&#x7B49;&#x3002;</p>
+<h2 id="2-2_&#x81EA;&#x5B9A;&#x4E49;&#x811A;&#x672C;&#x51FD;&#x6570;">2.2 &#x81EA;&#x5B9A;&#x4E49;&#x811A;&#x672C;&#x51FD;&#x6570;</h2><p>&#x3000;&#x3000;&#x81EA;&#x5B9A;&#x4E49;&#x811A;&#x672C;&#x51FD;&#x6570;&#x4E3B;&#x8981;&#x662F;&#x7528;&#x6765;&#x63A7;&#x5236;&#x53D8;&#x91CF;&#x3001;&#x8C03;&#x7528;&#x7CFB;&#x7EDF;&#x51FD;&#x6570;&#xFF0C;&#x4F8B;&#x5982;&#x4FEE;&#x6539;&#x5143;&#x7D20;&#x4F4D;&#x7F6E;&#x3001;&#x8C03;&#x7528;&#x5B9A;&#x65F6;&#x5668;&#x529F;&#x80FD;&#x7B49;&#x3002;</p>
+<h1 id="3-&#x793A;&#x4F8B;">3.&#x793A;&#x4F8B;</h1><p>&#x3000;&#x3000;&#x4E0B;&#x9762;&#x5C06;&#x5206;&#x6790;&#x7528;&#x811A;&#x672C;&#x5982;&#x4F55;&#x5B9E;&#x73B0;&#x56FE;&#x7247;&#x62D6;&#x52A8;&#xFF0C;&#x9996;&#x5148;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x56FE;&#x7247;&#x89C6;&#x56FE;&#x5143;&#x7D20;&#xFF1A;<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">Image</span> <span class="attribute">name</span>=<span class="value">&quot;&#x6309;&#x94AE;1&quot;</span> <span class="attribute">x</span>=<span class="value">&quot;100&quot;</span> <span class="attribute">y</span>=<span class="value">&quot;700&quot;</span>  <span class="attribute">w</span>=<span class="value">&quot;121&quot;</span> <span class="attribute">h</span>=<span class="value">&quot;60&quot;</span> <span class="attribute">src</span>=<span class="value">&quot;/mnt/sdcard/ic_download_edit_normal1.png&quot;</span> </span><br><span class="line">		<span class="attribute">onclickdown</span>=<span class="value">&quot;doclickdown()&quot;</span> <span class="attribute">onclickup</span>=<span class="value">&quot;doclickup()&quot;</span>  <span class="attribute">onclickmove</span>=<span class="value">&quot;doclickmove()&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>&#x3000;&#x3000;&#x8FD9;&#x91CC;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E2A;&#x89C6;&#x56FE;&#x5143;&#x7D20;Image&#xFF0C;&#x540D;&#x79F0;&#x4E3A;&#x201C;&#x6309;&#x94AE;1&#x201D;&#xFF0C;&#x5E76;&#x4E14;&#x5B9A;&#x4E49;&#x4E86;&#x5C5E;&#x6027;&#x8D77;&#x59CB;&#x5750;&#x6807;x&#x3001;&#x8D77;&#x59CB;&#x5750;&#x6807;y&#x3001;&#x56FE;&#x7247;&#x5BBD;&#x5EA6;w&#x3001;&#x56FE;&#x7247;&#x9AD8;&#x5EA6;h&#x3001;&#x56FE;&#x7247;&#x5730;&#x5740;src&#x7684;&#x503C;&#xFF1B;&#x540C;&#x65F6;&#x5B9A;&#x4E49;&#x4E86;&#x4E09;&#x79CD;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;&#x51FD;&#x6570;&#x6309;&#x4E0B;&#x4E8B;&#x4EF6;onclickdown&#x3001;&#x5F39;&#x8D77;&#x4E8B;&#x4EF6;onclickup&#x4EE5;&#x53CA;&#x79FB;&#x52A8;&#x4E8B;&#x4EF6;onclickmove&#x3002;<br>&#x3000;&#x3000;XModeEngine&#x4F1A;&#x5C06;sdcard&#x56FE;&#x7247;ic_download_edit_normal1.png&#x5728;X&#x5750;&#x6807;100&#x3001;Y&#x5750;&#x6807;700&#xFF0C;&#x6309;&#x7167;&#x5927;&#x5C0F;&#x4E3A;&#x5BBD;121&#x3001;&#x9AD8;60&#x7ED8;&#x5236;&#x5728;&#x89C6;&#x56FE;&#x4E2D;&#x3002;</p>
+<p>&#x3000;&#x3000;&#x63A5;&#x4E0B;&#x6765;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x811A;&#x672C;&#xFF1A;<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> lastTouchX = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">var</span> lastTouchY = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doclickdown</span><span class="params">()</span></span><br><span class="line"></span>{</span><br><span class="line">	XModeDocument.setAttrValue(<span class="string">&quot;&#x6309;&#x94AE;1&quot;</span>,<span class="string">&quot;src&quot;</span>,<span class="string">&quot;/mnt/sdcard/ic_download_edit_pressed1.png&quot;</span>);</span><br><span class="line">	lastTouchX = XModeDocument.getSystemValue(<span class="string">&quot;system_touch_x&quot;</span>);</span><br><span class="line">	lastTouchY = XModeDocument.getSystemValue(<span class="string">&quot;system_touch_y&quot;</span>);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doclickup</span><span class="params">()</span></span><br><span class="line"></span>{</span><br><span class="line">	XModeDocument.setAttrValue(<span class="string">&quot;&#x6309;&#x94AE;1&quot;</span>,<span class="string">&quot;src&quot;</span>,<span class="string">&quot;/mnt/sdcard/ic_download_edit_normal1.png&quot;</span>);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doclickmove</span><span class="params">()</span></span><br><span class="line"></span>{</span><br><span class="line">	<span class="keyword">var</span> currentTouchX = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">var</span> currentTouchY = <span class="number">0</span>;</span><br><span class="line">	currentTouchX = XModeDocument.getSystemValue(<span class="string">&quot;system_touch_x&quot;</span>);</span><br><span class="line">	currentTouchY = XModeDocument.getSystemValue(<span class="string">&quot;system_touch_y&quot;</span>);</span><br><span class="line">	<span class="keyword">var</span> offsetX = <span class="built_in">parseInt</span>(currentTouchX) - lastTouchX;</span><br><span class="line">	<span class="keyword">var</span> offsetY = <span class="built_in">parseInt</span>(currentTouchY) - lastTouchY;</span><br><span class="line">	lastTouchX = currentTouchX;</span><br><span class="line">	lastTouchY = currentTouchY;</span><br><span class="line">	<span class="keyword">var</span> currentElementX = XModeDocument.getAttrValue(<span class="string">&quot;&#x6309;&#x94AE;1&quot;</span>,<span class="string">&quot;x&quot;</span>);</span><br><span class="line">	<span class="keyword">var</span> currentElementY= XModeDocument.getAttrValue(<span class="string">&quot;&#x6309;&#x94AE;1&quot;</span>,<span class="string">&quot;y&quot;</span>);</span><br><span class="line">	currentElementX = <span class="built_in">parseInt</span>(currentElementX) + offsetX;</span><br><span class="line">	currentElementY = <span class="built_in">parseInt</span>(currentElementY) + offsetY;</span><br><span class="line">	        	 </span><br><span class="line">	XModeDocument.setAttrValue(<span class="string">&quot;&#x6309;&#x94AE;1&quot;</span>,<span class="string">&quot;x&quot;</span>,currentElementX);</span><br><span class="line">	XModeDocument.setAttrValue(<span class="string">&quot;&#x6309;&#x94AE;1&quot;</span>,<span class="string">&quot;y&quot;</span>,currentElementY);</span><br><span class="line">}</span><br></pre></td></tr></table></figure></p>
+<p>&#x3000;&#x3000;&#xFF08;&#x4E00;&#xFF09;&#x5B9A;&#x4E49;&#x5168;&#x5C40;&#x53D8;&#x91CF;<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> lastTouchX = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">var</span> lastTouchY = <span class="number">0</span>;</span><br></pre></td></tr></table></figure></p>
+<p>&#x3000;&#x3000;&#x3000;&#x3000;&#x5B9A;&#x4E49;&#x4E86;&#x5168;&#x5C40;&#x53D8;&#x91CF;lastTouchX&#x4E0E;lastTouchY&#xFF0C;&#x7528;&#x6765;&#x8BB0;&#x5F55;&#x4E0A;&#x6B21;&#x6309;&#x4E0B;&#x65F6;&#x89E6;&#x5C4F;&#x4F4D;&#x7F6E;&#x3002;</p>
+<p>&#x3000;&#x3000;&#xFF08;&#x4E8C;&#xFF09;&#x5B9A;&#x4E49;&#x81EA;&#x5B9A;&#x4E49;&#x811A;&#x672C;&#x51FD;&#x6570;&#xFF1A;</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doclickdown</span><span class="params">()</span></span><br><span class="line"></span>{</span><br><span class="line">	...</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doclickup</span><span class="params">()</span></span><br><span class="line"></span>{</span><br><span class="line">	...</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doclickmove</span><span class="params">()</span></span><br><span class="line"></span>{</span><br><span class="line">	...</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>&#x3000;&#x3000;&#x3000;&#x3000;&#x8FD9;&#x91CC;&#x5B9A;&#x4E49;&#x4E86;&#x4E09;&#x4E2A;&#x81EA;&#x5B9A;&#x4E49;&#x811A;&#x672C;&#x51FD;&#x6570;&#xFF0C;&#x7528;&#x6765;&#x5904;&#x7406;&#x56FE;&#x7247;&#x7684;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;&#x3002;</p>
+<p>&#x3000;&#x3000;&#xFF08;&#x4E09;&#xFF09;&#x5904;&#x7406;&#x70B9;&#x51FB;&#x6309;&#x4E0B;&#x4E8B;&#x4EF6;</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doclickdown</span><span class="params">()</span></span><br><span class="line"></span>{</span><br><span class="line">	<span class="comment">// &#x8BBE;&#x7F6E;&#x6309;&#x94AE;&#x56FE;&#x7247;&#x5730;&#x5740;&#x4E3A;/mnt/sdcard/ic_download_edit_pressed1.png</span></span><br><span class="line">	XModeDocument.setAttrValue(<span class="string">&quot;&#x6309;&#x94AE;1&quot;</span>,<span class="string">&quot;src&quot;</span>,<span class="string">&quot;/mnt/sdcard/ic_download_edit_pressed1.png&quot;</span>);</span><br><span class="line">	<span class="comment">// &#x83B7;&#x53D6;&#x7CFB;&#x7EDF;&#x89E6;&#x5C4F;&#x65F6;&#x7684;&#x5750;&#x6807;&#xFF0C;&#x5E76;&#x8BB0;&#x5165;&#x5230;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#x4E2D;</span></span><br><span class="line">	lastTouchX = XModeDocument.getSystemValue(<span class="string">&quot;system_touch_x&quot;</span>);</span><br><span class="line">	lastTouchY = XModeDocument.getSystemValue(<span class="string">&quot;system_touch_y&quot;</span>);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>&#x3000;&#x3000;&#x3000;&#x3000;&#x5176;&#x4E2D;XModeDocument.setAttrValue()&#x4E0E;XModeDocument.getSystemValue()&#x5747;&#x4E3A;&#x672C;&#x5730;&#x7CFB;&#x7EDF;&#x51FD;&#x6570;&#xFF0C;&#x5206;&#x522B;&#x8868;&#x793A;&#x8BBE;&#x7F6E;&#x5143;&#x7D20;&#x5C5E;&#x6027;&#x503C;&#x5373;&#x4FEE;&#x6539;&#x5143;&#x7D20;&#x5C5E;&#x6027;&#x53D8;&#x91CF;&#x503C;&#xFF0C;&#x4EE5;&#x53CA;&#x83B7;&#x53D6;&#x7CFB;&#x7EDF;&#x53D8;&#x91CF;&#x503C;&#x3002;</p>
+<p>&#x3000;&#x3000;&#xFF08;&#x56DB;&#xFF09;&#x5904;&#x7406;&#x79FB;&#x52A8;&#x4E8B;&#x4EF6;</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doclickmove</span><span class="params">()</span></span><br><span class="line"></span>{</span><br><span class="line">  <span class="comment">// &#x5C40;&#x90E8;&#x53D8;&#x91CF;</span></span><br><span class="line">	<span class="keyword">var</span> currentTouchX = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">var</span> currentTouchY = <span class="number">0</span>;</span><br><span class="line">	<span class="comment">// &#x83B7;&#x53D6;&#x5F53;&#x524D;&#x70B9;&#x51FB;&#x4F4D;&#x7F6E;</span></span><br><span class="line">	currentTouchX = XModeDocument.getSystemValue(<span class="string">&quot;system_touch_x&quot;</span>);</span><br><span class="line">	currentTouchY = XModeDocument.getSystemValue(<span class="string">&quot;system_touch_y&quot;</span>);</span><br><span class="line">	<span class="comment">// &#x8BA1;&#x7B97;&#x62D6;&#x52A8;&#x504F;&#x79FB;</span></span><br><span class="line">	<span class="keyword">var</span> offsetX = <span class="built_in">parseInt</span>(currentTouchX) - lastTouchX;</span><br><span class="line">	<span class="keyword">var</span> offsetY = <span class="built_in">parseInt</span>(currentTouchY) - lastTouchY;</span><br><span class="line">	lastTouchX = currentTouchX;</span><br><span class="line">	lastTouchY = currentTouchY;</span><br><span class="line">	<span class="comment">// &#x83B7;&#x53D6;&#x6309;&#x94AE;1&#x5F53;&#x524D;&#x4F4D;&#x7F6E;</span></span><br><span class="line">	<span class="keyword">var</span> currentElementX = XModeDocument.getAttrValue(<span class="string">&quot;&#x6309;&#x94AE;1&quot;</span>,<span class="string">&quot;x&quot;</span>);</span><br><span class="line">	<span class="keyword">var</span> currentElementY= XModeDocument.getAttrValue(<span class="string">&quot;&#x6309;&#x94AE;1&quot;</span>,<span class="string">&quot;y&quot;</span>);</span><br><span class="line">	<span class="comment">// &#x8BA1;&#x7B97;&#x6309;&#x94AE;1&#x5E94;&#x8BE5;&#x79FB;&#x52A8;&#x5230;&#x7684;&#x4F4D;&#x7F6E;</span></span><br><span class="line">	currentElementX = <span class="built_in">parseInt</span>(currentElementX) + offsetX;</span><br><span class="line">	currentElementY = <span class="built_in">parseInt</span>(currentElementY) + offsetY;</span><br><span class="line">	<span class="comment">// &#x8BBE;&#x7F6E;&#x6309;&#x94AE;1&#x65B0;&#x7684;&#x4F4D;&#x7F6E;        	 </span></span><br><span class="line">	XModeDocument.setAttrValue(<span class="string">&quot;&#x6309;&#x94AE;1&quot;</span>,<span class="string">&quot;x&quot;</span>,currentElementX);</span><br><span class="line">	XModeDocument.setAttrValue(<span class="string">&quot;&#x6309;&#x94AE;1&quot;</span>,<span class="string">&quot;y&quot;</span>,currentElementY);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>&#x3000;&#x3000;&#x3000;&#x3000;&#x8FD9;&#x91CC;&#x5B9A;&#x4E49;&#x4E86;&#x5C40;&#x90E8;&#x53D8;&#x91CF;currentTouchX&#x7B49;&#xFF0C;&#x5E76;&#x4E14;&#x901A;&#x8FC7;&#x8BED;&#x8A00;&#x5185;&#x7F6E;&#x8BED;&#x6CD5;parseInt&#x5C06;&#x53D8;&#x91CF;&#x8F6C;&#x6210;int&#x578B;&#x8FDB;&#x884C;&#x8BA1;&#x7B97;&#x3002;</p>
+<p>&#x3000;&#x3000;&#xFF08;&#x4E94;&#xFF09;&#x5904;&#x7406;&#x5F39;&#x8D77;&#x4E8B;&#x4EF6;</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doclickup</span><span class="params">()</span></span><br><span class="line"></span>{</span><br><span class="line">	XModeDocument.setAttrValue(<span class="string">&quot;&#x6309;&#x94AE;1&quot;</span>,<span class="string">&quot;src&quot;</span>,<span class="string">&quot;/mnt/sdcard/ic_download_edit_normal1.png&quot;</span>);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>&#x3000;&#x3000;&#x3000;&#x3000;&#x8FD9;&#x91CC;&#x5C06;&#x56FE;&#x7247;&#x8BBE;&#x4E3A;&#x9ED8;&#x8BA4;&#x6B63;&#x5E38;&#x56FE;&#x7247;&#x3002;</p>
+<h1 id="4-&#x603B;&#x7ED3;">4.&#x603B;&#x7ED3;</h1><p>&#x3000;&#x3000;&#x672C;&#x6587;&#x63CF;&#x8FF0;&#x4E86;XModeEngine&#x4E2D;&#x53D8;&#x91CF;&#x4E0E;&#x51FD;&#x6570;&#x7C7B;&#x578B;&#x5206;&#x7C7B;&#xFF0C;&#x5E76;&#x901A;&#x8FC7;&#x793A;&#x4F8B;&#x4EE3;&#x7801;&#x6BB5;&#x7B80;&#x5355;&#x63CF;&#x8FF0;&#x4E86;&#x5143;&#x7D20;&#x4E0E;&#x811A;&#x672C;&#x4E2D;&#x53D8;&#x91CF;&#x4E0E;&#x51FD;&#x6570;&#x7684;&#x6982;&#x5FF5;&#x3002;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://www.laiwangyo.com/2016/03/03/自定义界面脚本引擎XModeEngine-（三）变量与函数/" data-id="cilvl5qe70003z8m3adn98syv" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://www.laiwangyo.com/2016/03/03/自定义界面脚本引擎XModeEngine-（三）变量与函数/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/03/10/破解的那些破事-记手动逆向smali代码/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          破解的那些破事-记手动逆向smali代码
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/02/自定义界面脚本引擎XModeEngine-（二）视图元素与事件/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">自定义界面脚本引擎XModeEngine-（二）视图元素与事件</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2016/03/03/自定义界面脚本引擎XModeEngine-（三）变量与函数/" data-title="自定义界面脚本引擎XModeEngine-（三）变量与函数" data-url="http://www.laiwangyo.com/2016/03/03/自定义界面脚本引擎XModeEngine-（三）变量与函数/"></div>
+  </section>
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android开源项目分析/">Android开源项目分析</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android破解的那些破事/">Android破解的那些破事</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Openfire/">Openfire</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/XModeEngine脚本引擎/">XModeEngine脚本引擎</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Openfire/">Openfire</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/03/15/Android开源项目分析-Volley/">Android开源项目分析-Volley</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/10/破解的那些破事-记手动逆向smali代码/">破解的那些破事-记手动逆向smali代码</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/03/自定义界面脚本引擎XModeEngine-（三）变量与函数/">自定义界面脚本引擎XModeEngine-（三）变量与函数</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/02/自定义界面脚本引擎XModeEngine-（二）视图元素与事件/">自定义界面脚本引擎XModeEngine-（二）视图元素与事件</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/01/自定义界面脚本引擎XModeEngine-（一）描述/">自定义界面脚本引擎XModeEngine-（一）描述</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://taoyuanxiaoqi.com" target="_blank">桃园小七</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Powered by <a href=http://www.laiwangyo.com target="_blank">yazone</a><br>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">文章列表</a>
+  
+    <a href="/me" class="mobile-nav-link">关于我</a>
+  
+</nav>
+  <!-- totop start -->
+
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"yazone"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>

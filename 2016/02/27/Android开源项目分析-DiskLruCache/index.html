@@ -1,0 +1,362 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android开源项目分析-DiskLruCache | 云景中天</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="&amp;#x6458;&amp;#x8981;&amp;#xFF1A;&amp;#x672C;&amp;#x6587;&amp;#x5BF9;&amp;#x5F00;&amp;#x6E90;&amp;#x4EE3;&amp;#x7801;DiskLruCache&amp;#x6E90;&amp;#x7801;&amp;#x8FDB;&amp;#x884C;&amp;#x5206;&amp;#x6790;&amp;#x3002;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android开源项目分析-DiskLruCache">
+<meta property="og:url" content="http://www.laiwangyo.com/2016/02/27/Android开源项目分析-DiskLruCache/index.html">
+<meta property="og:site_name" content="云景中天">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;&amp;#xFF1A;&amp;#x672C;&amp;#x6587;&amp;#x5BF9;&amp;#x5F00;&amp;#x6E90;&amp;#x4EE3;&amp;#x7801;DiskLruCache&amp;#x6E90;&amp;#x7801;&amp;#x8FDB;&amp;#x884C;&amp;#x5206;&amp;#x6790;&amp;#x3002;">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android开源项目分析-DiskLruCache">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;&amp;#xFF1A;&amp;#x672C;&amp;#x6587;&amp;#x5BF9;&amp;#x5F00;&amp;#x6E90;&amp;#x4EE3;&amp;#x7801;DiskLruCache&amp;#x6E90;&amp;#x7801;&amp;#x8FDB;&amp;#x884C;&amp;#x5206;&amp;#x6790;&amp;#x3002;">
+  
+    <link rel="alternative" href="/atom.xml" title="云景中天" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">云景中天</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">代码中带点唏嘘，生命中带点惊喜</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">文章列表</a>
+        
+          <a class="main-nav-link" href="/me">关于我</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="www.laiwangyo.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-Android开源项目分析-DiskLruCache" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/27/Android开源项目分析-DiskLruCache/" class="article-date">
+  <time datetime="2016-02-27T01:38:00.000Z" itemprop="datePublished">2016-02-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android开源项目分析/">Android开源项目分析</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android开源项目分析-DiskLruCache
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div class="toc-wrap">
+        	<div class="toc-title">Index</div>
+        	<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-简介"><span class="toc-number">1.</span> <span class="toc-text">1.简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-源码查看："><span class="toc-number">2.</span> <span class="toc-text">2.源码查看：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-原理"><span class="toc-number">3.</span> <span class="toc-text">3.原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-代码分析"><span class="toc-number">4.</span> <span class="toc-text">4.代码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1_创建DiskLruCache"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 创建DiskLruCache</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2_journal文件"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 journal文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3_写入缓存DiskLruCache-Editor"><span class="toc-number">4.3.</span> <span class="toc-text">4.3 写入缓存DiskLruCache.Editor</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-1_Editor创建"><span class="toc-number">4.3.1.</span> <span class="toc-text">4.3.1 Editor创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-2_Editor-newOutputStream创建输出流"><span class="toc-number">4.3.2.</span> <span class="toc-text">4.3.2 Editor.newOutputStream创建输出流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-3_Editor-commit提交变更"><span class="toc-number">4.3.3.</span> <span class="toc-text">4.3.3 Editor.commit提交变更</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4_读取缓存DiskLruCache-Snapshot"><span class="toc-number">4.4.</span> <span class="toc-text">4.4 读取缓存DiskLruCache.Snapshot</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-1_Snapshot创建"><span class="toc-number">4.4.1.</span> <span class="toc-text">4.4.1 Snapshot创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-2_Snapshot-getInputStream获取流"><span class="toc-number">4.4.2.</span> <span class="toc-text">4.4.2 Snapshot.getInputStream获取流</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-总结"><span class="toc-number">5.</span> <span class="toc-text">5.总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-相关文章"><span class="toc-number">6.</span> <span class="toc-text">6.相关文章</span></a></li></ol>
+    		</div>
+
+        <p>&#x6458;&#x8981;&#xFF1A;&#x672C;&#x6587;&#x5BF9;&#x5F00;&#x6E90;&#x4EE3;&#x7801;DiskLruCache&#x6E90;&#x7801;&#x8FDB;&#x884C;&#x5206;&#x6790;&#x3002;<a id="more"></a></p>
+<h1 id="1-&#x7B80;&#x4ECB;">1.&#x7B80;&#x4ECB;</h1><p>&#x3000;&#x3000;&#x901A;&#x8FC7;DiskLruCache&#x80FD;&#x591F;&#x5C06;&#x6570;&#x636E;&#x7F13;&#x5B58;&#x5230;&#x5B58;&#x50A8;&#x7A7A;&#x95F4;&#x4E2D;&#xFF0C;&#x907F;&#x514D;&#x4E86;&#x5BF9;&#x8C61;&#xFF08;&#x4F8B;&#x5982;&#x56FE;&#x7247;&#xFF09;&#x91CA;&#x653E;&#x540E;&#x9700;&#x7F51;&#x7EDC;&#x91CD;&#x65B0;&#x52A0;&#x8F7D;&#x5BFC;&#x81F4;&#x7684;&#x6027;&#x80FD;&#x95EE;&#x9898;&#x3002;</p>
+<h1 id="2-&#x6E90;&#x7801;&#x67E5;&#x770B;&#xFF1A;">2.&#x6E90;&#x7801;&#x67E5;&#x770B;&#xFF1A;</h1><p>&#x3000;&#x3000;<a href="https://android.googlesource.com/platform/libcore/+/android-4.1.1_r1/luni/src/main/java/libcore/io/DiskLruCache.java" target="_blank" rel="external">https://android.googlesource.com/platform/libcore/+/android-4.1.1_r1/luni/src/main/java/libcore/io/DiskLruCache.java</a><br>&#x3000;&#x3000;<a href="http://androidxref.com/6.0.1_r10/xref/development/samples/browseable/DisplayingBitmaps/src/com.example.android.displayingbitmaps/util/DiskLruCache.java" target="_blank" rel="external">http://androidxref.com/6.0.1_r10/xref/development/samples/browseable/DisplayingBitmaps/src/com.example.android.displayingbitmaps/util/DiskLruCache.java</a></p>
+<h1 id="3-&#x539F;&#x7406;">3.&#x539F;&#x7406;</h1><p>&#x3000;&#x3000;DiskLruCache&#x7F13;&#x5B58;&#x5B9E;&#x73B0;&#x539F;&#x7406;&#x662F;&#x5C06;&#x7F13;&#x5B58;&#x5185;&#x5BB9;&#x7F13;&#x5B58;&#x5230;&#x5B58;&#x50A8;&#x7A7A;&#x95F4;&#x4E2D;&#xFF0C;&#x901A;&#x8FC7;Lru&#x7B97;&#x6CD5;&#x63A7;&#x5236;&#x54EA;&#x4E9B;&#x6570;&#x636E;&#x9700;&#x8981;&#x7F13;&#x5B58;&#x3002;</p>
+<h1 id="4-&#x4EE3;&#x7801;&#x5206;&#x6790;">4.&#x4EE3;&#x7801;&#x5206;&#x6790;</h1><h2 id="4-1_&#x521B;&#x5EFA;DiskLruCache">4.1 &#x521B;&#x5EFA;DiskLruCache</h2><p>DiskLruCache&#x6784;&#x9020;&#x51FD;&#x6570;&#x662F;&#x79C1;&#x6709;&#x7684;&#xFF0C;&#x9700;&#x8981;&#x901A;&#x8FC7;DiskLruCache::open&#x6765;&#x521B;&#x5EFA;DiskLruCache&#x5BF9;&#x8C61;&#x3002;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> DiskLruCache <span class="title">open</span><span class="params">(File directory, <span class="keyword">int</span> appVersion, <span class="keyword">int</span> valueCount, <span class="keyword">long</span> maxSize)</span></span><br><span class="line">         <span class="keyword">throws</span> IOException </span>{</span><br><span class="line">     ...</span><br><span class="line">     <span class="comment">// prefer to pick up where we left off</span></span><br><span class="line">     DiskLruCache cache = <span class="keyword">new</span> DiskLruCache(directory, appVersion, valueCount, maxSize);</span><br><span class="line">     <span class="keyword">if</span> (cache.journalFile.exists()) {</span><br><span class="line">         <span class="keyword">try</span> {</span><br><span class="line">             cache.readJournal();</span><br><span class="line">             cache.processJournal();</span><br><span class="line">             cache.journalWriter = <span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> FileWriter(cache.journalFile, <span class="keyword">true</span>),</span><br><span class="line">                     IO_BUFFER_SIZE);</span><br><span class="line">             <span class="keyword">return</span> cache;</span><br><span class="line">         } <span class="keyword">catch</span> (IOException journalIsCorrupt) {</span><br><span class="line">             cache.delete();</span><br><span class="line">         }</span><br><span class="line">     }</span><br><span class="line"></span><br><span class="line">     <span class="comment">// create a new empty cache</span></span><br><span class="line">     directory.mkdirs();</span><br><span class="line">     cache = <span class="keyword">new</span> DiskLruCache(directory, appVersion, valueCount, maxSize);</span><br><span class="line">     cache.rebuildJournal();</span><br><span class="line">     <span class="keyword">return</span> cache;</span><br><span class="line"> }</span><br></pre></td></tr></table></figure>
+<p>&#x53C2;&#x6570;directory&#x6307;&#x660E;&#x9700;&#x8981;&#x5B58;&#x653E;&#x7684;&#x76EE;&#x5F55;&#x3002;<br>&#x53C2;&#x6570;valueCount&#x6307;&#x660E;&#x7F13;&#x5B58;&#x7684;&#x6570;&#x76EE;&#x3002;<br>&#x53C2;&#x6570;maxSize&#x6307;&#x660E;&#x6700;&#x5927;&#x5B58;&#x50A8;&#x7684;&#x5B57;&#x8282;&#x6570;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x4E4B;&#x524D;&#x5DF2;&#x7ECF;&#x6709;&#x7F13;&#x5B58;&#x8BB0;&#x5F55;&#x6587;&#x4EF6;&#xFF0C;&#x90A3;&#x4E48;&#x8BFB;&#x53D6;&#x76F8;&#x5173;&#x4FE1;&#x606F;&#xFF1B;&#x5426;&#x5219;&#x521B;&#x5EFA;&#x7F13;&#x5B58;&#x76EE;&#x5F55;&#x4EE5;&#x53CA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x7F13;&#x5B58;&#x3002;</p>
+<p>&#x56DE;&#x5230;&#x6784;&#x9020;&#x51FD;&#x6570;&#x4E2D;&#xFF1A;<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="title">DiskLruCache</span><span class="params">(File directory, <span class="keyword">int</span> appVersion, <span class="keyword">int</span> valueCount, <span class="keyword">long</span> maxSize)</span> </span>{</span><br><span class="line">    <span class="keyword">this</span>.directory = directory;</span><br><span class="line">    <span class="keyword">this</span>.appVersion = appVersion;</span><br><span class="line">    <span class="keyword">this</span>.journalFile = <span class="keyword">new</span> File(directory, JOURNAL_FILE);</span><br><span class="line">    <span class="keyword">this</span>.journalFileTmp = <span class="keyword">new</span> File(directory, JOURNAL_FILE_TMP);</span><br><span class="line">    <span class="keyword">this</span>.valueCount = valueCount;</span><br><span class="line">    <span class="keyword">this</span>.maxSize = maxSize;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></p>
+<p>&#x5B83;&#x8BB0;&#x5F55;&#x4E86;&#x4E24;&#x4E2A;&#x6587;&#x4EF6;JOURNAL_FILE&#x548C;JOURNAL_FILE_TMP,&#x5206;&#x522B;&#x5BF9;&#x5E94;&#x4E86;directory&#x76EE;&#x5F55;&#x4E0B;&#x7684;journal&#x548C;journal.tmp&#x6587;&#x4EF6;&#x3002;</p>
+<h2 id="4-2_journal&#x6587;&#x4EF6;">4.2 journal&#x6587;&#x4EF6;</h2><p>journal&#x6587;&#x4EF6;&#x7528;&#x6765;&#x8BB0;&#x5F55;&#x7F13;&#x5B58;&#x4F7F;&#x7528;&#x60C5;&#x51B5;&#xFF0C;&#x5178;&#x578B;&#x7684;journal&#x6587;&#x4EF6;&#x5982;&#x4E0B;&#x683C;&#x5F0F;&#xFF1A;<br><figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">libcore.io.DiskLruCache</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">100</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line">     </span><br><span class="line">CLEAN <span class="number">3400330</span>d1dfc7f3f7f4b8d4d803dfcf6 <span class="number">832</span> <span class="number">21054</span></span><br><span class="line">DIRTY <span class="number">335</span>c4c6028171cfddfbaae1a9c313c52</span><br><span class="line">CLEAN <span class="number">335</span>c4c6028171cfddfbaae1a9c313c52 <span class="number">3934</span> <span class="number">2342</span></span><br><span class="line"><span class="keyword">REMOVE</span> <span class="number">335</span>c4c6028171cfddfbaae1a9c313c52</span><br><span class="line">DIRTY <span class="number">1</span>ab96a171faeeee38496d8b330771a7a</span><br><span class="line">CLEAN <span class="number">1</span>ab96a171faeeee38496d8b330771a7a <span class="number">1600</span> <span class="number">234</span></span><br><span class="line"><span class="keyword">READ</span> <span class="number">335</span>c4c6028171cfddfbaae1a9c313c52</span><br><span class="line"><span class="keyword">READ</span> <span class="number">3400330</span>d1dfc7f3f7f4b8d4d803dfcf6</span><br></pre></td></tr></table></figure></p>
+<pre><code>journal&#x6587;&#x4EF6;&#x524D;<span class="number">5</span>&#x884C;&#x5206;&#x522B;&#x4E3A;&#x5B57;&#x7B26;&#x4E32;&#x5E38;&#x91CF;<span class="string">&quot;libcore.io.DiskLruCache&quot;</span>&#x3001;&#x7F13;&#x5B58;&#x7248;&#x672C;&#x3001;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7248;&#x672C;&#x3001;&#x7F13;&#x5B58;&#x6570;&#x3001;&#x7A7A;&#x767D;&#x884C;&#x3002;
+&#x63A5;&#x4E0B;&#x6765;&#x6BCF;&#x4E00;&#x884C;&#x90FD;&#x662F;&#x4E00;&#x6761;&#x7F13;&#x5B58;&#x7684;&#x8BB0;&#x5F55;&#x9879;&#xFF0C;&#x6BCF;&#x6761;&#x8BB0;&#x5F55;&#x9879;&#x7684;&#x503C;&#x901A;&#x8FC7;&#x7A7A;&#x683C;&#x5206;&#x5F00;&#xFF0C;&#x5206;&#x522B;&#x8868;&#x793A;&#x72B6;&#x6001;&#x3001;&#x952E;&#x503C;&#x4EE5;&#x53CA;&#x7279;&#x5B9A;&#x7684;&#x72B6;&#x6001;&#x503C;&#x3002;
+
+*   o DIRTY&#x884C;&#x8868;&#x793A;&#x8BE5;&#x8BB0;&#x5F55;&#x9879;&#x6B63;&#x5728;&#x88AB;&#x521B;&#x5EFA;&#x6216;&#x6709;&#x66F4;&#x65B0;&#x3002;
+*     &#x6BCF;&#x4E00;&#x9879;&#x6210;&#x529F;&#x7684;DIRTY&#x64CD;&#x4F5C;&#x540E;&#x5FC5;&#x987B;&#x7D27;&#x8DDF;&#x7740;CLEAN&#x6216;REMOVE&#x64CD;&#x4F5C;&#x3002;
+*     DIRTY&#x884C;&#x540E;&#x9762;&#x6CA1;&#x6709;&#x5339;&#x914D;CLEAN&#x6216;REMOVE&#x884C;&#x8BF4;&#x660E;&#x4E34;&#x65F6;&#x6587;&#x4EF6;&#x9700;&#x8981;&#x88AB;&#x5220;&#x9664;&#x3002; <span class="keyword">lines</span> <span class="keyword">without</span> <span class="operator">a</span> matching CLEAN <span class="operator">or</span> REMOVE indicate that
+*     temporary <span class="built_in">files</span> may need <span class="built_in">to</span> be deleted.
+*   o CLEAN&#x884C;&#x6307;&#x660E;&#x4E00;&#x4E2A;&#x7F13;&#x5B58;&#x9879;&#x5DF2;&#x7ECF;&#x6210;&#x529F;&#x88AB;&#x53D1;&#x5E03;&#x6216;&#x8005;&#x88AB;&#x8BFB;&#x53D6;&#x3002; &#x4E00;&#x4E2A;&#x5DF2;&#x7ECF;&#x53D1;&#x5E03;&#x7684;&#x884C;&#x540E;&#x9762;&#x8DDF;&#x7740;&#x7684;&#x662F;&#x6BCF;&#x4E00;&#x4E2A;&#x503C;&#x7684;&#x957F;&#x5EA6;&#x3002;<span class="keyword">lines</span> track <span class="operator">a</span> cache entry that has been successfully published
+*     <span class="operator">and</span> may be <span class="built_in">read</span>. A publish <span class="built_in">line</span> is followed <span class="keyword">by</span> <span class="operator">the</span> lengths <span class="operator">of</span> <span class="keyword">each</span> <span class="operator">of</span>
+*     its values.
+*   o READ&#x884C;&#x6307;&#x660E;&#x4E86;LRU&#x53EF;&#x8BBF;&#x95EE;&#x7684;&#x7F13;&#x5B58;&#x9879;&#x3002; <span class="keyword">lines</span> track accesses <span class="keyword">for</span> LRU.
+*   o REMOVE&#x884C;&#x6307;&#x660E;&#x4E86;&#x5DF2;&#x7ECF;&#x88AB;&#x5220;&#x9664;&#x7684;&#x7F13;&#x5B58;&#x9879;&#x3002; <span class="keyword">lines</span> track entries that have been deleted.
+*
+* journal&#x6587;&#x4EF6;&#x5076;&#x5C14;&#x4F1A;&#x88AB;&#x538B;&#x7F29;&#x7528;&#x6765;&#x51CF;&#x5C11;&#x5197;&#x4F59;&#x7684;&#x884C;&#x3002;
+*  &#x4E34;&#x65F6;&#x6587;&#x4EF6;&#x201C;journal.tmp&#x201D;&#x5728;&#x538B;&#x7F29;&#x65F6;&#x5C06;&#x4F1A;&#x88AB;&#x4F7F;&#x7528;&#xFF0C;&#x5982;&#x679C;&#x7F13;&#x5B58;&#x88AB;&#x6253;&#x5F00;&#x7684;&#x8BDD;&#xFF0C;&#x5982;&#x679C;&#x5B83;&#x5B58;&#x5728;&#x5C31;&#x5E94;&#x8BE5;&#x628A;&#x5B83;&#x5220;&#x9664;&#x6389;&#x3002;The journal <span class="built_in">file</span> is appended <span class="built_in">to</span> <span class="keyword">as</span> cache operations occur. The journal may
+* occasionally be compacted <span class="keyword">by</span> dropping redundant <span class="keyword">lines</span>. A temporary <span class="built_in">file</span> named
+* <span class="string">&quot;journal.tmp&quot;</span> will be used during compaction; that <span class="built_in">file</span> should be deleted <span class="keyword">if</span>
+* <span class="keyword">it</span> exists when <span class="operator">the</span> cache is opened.
+</code></pre><h2 id="4-3_&#x5199;&#x5165;&#x7F13;&#x5B58;DiskLruCache-Editor">4.3 &#x5199;&#x5165;&#x7F13;&#x5B58;DiskLruCache.Editor</h2><p>&#x3000;&#x3000;&#x5199;&#x5165;&#x7F13;&#x5B58;&#x7684;&#x57FA;&#x672C;&#x8FC7;&#x7A0B;&#x662F;&#xFF1A;&#x9996;&#x5148;&#x901A;&#x8FC7;DiskLruCache.edit()&#x521B;&#x5EFA;&#x4E00;&#x4E2A;DiskLruCache.Editor&#x5BF9;&#x8C61;&#xFF0C;&#x7136;&#x540E;&#x901A;&#x8FC7;Editor.newOutputStream()&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x8F93;&#x51FA;&#x6D41;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x4F60;&#x8981;&#x4FDD;&#x5B58;&#x7684;&#x6570;&#x636E;&#x5199;&#x5165;&#x5230;&#x8FD9;&#x4E2A;&#x8F93;&#x51FA;&#x6D41;&#x4E2D;&#x3002;<br>&#x3000;&#x3000;&#x4EE5;&#x4E0B;&#x662F;&#x7F51;&#x4E0A;&#x7684;&#x4E00;&#x6BB5;&#x793A;&#x4F8B;&#x4EE3;&#x7801;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">try</span> {</span><br><span class="line">    <span class="comment">// &#x56FE;&#x7247;&#x5730;&#x5740;</span></span><br><span class="line">	String imageUrl = <span class="string">&quot;http://img.my.csdn.net/uploads/201309/01/1378037235_7476.jpg&quot;</span>;</span><br><span class="line">	<span class="comment">// &#x8BA1;&#x7B97;&#x51FA;&#x4E00;&#x4E2A;&#x5173;&#x952E;&#x5B57;</span></span><br><span class="line">	String key = hashKeyForDisk(imageUrl);</span><br><span class="line">	<span class="comment">// &#x901A;&#x8FC7;&#x5173;&#x952E;&#x5B57;&#x83B7;&#x53D6;&#x4E00;&#x4E2A;Editor</span></span><br><span class="line">	DiskLruCache.Editor editor = mDiskLruCache.edit(key);</span><br><span class="line">	<span class="keyword">if</span> (editor != <span class="keyword">null</span>) {</span><br><span class="line">	    <span class="comment">// &#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x8F93;&#x51FA;&#x6D41;</span></span><br><span class="line">		  OutputStream outputStream = editor.newOutputStream(<span class="number">0</span>);</span><br><span class="line">		  <span class="comment">// &#x901A;&#x8FC7;&#x5730;&#x5740;&#x83B7;&#x53D6;&#x56FE;&#x7247;&#x6570;&#x636E;&#x5199;&#x5165;&#x5230;&#x8F93;&#x51FA;&#x6D41;</span></span><br><span class="line">		  <span class="keyword">if</span> (downloadUrlToStream(imageUrl, outputStream)) {</span><br><span class="line">		      <span class="comment">// &#x5199;&#x5165;&#x6210;&#x529F;&#xFF0C;&#x63D0;&#x4EA4;</span></span><br><span class="line">			    editor.commit();</span><br><span class="line">		  } <span class="keyword">else</span> {</span><br><span class="line">		      <span class="comment">// &#x5199;&#x5165;&#x5931;&#x8D25;&#xFF0C;&#x4E2D;&#x6B62;</span></span><br><span class="line">			    editor.abort();</span><br><span class="line">		  }</span><br><span class="line">	}</span><br><span class="line">	<span class="comment">// flush</span></span><br><span class="line">	mDiskLruCache.flush();</span><br><span class="line">} <span class="keyword">catch</span> (IOException e) {</span><br><span class="line">	e.printStackTrace();</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<h3 id="4-3-1_Editor&#x521B;&#x5EFA;">4.3.1 Editor&#x521B;&#x5EFA;</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Editor <span class="title">edit</span><span class="params">(String key)</span> <span class="keyword">throws</span> IOException </span>{</span><br><span class="line">    <span class="keyword">return</span> edit(key, ANY_SEQUENCE_NUMBER);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">synchronized</span> Editor <span class="title">edit</span><span class="params">(String key, <span class="keyword">long</span> expectedSequenceNumber)</span> <span class="keyword">throws</span> IOException </span>{</span><br><span class="line">    checkNotClosed();</span><br><span class="line">    validateKey(key);</span><br><span class="line">    <span class="comment">// lruEntries&#x4E3A;LinkedHashMap&lt;String, Entry&gt;&#x5B9E;&#x4F8B;</span></span><br><span class="line">    Entry entry = lruEntries.get(key);</span><br><span class="line">    <span class="comment">// &#x8BF7;&#x6C42;&#x7684;&#x5E8F;&#x5217;&#x53F7;&#x8DDF;&#x5165;&#x53E3;&#x7684;&#x5E8F;&#x5217;&#x53F7;&#x4E0D;&#x5339;&#x914D;&#x9700;&#x8981;&#x8FD4;&#x56DE;&#x7A7A;</span></span><br><span class="line">    <span class="keyword">if</span> (expectedSequenceNumber != ANY_SEQUENCE_NUMBER</span><br><span class="line">            &amp;&amp; (entry == <span class="keyword">null</span> || entry.sequenceNumber != expectedSequenceNumber)) {</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>; <span class="comment">// snapshot is stale</span></span><br><span class="line">    }</span><br><span class="line">    <span class="comment">// &#x5982;&#x679C;&#x4E0D;&#x5B58;&#x5728;key&#x7684;&#x5165;&#x53E3;&#xFF0C;&#x90A3;&#x4E48;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x5165;&#x53E3;</span></span><br><span class="line">    <span class="keyword">if</span> (entry == <span class="keyword">null</span>) {</span><br><span class="line">        entry = <span class="keyword">new</span> Entry(key);</span><br><span class="line">        lruEntries.put(key, entry);</span><br><span class="line">    } <span class="function"><span class="keyword">else</span> <span class="title">if</span> <span class="params">(entry.currentEditor != <span class="keyword">null</span>)</span> </span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>; <span class="comment">// &#x8FD9;&#x4E2A;&#x5165;&#x53E3;&#x6B63;&#x5728;&#x7F16;&#x8F91;another edit is in progress</span></span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">// &#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;Editor&#xFF0C;&#x5E76;&#x8BB0;&#x5F55;&#x5728;&#x5F53;&#x524D;&#x5165;&#x53E3;</span></span><br><span class="line">    Editor editor = <span class="keyword">new</span> Editor(entry);</span><br><span class="line">    entry.currentEditor = editor;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// flush the journal before creating files to prevent file leaks</span></span><br><span class="line">    <span class="comment">// &#x5C06;&#x8BE5;key&#x4F5C;&#x4E3A;DIRTY&#x9879;&#x8BB0;&#x5F55;&#x5230;journal&#x6587;&#x4EF6;</span></span><br><span class="line">    journalWriter.write(DIRTY + <span class="string">&apos; &apos;</span> + key + <span class="string">&apos;\n&apos;</span>);</span><br><span class="line">    journalWriter.flush();</span><br><span class="line">    <span class="keyword">return</span> editor;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>&#x8FD9;&#x91CC;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;Editor&#xFF0C;&#x5E76;&#x4E0E;key&#x5BF9;&#x5E94;&#x5165;&#x53E3;&#x5173;&#x8054;&#xFF0C;&#x540C;&#x65F6;&#x5C06;DIRTY&#x9879;&#x5199;&#x5165;&#x5230;journal&#x6587;&#x4EF6;&#x3002;</p>
+<h3 id="4-3-2_Editor-newOutputStream&#x521B;&#x5EFA;&#x8F93;&#x51FA;&#x6D41;">4.3.2 Editor.newOutputStream&#x521B;&#x5EFA;&#x8F93;&#x51FA;&#x6D41;</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> OutputStream <span class="title">newOutputStream</span><span class="params">(<span class="keyword">int</span> index)</span> <span class="keyword">throws</span> IOException </span>{</span><br><span class="line">    <span class="keyword">synchronized</span> (DiskLruCache.<span class="keyword">this</span>) {</span><br><span class="line">        <span class="keyword">if</span> (entry.currentEditor != <span class="keyword">this</span>) {</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException();</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> FaultHidingOutputStream(<span class="keyword">new</span> FileOutputStream(entry.getDirtyFile(index)));</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>Entry.getDirtyFile()&#x6307;&#x5411;&#x7F13;&#x5B58;&#x76EE;&#x5F55;&#x4E0B;&#x7684;&#x4E00;&#x4E2A;&#x4E34;&#x65F6;&#x6587;&#x4EF6;&#x3002;<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> File <span class="title">getDirtyFile</span><span class="params">(<span class="keyword">int</span> i)</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> File(directory, key + <span class="string">&quot;.&quot;</span> + i + <span class="string">&quot;.tmp&quot;</span>);</span><br><span class="line">}</span><br></pre></td></tr></table></figure></p>
+<p>FaultHidingOutputStream&#x7EE7;&#x627F;&#x81EA;FileOutputStream&#xFF0C;&#x7528;&#x6765;&#x6355;&#x6349;&#x5F02;&#x5E38;&#x540E;&#x4E0D;&#x629B;&#x51FA;&#xFF0C;&#x53EA;&#x505A;&#x6807;&#x8BB0;hasErrors&#xFF0C;&#x9632;&#x6B62;&#x7A0B;&#x5E8F;&#x5D29;&#x6E83;&#x3002;<br>&#x4E00;&#x4E2A;&#x5173;&#x952E;&#x5B57;&#x53EF;&#x4EE5;&#x5BF9;&#x5E94;&#x591A;&#x4E2A;&#x7F13;&#x5B58;&#x6587;&#x4EF6;&#xFF0C;&#x6570;&#x76EE;&#x4E3A;&#x6784;&#x9020;&#x51FD;&#x6570;&#x4F20;&#x5165;&#x7684;valueCount&#xFF0C;&#x901A;&#x8FC7;index&#x6765;&#x6307;&#x660E;&#x3002;</p>
+<h3 id="4-3-3_Editor-commit&#x63D0;&#x4EA4;&#x53D8;&#x66F4;">4.3.3 Editor.commit&#x63D0;&#x4EA4;&#x53D8;&#x66F4;</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">commit</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>{</span><br><span class="line">    <span class="keyword">if</span> (hasErrors) {</span><br><span class="line">        completeEdit(<span class="keyword">this</span>, <span class="keyword">false</span>);</span><br><span class="line">        remove(entry.key); <span class="comment">// the previous entry is stale</span></span><br><span class="line">    } <span class="keyword">else</span> {</span><br><span class="line">        completeEdit(<span class="keyword">this</span>, <span class="keyword">true</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>&#x5982;&#x679C;&#x6587;&#x4EF6;&#x8BFB;&#x5199;&#x53D1;&#x751F;&#x9519;&#x8BEF;&#xFF0C;hasErrors&#x88AB;&#x6807;&#x8BB0;&#x4E3A;true&#xFF0C;&#x90A3;&#x4E48;&#x9700;&#x8981;&#x7528;&#x5173;&#x952E;&#x5B57;&#x5220;&#x9664;&#x6389;&#x7F13;&#x5B58;&#x9879;&#x3002;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">completeEdit</span><span class="params">(Editor editor, <span class="keyword">boolean</span> success)</span> <span class="keyword">throws</span> IOException </span>{</span><br><span class="line">    Entry entry = editor.entry;</span><br><span class="line">    <span class="keyword">if</span> (entry.currentEditor != editor) {</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException();</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">// if this edit is creating the entry for the first time, every index must have a value</span></span><br><span class="line">    <span class="comment">// &#x7B2C;&#x4E00;&#x6B21;&#x521B;&#x5EFA;&#x5165;&#x53E3;&#x65F6;readable&#x8FD8;&#x662F;false&#xFF0C;&#x7F13;&#x5B58;&#x6210;&#x529F;&#x7684;&#x8BDD;&#x8981;&#x786E;&#x4FDD;&#x7F13;&#x5B58;&#x6587;&#x4EF6;&#x5B58;&#x5728;</span></span><br><span class="line">    <span class="keyword">if</span> (success &amp;&amp; !entry.readable) {</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; valueCount; i++) {</span><br><span class="line">            <span class="keyword">if</span> (!entry.getDirtyFile(i).exists()) {</span><br><span class="line">                editor.abort();</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">&quot;edit didn&apos;t create file &quot;</span> + i);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; valueCount; i++) {</span><br><span class="line">        File dirty = entry.getDirtyFile(i);</span><br><span class="line">        <span class="keyword">if</span> (success) {</span><br><span class="line">        		<span class="comment">// &#x5C06;&#x4E34;&#x65F6;&#x6587;&#x4EF6;&#x6539;&#x540D;&#x4E3A;&#x6B63;&#x5F0F;&#x7F13;&#x5B58;&#x6587;&#x4EF6;&#xFF0C;&#x5E76;&#x540C;&#x65F6;&#x8BA1;&#x7B97;&#x5927;&#x5C0F;</span></span><br><span class="line">            <span class="keyword">if</span> (dirty.exists()) {</span><br><span class="line">                File clean = entry.getCleanFile(i);</span><br><span class="line">                dirty.renameTo(clean);</span><br><span class="line">                <span class="keyword">long</span> oldLength = entry.lengths[i];</span><br><span class="line">                <span class="keyword">long</span> newLength = clean.length();</span><br><span class="line">                entry.lengths[i] = newLength;</span><br><span class="line">                size = size - oldLength + newLength;</span><br><span class="line">            }</span><br><span class="line">        } <span class="keyword">else</span> {</span><br><span class="line">        		<span class="comment">// &#x5220;&#x9664;&#x4E34;&#x65F6;&#x6587;&#x4EF6;</span></span><br><span class="line">            deleteIfExists(dirty);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"><span class="comment">// &#x4FEE;&#x6539;&#x5165;&#x53E3;&#x4FE1;&#x606F;&#xFF0C;&#x5E76;&#x4E14;&#x4FEE;&#x6539;journal&#x6587;&#x4EF6;</span></span><br><span class="line">    redundantOpCount++;</span><br><span class="line">    entry.currentEditor = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">if</span> (entry.readable | success) {</span><br><span class="line">    		<span class="comment">// &#x5165;&#x53E3;&#x53EF;&#x8BFB;&#x4E86;</span></span><br><span class="line">        entry.readable = <span class="keyword">true</span>;</span><br><span class="line">        <span class="comment">// &#x8BB0;&#x5F55;&#x4E3A;&#x7F13;&#x5B58;&#x5B8C;&#x6210;&#x9879;&#x76EE;</span></span><br><span class="line">        journalWriter.write(CLEAN + <span class="string">&apos; &apos;</span> + entry.key + entry.getLengths() + <span class="string">&apos;\n&apos;</span>);</span><br><span class="line">        <span class="keyword">if</span> (success) {</span><br><span class="line">            entry.sequenceNumber = nextSequenceNumber++;</span><br><span class="line">        }</span><br><span class="line">    } <span class="keyword">else</span> {</span><br><span class="line">        lruEntries.remove(entry.key);</span><br><span class="line">    		<span class="comment">// &#x8BB0;&#x5F55;&#x4E3A;&#x5DF2;&#x79FB;&#x9664;&#x9879;</span></span><br><span class="line">        journalWriter.write(REMOVE + <span class="string">&apos; &apos;</span> + entry.key + <span class="string">&apos;\n&apos;</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"><span class="comment">// &#x5982;&#x679C;&#x7F13;&#x5B58;&#x5927;&#x5C0F;&#x5927;&#x4E8E;&#x914D;&#x7F6E;&#x7684;&#x6700;&#x5927;&#x503C;&#xFF0C;</span></span><br><span class="line"><span class="comment">// &#x6216;&#x8005;redundantOpCount&#x5927;&#x4E8E;&#x7F13;&#x5B58;&#x9879;&#x6216;2000&#x65F6;&#xFF0C;</span></span><br><span class="line"><span class="comment">// &#x5219;&#x542F;&#x52A8;&#x6E05;&#x7406;&#x670D;&#x52A1;</span></span><br><span class="line">    <span class="keyword">if</span> (size &gt; maxSize || journalRebuildRequired()) {</span><br><span class="line">        executorService.submit(cleanupCallable);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="javadoc">/**</span><br><span class="line"> * We only rebuild the journal when it will halve the size of the journal</span><br><span class="line"> * and eliminate at least 2000 ops.</span><br><span class="line"> */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">journalRebuildRequired</span><span class="params">()</span> </span>{</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> REDUNDANT_OP_COMPACT_THRESHOLD = <span class="number">2000</span>;</span><br><span class="line">    <span class="keyword">return</span> redundantOpCount &gt;= REDUNDANT_OP_COMPACT_THRESHOLD</span><br><span class="line">            &amp;&amp; redundantOpCount &gt;= lruEntries.size();</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>completeEdit&#x51FD;&#x6570;&#x5206;&#x522B;&#x5BF9;&#x6210;&#x529F;&#x4E0E;&#x5931;&#x8D25;&#x4E24;&#x79CD;&#x72B6;&#x6001;&#x5BF9;journal&#x6587;&#x4EF6;&#x8FDB;&#x884C;&#x5904;&#x7406;&#xFF0C;&#x540C;&#x65F6;&#x901A;&#x8FC7;lruEntries&#x6765;&#x8BB0;&#x5F55;&#x5165;&#x53E3;&#x9879;&#xFF0C;&#x57FA;&#x4E8E;LRU&#x7B97;&#x6CD5;&#x7528;&#x4F5C;&#x7F13;&#x5B58;&#x5927;&#x4E8E;&#x8BBE;&#x5B9A;&#x503C;&#x65F6;&#x79FB;&#x9664;&#x5165;&#x53E3;&#x9879;&#x3002;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> ExecutorService executorService = <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">0</span>, <span class="number">1</span>,</span><br><span class="line">        <span class="number">60L</span>, TimeUnit.SECONDS, <span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;());</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Callable&lt;Void&gt; cleanupCallable = <span class="keyword">new</span> Callable&lt;Void&gt;() {</span><br><span class="line">    <span class="annotation">@Override</span> <span class="function"><span class="keyword">public</span> Void <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>{</span><br><span class="line">        <span class="keyword">synchronized</span> (DiskLruCache.<span class="keyword">this</span>) {</span><br><span class="line">            <span class="keyword">if</span> (journalWriter == <span class="keyword">null</span>) {</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">null</span>; <span class="comment">// closed</span></span><br><span class="line">            }</span><br><span class="line">            trimToSize();</span><br><span class="line">            <span class="keyword">if</span> (journalRebuildRequired()) {</span><br><span class="line">                rebuildJournal();</span><br><span class="line">                redundantOpCount = <span class="number">0</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure>
+<p>&#x6E05;&#x7406;&#x670D;&#x52A1;&#x901A;&#x8FC7;&#x7EBF;&#x7A0B;&#x6C60;&#x5F02;&#x6B65;&#x6765;&#x5B8C;&#x6210;&#xFF0C;&#x8FD9;&#x6837;&#x4E0D;&#x4F1A;&#x5BFC;&#x81F4;&#x4E3B;&#x7EBF;&#x7A0B;&#x963B;&#x585E;&#x3002;&#x5176;&#x4E2D;trimeToSize&#x57FA;&#x4E8E;LRU&#x5C06;eldest&#x9879;&#x76EE;&#x79FB;&#x9664;&#xFF0C;rebuildJournal&#x6839;&#x636E;lruEntries&#x8BB0;&#x5F55;&#x7684;&#x6BCF;&#x4E00;&#x9879;&#x76EE;&#x91CD;&#x5199;journal&#x6587;&#x4EF6;&#x3002;</p>
+<h2 id="4-4_&#x8BFB;&#x53D6;&#x7F13;&#x5B58;DiskLruCache-Snapshot">4.4 &#x8BFB;&#x53D6;&#x7F13;&#x5B58;DiskLruCache.Snapshot</h2><p>&#x5728;&#x8C03;&#x7528;Editor&#x5C06;&#x6D41;&#x7F13;&#x5B58;&#x5230;&#x672C;&#x5730;&#x540E;&#xFF0C;&#x8BFB;&#x53D6;&#x65F6;&#x901A;&#x8FC7;DiskLruCache.get&#x6765;&#x83B7;&#x53D6;&#x7F13;&#x5B58;&#x4FE1;&#x606F;&#xFF0C;&#x8FD9;&#x91CC;&#x5C06;&#x521B;&#x5EFA;DiskLruCache.Snapshot&#x5BF9;&#x8C61;&#x3002;&#x7EE7;&#x7EED;&#x7F51;&#x4E0A;&#x8BFB;&#x53D6;&#x4EE3;&#x7801;&#xFF1A;<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> {</span><br><span class="line">	String imageUrl = <span class="string">&quot;http://img.my.csdn.net/uploads/201309/01/1378037235_7476.jpg&quot;</span>;</span><br><span class="line">	<span class="comment">// &#x8BA1;&#x7B97;&#x51FA;key</span></span><br><span class="line">	String key = hashKeyForDisk(imageUrl);</span><br><span class="line">	DiskLruCache.Snapshot snapShot = mDiskLruCache.get(key);</span><br><span class="line">	<span class="keyword">if</span> (snapShot != <span class="keyword">null</span>) {</span><br><span class="line">		InputStream is = snapShot.getInputStream(<span class="number">0</span>);</span><br><span class="line">		Bitmap bitmap = BitmapFactory.decodeStream(is);</span><br><span class="line">		mImage.setImageBitmap(bitmap);</span><br><span class="line">	}</span><br><span class="line">} <span class="keyword">catch</span> (IOException e) {</span><br><span class="line">	e.printStackTrace();</span><br><span class="line">}</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-4-1_Snapshot&#x521B;&#x5EFA;">4.4.1 Snapshot&#x521B;&#x5EFA;</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> Snapshot <span class="title">get</span><span class="params">(String key)</span> <span class="keyword">throws</span> IOException </span>{</span><br><span class="line">    checkNotClosed();</span><br><span class="line">    validateKey(key);</span><br><span class="line">    <span class="comment">// &#x83B7;&#x53D6;key&#x7684;&#x5165;&#x53E3;</span></span><br><span class="line">    Entry entry = lruEntries.get(key);</span><br><span class="line">    <span class="keyword">if</span> (entry == <span class="keyword">null</span>) {</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"><span class="comment">// &#x4E0D;&#x53EF;&#x8BFB;</span></span><br><span class="line">    <span class="keyword">if</span> (!entry.readable) {</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span><br><span class="line">     * Open all streams eagerly to guarantee that we see a single published</span><br><span class="line">     * snapshot. If we opened streams lazily then the streams could come</span><br><span class="line">     * from different edits.</span><br><span class="line">     */</span></span><br><span class="line">    <span class="comment">// &#x6253;&#x5F00;&#x8BE5;&#x5165;&#x53E3;&#x5173;&#x8054;&#x7684;&#x6240;&#x6709;&#x7F13;&#x5B58;&#x6587;&#x4EF6;</span></span><br><span class="line">    InputStream[] ins = <span class="keyword">new</span> InputStream[valueCount];</span><br><span class="line">    <span class="keyword">try</span> {</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; valueCount; i++) {</span><br><span class="line">            ins[i] = <span class="keyword">new</span> FileInputStream(entry.getCleanFile(i));</span><br><span class="line">        }</span><br><span class="line">    } <span class="keyword">catch</span> (FileNotFoundException e) {</span><br><span class="line">        <span class="comment">// a file must have been deleted manually!</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    redundantOpCount++;</span><br><span class="line">    <span class="comment">// &#x5C06;journal&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x952E;&#x503C;&#x5BF9;&#x5E94;&#x9879;&#x8BBE;&#x4E3A;READ&#x72B6;&#x6001;</span></span><br><span class="line">    journalWriter.append(READ + <span class="string">&apos; &apos;</span> + key + <span class="string">&apos;\n&apos;</span>);</span><br><span class="line">    <span class="keyword">if</span> (journalRebuildRequired()) {</span><br><span class="line">        executorService.submit(cleanupCallable);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Snapshot(key, entry.sequenceNumber, ins);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>&#x8FD9;&#x91CC;&#x5C06;&#x6240;&#x6709;&#x6587;&#x4EF6;&#x6587;&#x4EF6;&#x6253;&#x5F00;&#xFF0C;&#x540C;&#x65F6;&#x521B;&#x5EFA;Snapshot&#x5BF9;&#x8C61;&#xFF0C;&#x67E5;&#x770B;Snapshot&#x79C1;&#x6709;&#x6784;&#x9020;&#x51FD;&#x6570;&#x3002;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="title">Snapshot</span><span class="params">(String key, <span class="keyword">long</span> sequenceNumber, InputStream[] ins)</span> </span>{</span><br><span class="line">    <span class="keyword">this</span>.key = key;</span><br><span class="line">    <span class="keyword">this</span>.sequenceNumber = sequenceNumber;</span><br><span class="line">    <span class="keyword">this</span>.ins = ins;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<h3 id="4-4-2_Snapshot-getInputStream&#x83B7;&#x53D6;&#x6D41;">4.4.2 Snapshot.getInputStream&#x83B7;&#x53D6;&#x6D41;</h3><p>Snapshot&#x8BB0;&#x5F55;&#x4E86;&#x5F53;&#x524D;&#x5173;&#x952E;&#x5B57;&#x3001;&#x5E8F;&#x5217;&#x53F7;&#x4EE5;&#x53CA;&#x5BF9;&#x5E94;&#x7F13;&#x5B58;&#x7684;&#x6240;&#x6709;&#x8F93;&#x5165;&#x6D41;&#x3002;&#x63A5;&#x4E0B;&#x6765;&#x5C31;&#x80FD;&#x591F;&#x901A;&#x8FC7;&#x7D22;&#x5F15;&#x4ECE;Snapshot&#x4E2D;&#x83B7;&#x53D6;&#x5BF9;&#x5E94;&#x7684;&#x6D41;&#x4E86;&#xFF1A;<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> InputStream <span class="title">getInputStream</span><span class="params">(<span class="keyword">int</span> index)</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> ins[index];</span><br><span class="line">}</span><br></pre></td></tr></table></figure></p>
+<p>&#x901A;&#x8FC7;&#x8FD4;&#x56DE;&#x7684;&#x6D41;&#x8BFB;&#x53D6;&#x7F13;&#x5B58;&#x5230;&#x78C1;&#x76D8;&#x7684;&#x6587;&#x4EF6;&#x3002;</p>
+<h1 id="5-&#x603B;&#x7ED3;">5.&#x603B;&#x7ED3;</h1><ul>
+<li>DiskLruCache&#x4F7F;&#x7528;&#x4E86;&#x4E24;&#x4E2A;&#x5185;&#x90E8;&#x7C7B;&#xFF0C;&#x4E00;&#x4E2A;&#x662F;DiskLruCache.Editor&#x7528;&#x6765;&#x5199;&#x5165;&#x7F13;&#x5B58;&#x4FE1;&#x606F;&#xFF0C;&#x4E00;&#x4E2A;&#x662F;DiskLruCache.Snapshot&#x7528;&#x6765;&#x8BFB;&#x53D6;&#x7F13;&#x5B58;&#x6587;&#x4EF6;&#x3002;</li>
+<li>&#x7F13;&#x5B58;&#x6587;&#x4EF6;&#x5206;&#x4E3A;CLEAN&#x6587;&#x4EF6;&#x548C;DIRTY&#x6587;&#x4EF6;&#xFF0C;CLEAN&#x6587;&#x4EF6;&#x4E3A;&#x7F13;&#x5B58;&#x5B8C;&#x6210;&#x7684;&#x6587;&#x4EF6;&#xFF0C;DIRTY&#x6587;&#x4EF6;&#x7528;&#x6765;&#x4E34;&#x65F6;&#x6807;&#x8BB0;&#x6B63;&#x5728;&#x4FEE;&#x6539;&#x3002;</li>
+<li>journal&#x6587;&#x4EF6;&#x8BB0;&#x5F55;&#x4E86;&#x54EA;&#x4E9B;&#x5173;&#x952E;&#x5B57;&#x5DF2;&#x7ECF;&#x88AB;&#x7F13;&#x5B58;&#x3001;&#x54EA;&#x4E9B;&#x6B63;&#x5728;&#x4FEE;&#x6539;&#x3001;&#x54EA;&#x4E9B;&#x6B63;&#x5728;&#x8BFB;&#x53D6;&#x3002;</li>
+<li>&#x7F13;&#x5B58;&#x5165;&#x53E3;&#x9879;&#x540C;LruCache&#x4E00;&#x6837;&#x4F7F;&#x7528;LinkedHashMap&#xFF0C;&#x80FD;&#x591F;&#x76F4;&#x63A5;&#x8C03;&#x7528;LinkedHashMap.eldest()&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x6700;&#x4E45;&#x672A;&#x88AB;&#x4F7F;&#x7528;&#x7684;&#x9879;&#xFF0C;&#x7701;&#x53BB;&#x4E86;LRU&#x7B97;&#x6CD5;&#x7684;&#x5B9E;&#x73B0;&#x3002;</li>
+<li>&#x6574;&#x7406;&#x7A7A;&#x95F4;&#x5DF2;&#x7ECF;&#x91CD;&#x5199;journal&#x64CD;&#x4F5C;&#x7559;&#x7ED9;&#x4E86;&#x7EBF;&#x7A0B;&#x6C60;&#x5355;&#x7EBF;&#x7A0B;&#x5F02;&#x6B65;&#x5904;&#x7406;&#xFF0C;&#x4E00;&#x662F;&#x9632;&#x6B62;&#x4E86;&#x4E3B;&#x7EBF;&#x7A0B;&#x963B;&#x585E;&#x95EE;&#x9898;&#xFF0C;&#x4E8C;&#x662F;&#x89E3;&#x51B3;&#x4E86;&#x540C;&#x6B65;&#x95EE;&#x9898;&#x3002;</li>
+</ul>
+<h1 id="6-&#x76F8;&#x5173;&#x6587;&#x7AE0;">6.&#x76F8;&#x5173;&#x6587;&#x7AE0;</h1><p>&#x3000;&#x3000;<a href="http://m.blog.csdn.net/article/details?id=28863651" target="_blank" rel="external">http://m.blog.csdn.net/article/details?id=28863651</a><br>&#x3000;&#x3000;<a href="http://m.blog.csdn.net/article/details?id=34093441" target="_blank" rel="external">http://m.blog.csdn.net/article/details?id=34093441</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://www.laiwangyo.com/2016/02/27/Android开源项目分析-DiskLruCache/" data-id="cilso6e6d0004skm3ifnnmt4i" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://www.laiwangyo.com/2016/02/27/Android开源项目分析-DiskLruCache/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/03/01/自定义界面脚本引擎XModeEngine-（一）描述/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          自定义界面脚本引擎XModeEngine-（一）描述
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/02/24/Android开源项目分析-LruCache/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">Android开源项目分析-LruCache</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2016/02/27/Android开源项目分析-DiskLruCache/" data-title="Android开源项目分析-DiskLruCache" data-url="http://www.laiwangyo.com/2016/02/27/Android开源项目分析-DiskLruCache/"></div>
+  </section>
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android开源项目分析/">Android开源项目分析</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android破解的那些破事/">Android破解的那些破事</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Openfire/">Openfire</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/XModeEngine脚本引擎/">XModeEngine脚本引擎</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Openfire/">Openfire</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/03/15/Android开源项目分析-Volley/">Android开源项目分析-Volley</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/10/破解的那些破事-记手动逆向smali代码/">破解的那些破事-记手动逆向smali代码</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/03/自定义界面脚本引擎XModeEngine-（三）变量与函数/">自定义界面脚本引擎XModeEngine-（三）变量与函数</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/02/自定义界面脚本引擎XModeEngine-（二）视图元素与事件/">自定义界面脚本引擎XModeEngine-（二）视图元素与事件</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/01/自定义界面脚本引擎XModeEngine-（一）描述/">自定义界面脚本引擎XModeEngine-（一）描述</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://taoyuanxiaoqi.com" target="_blank">桃园小七</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Powered by <a href=http://www.laiwangyo.com target="_blank">yazone</a><br>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">文章列表</a>
+  
+    <a href="/me" class="mobile-nav-link">关于我</a>
+  
+</nav>
+  <!-- totop start -->
+
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"yazone"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>

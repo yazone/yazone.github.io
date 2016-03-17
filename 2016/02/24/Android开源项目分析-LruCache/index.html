@@ -1,0 +1,332 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android开源项目分析-LruCache | 云景中天</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="&amp;#x6458;&amp;#x8981;&amp;#xFF1A;&amp;#x672C;&amp;#x6587;&amp;#x5BF9;&amp;#x5F00;&amp;#x6E90;&amp;#x4EE3;&amp;#x7801;LruCache&amp;#x6E90;&amp;#x7801;&amp;#x8FDB;&amp;#x884C;&amp;#x5206;&amp;#x6790;&amp;#x3002;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android开源项目分析-LruCache">
+<meta property="og:url" content="http://www.laiwangyo.com/2016/02/24/Android开源项目分析-LruCache/index.html">
+<meta property="og:site_name" content="云景中天">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;&amp;#xFF1A;&amp;#x672C;&amp;#x6587;&amp;#x5BF9;&amp;#x5F00;&amp;#x6E90;&amp;#x4EE3;&amp;#x7801;LruCache&amp;#x6E90;&amp;#x7801;&amp;#x8FDB;&amp;#x884C;&amp;#x5206;&amp;#x6790;&amp;#x3002;">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android开源项目分析-LruCache">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;&amp;#xFF1A;&amp;#x672C;&amp;#x6587;&amp;#x5BF9;&amp;#x5F00;&amp;#x6E90;&amp;#x4EE3;&amp;#x7801;LruCache&amp;#x6E90;&amp;#x7801;&amp;#x8FDB;&amp;#x884C;&amp;#x5206;&amp;#x6790;&amp;#x3002;">
+  
+    <link rel="alternative" href="/atom.xml" title="云景中天" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">云景中天</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">代码中带点唏嘘，生命中带点惊喜</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">文章列表</a>
+        
+          <a class="main-nav-link" href="/me">关于我</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="www.laiwangyo.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-Android开源项目分析-LruCache" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/24/Android开源项目分析-LruCache/" class="article-date">
+  <time datetime="2016-02-24T12:45:00.000Z" itemprop="datePublished">2016-02-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android开源项目分析/">Android开源项目分析</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android开源项目分析-LruCache
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div class="toc-wrap">
+        	<div class="toc-title">Index</div>
+        	<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-简介："><span class="toc-number">1.</span> <span class="toc-text">1.简介：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-源码查看："><span class="toc-number">2.</span> <span class="toc-text">2.源码查看：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-原理"><span class="toc-number">3.</span> <span class="toc-text">3.原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-代码分析"><span class="toc-number">4.</span> <span class="toc-text">4.代码分析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-1_构造函数"><span class="toc-number">5.</span> <span class="toc-text">4.1 构造函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-2_加入缓存对象put操作"><span class="toc-number">6.</span> <span class="toc-text">4.2 加入缓存对象put操作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-3_获取缓存对象get操作"><span class="toc-number">7.</span> <span class="toc-text">4.3 获取缓存对象get操作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-4_移除缓存对象remove操作"><span class="toc-number">8.</span> <span class="toc-text">4.4 移除缓存对象remove操作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-5_缓存调整trimToSize"><span class="toc-number">9.</span> <span class="toc-text">4.5 缓存调整trimToSize</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-总结"><span class="toc-number">10.</span> <span class="toc-text">5.总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-相关文章："><span class="toc-number">11.</span> <span class="toc-text">6.相关文章：</span></a></li></ol>
+    		</div>
+
+        <p>&#x6458;&#x8981;&#xFF1A;&#x672C;&#x6587;&#x5BF9;&#x5F00;&#x6E90;&#x4EE3;&#x7801;LruCache&#x6E90;&#x7801;&#x8FDB;&#x884C;&#x5206;&#x6790;&#x3002;<a id="more"></a></p>
+<h1 id="1-&#x7B80;&#x4ECB;&#xFF1A;">1.&#x7B80;&#x4ECB;&#xFF1A;</h1><p>&#x3000;&#x3000;&#x901A;&#x8FC7;LruCache&#x901A;&#x8FC7;&#x952E;&#x503C;&#x5C06;&#x5B58;&#x50A8;&#x6570;&#x636E;&#x7F13;&#x5B58;&#x5185;&#x5B58;&#x4E2D;&#xFF0C;&#x7528;&#x6237;&#x53EA;&#x9700;&#x63D0;&#x4F9B;&#x521B;&#x5EFA;&#x65B9;&#x5F0F;&#xFF0C;&#x65E0;&#x9700;&#x5173;&#x6CE8;&#x91CA;&#x653E;&#x95EE;&#x9898;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x907F;&#x514D;OOM&#xFF0C;&#x57FA;&#x4E8E;LRU&#x7B97;&#x6CD5;&#x5B9E;&#x73B0;&#x3002;</p>
+<h1 id="2-&#x6E90;&#x7801;&#x67E5;&#x770B;&#xFF1A;">2.&#x6E90;&#x7801;&#x67E5;&#x770B;&#xFF1A;</h1><p>&#x3000;&#x3000;<a href="http://androidxref.com/6.0.1_r10/xref/frameworks/base/core/java/android/util/LruCache.java" target="_blank" rel="external">http://androidxref.com/6.0.1_r10/xref/frameworks/base/core/java/android/util/LruCache.java</a></p>
+<h1 id="3-&#x539F;&#x7406;">3.&#x539F;&#x7406;</h1><p>&#x3000;&#x3000;Lru&#x7F13;&#x5B58;&#x5B9E;&#x73B0;&#x539F;&#x7406;&#x662F;&#x5728;&#x961F;&#x5217;&#x4E2D;&#x4FDD;&#x5B58;&#x4E86;&#x4E00;&#x5B9A;&#x6570;&#x91CF;&#x7684;&#x5F3A;&#x5F15;&#x7528;&#x5BF9;&#x8C61;&#x3002;&#x6BCF;&#x5F53;&#x5BF9;&#x8C61;&#x88AB;&#x8BBF;&#x95EE;&#xFF0C;&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x88AB;&#x79FB;&#x52A8;&#x5230;&#x961F;&#x5217;&#x6700;&#x524D;&#x9762;&#x3002;&#x5F53;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x6DFB;&#x52A0;&#x5230;&#x961F;&#x5217;&#x5DF2;&#x6EE1;&#x7684;&#x7F13;&#x5B58;&#x65F6;&#xFF0C;&#x7F13;&#x5B58;&#x961F;&#x5217;&#x4E2D;&#x6700;&#x540E;&#x7684;&#x5BF9;&#x8C61;&#x88AB;&#x79FB;&#x9664;&#xFF0C;&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x9002;&#x5F53;&#x7684;&#x65F6;&#x5019;&#x4F1A;&#x88AB;&#x5783;&#x573E;&#x56DE;&#x6536;&#x5668;&#x56DE;&#x6536;&#x3002;</p>
+<h1 id="4-&#x4EE3;&#x7801;&#x5206;&#x6790;">4.&#x4EE3;&#x7801;&#x5206;&#x6790;</h1><h1 id="4-1_&#x6784;&#x9020;&#x51FD;&#x6570;">4.1 &#x6784;&#x9020;&#x51FD;&#x6570;</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">LruCache</span><span class="params">(<span class="keyword">int</span> maxSize)</span> </span>{</span><br><span class="line">    <span class="keyword">if</span> (maxSize &lt;= <span class="number">0</span>) {</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">&quot;maxSize &lt;= 0&quot;</span>);</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">this</span>.maxSize = maxSize;</span><br><span class="line">    <span class="keyword">this</span>.map = <span class="keyword">new</span> LinkedHashMap&lt;K, V&gt;(<span class="number">0</span>, <span class="number">0.75f</span>, <span class="keyword">true</span>);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>&#x5176;&#x4E2D;maxSize&#x4E0E;map&#x7684;&#x5B9A;&#x4E49;&#x5982;&#x4E0B;&#xFF1A;<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> LinkedHashMap&lt;K, V&gt; map;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> maxSize;</span><br></pre></td></tr></table></figure></p>
+<p>maxSize&#x6709;&#x4E24;&#x79CD;&#x72B6;&#x6001;&#x8868;&#x793A;&#xFF1A;<br>&#x3000;&#x3000;1&#x3001;&#x5F53;&#x7C7B;&#x4E2D;&#x7684;LruCache::sizeOf&#x6CA1;&#x88AB;&#x91CD;&#x8F7D;&#x65F6;&#xFF0C;&#x5B83;&#x8868;&#x793A;&#x961F;&#x5217;&#x4E2D;&#x5BF9;&#x8C61;&#x7684;&#x6570;&#x76EE;&#xFF1B;<br>&#x3000;&#x3000;2&#x3001;&#x5982;&#x679C;LruCache::sizeof&#x88AB;&#x91CD;&#x8F7D;&#x4E86;&#xFF0C;&#x90A3;&#x4E48;&#x5B83;&#x8868;&#x793A;&#x7684;&#x662F;&#x961F;&#x5217;&#x4E2D;&#x6240;&#x6709;&#x5BF9;&#x8C61;&#x7684;&#x5B57;&#x8282;&#x5927;&#x5C0F;&#x603B;&#x548C;&#x3002;</p>
+<p>map&#x4E3A;LinkedHashMap&#x662F;&#x4E00;&#x4E2A;&#x6709;&#x5E8F;&#x7684;HashMap&#xFF0C;&#x8FD9;&#x91CC;&#x5C06;&#x5B83;&#x7406;&#x89E3;&#x4E3A;&#x80FD;&#x901A;&#x8FC7;&#x952E;&#x503C;&#x67E5;&#x8BE2;&#x7684;&#x961F;&#x5217;&#xFF0C;&#x5B83;&#x7528;&#x6765;&#x5B58;&#x50A8;&#x9700;&#x8981;&#x7F13;&#x5B58;&#x7684;&#x5BF9;&#x8C61;&#x3002;<br>LinkedHashMap&#x5B9E;&#x73B0;&#x4EE3;&#x7801;&#x53C2;&#x89C1;<a href="http://androidxref.com/6.0.1_r10/xref/libcore/luni/src/main/java/java/util/LinkedHashMap.java&#x3002;" target="_blank" rel="external">http://androidxref.com/6.0.1_r10/xref/libcore/luni/src/main/java/java/util/LinkedHashMap.java&#x3002;</a></p>
+<h1 id="4-2_&#x52A0;&#x5165;&#x7F13;&#x5B58;&#x5BF9;&#x8C61;put&#x64CD;&#x4F5C;">4.2 &#x52A0;&#x5165;&#x7F13;&#x5B58;&#x5BF9;&#x8C61;put&#x64CD;&#x4F5C;</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> V <span class="title">put</span><span class="params">(K key, V value)</span> </span>{</span><br><span class="line">    <span class="keyword">if</span> (key == <span class="keyword">null</span> || value == <span class="keyword">null</span>) {</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">&quot;key == null || value == null&quot;</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    V previous;</span><br><span class="line">    <span class="keyword">synchronized</span> (<span class="keyword">this</span>) {</span><br><span class="line">        putCount++;</span><br><span class="line">        <span class="comment">// &#x8BA1;&#x7B97;&#x603B;&#x5927;&#x5C0F;</span></span><br><span class="line">        size += safeSizeOf(key, value);</span><br><span class="line">        previous = map.put(key, value);</span><br><span class="line">        <span class="comment">// &#x76F8;&#x540C;key&#xFF0C;&#x9700;&#x8981;&#x53BB;&#x9664;&#x4E4B;&#x524D;&#x7684;size&#x5927;&#x5C0F;</span></span><br><span class="line">        <span class="keyword">if</span> (previous != <span class="keyword">null</span>) {</span><br><span class="line">            size -= safeSizeOf(key, previous);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (previous != <span class="keyword">null</span>) {</span><br><span class="line">        entryRemoved(<span class="keyword">false</span>, key, previous, value);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    trimToSize(maxSize);</span><br><span class="line">    <span class="keyword">return</span> previous;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>1&#x3001;&#x9996;&#x5148;&#x8FDB;&#x884C;&#x7A7A;&#x6307;&#x9488;&#x5224;&#x65AD;&#xFF0C;&#x5982;&#x679C;key&#x548C;value&#x6709;&#x7A7A;&#x6307;&#x9488;&#x5219;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#xFF1B;<br>2&#x3001;&#x8BA1;&#x7B97;&#x5F53;&#x524D;&#x6240;&#x6709;&#x5BF9;&#x8C61;&#x5927;&#x5C0F;size&#xFF0C;&#x5E76;&#x540C;&#x65F6;&#x5C06;&#x5BF9;&#x8C61;&#x8BB0;&#x5F55;&#x5230;map&#x4E2D;&#xFF1B;<br>3&#x3001;&#x5982;&#x679C;&#x5177;&#x5907;&#x76F8;&#x540C;key&#xFF0C;previous&#x5C06;&#x4E0D;&#x4E3A;&#x7A7A;&#xFF0C;&#x5219;&#x8C03;&#x7528;entryRemoved&#x6765;&#x5224;&#x65AD;&#x662F;&#x5426;&#x8981;&#x663E;&#x5F0F;&#x91CA;&#x653E;&#x5185;&#x5B58;&#xFF1B;<br>4&#x3001;&#x901A;&#x8FC7;trimToSize&#x5C06;&#x6700;&#x5148;&#x63D2;&#x5165;&#x5230;map&#x7684;&#x79FB;&#x9664;&#xFF0C;&#x4FDD;&#x8BC1;&#x5F53;&#x524D;map&#x5927;&#x5C0F;&#x5C0F;&#x4E8E;maxSize&#x3002;</p>
+<h1 id="4-3_&#x83B7;&#x53D6;&#x7F13;&#x5B58;&#x5BF9;&#x8C61;get&#x64CD;&#x4F5C;">4.3 &#x83B7;&#x53D6;&#x7F13;&#x5B58;&#x5BF9;&#x8C61;get&#x64CD;&#x4F5C;</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> V <span class="title">get</span><span class="params">(K key)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (key == <span class="keyword">null</span>) {</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">&quot;key == null&quot;</span>);</span><br><span class="line">        }</span><br></pre></td></tr></table></figure>
+<p>&#x7A7A;&#x6307;&#x9488;&#x5224;&#x65AD;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">V mapValue;</span><br><span class="line"><span class="keyword">synchronized</span> (<span class="keyword">this</span>) {</span><br><span class="line">    mapValue = map.get(key);</span><br><span class="line">    <span class="keyword">if</span> (mapValue != <span class="keyword">null</span>) {</span><br><span class="line">        hitCount++;</span><br><span class="line">        <span class="keyword">return</span> mapValue;</span><br><span class="line">    }</span><br><span class="line">    missCount++;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>&#x901A;&#x8FC7;map&#x83B7;&#x53D6;&#x7F13;&#x5B58;&#x5BF9;&#x8C61;&#xFF0C;&#x5B58;&#x5728;&#x7684;&#x8BDD;&#x8FD4;&#x56DE;&#x5BF9;&#x8C61;&#xFF0C;&#x5E76;&#x589E;&#x52A0;&#x547D;&#x4E2D;&#x6570;hitCount&#xFF0C;&#x5426;&#x5219;&#x672A;&#x547D;&#x4E2D;&#x6570;missCount&#x3002;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">V createdValue = create(key);</span><br><span class="line"><span class="keyword">if</span> (createdValue == <span class="keyword">null</span>) {</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>&#x901A;&#x8FC7;create&#x51FD;&#x6570;&#x6765;&#x521B;&#x5EFA;&#x9700;&#x8981;&#x7F13;&#x5B58;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;LruCache::create&#x8FD4;&#x56DE;null&#xFF0C;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x5B50;&#x7C7B;&#x91CD;&#x8F7D;&#x6765;&#x8FD4;&#x56DE;&#x9700;&#x8981;&#x7F13;&#x5B58;&#x7684;&#x5BF9;&#x8C61;&#x3002;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">synchronized</span> (<span class="keyword">this</span>) {</span><br><span class="line">    createCount++;</span><br><span class="line">    mapValue = map.put(key, createdValue);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (mapValue != <span class="keyword">null</span>) {</span><br><span class="line">        <span class="comment">// There was a conflict so undo that last put</span></span><br><span class="line">        map.put(key, mapValue);</span><br><span class="line">    } <span class="keyword">else</span> {</span><br><span class="line">        size += safeSizeOf(key, createdValue);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>&#x589E;&#x52A0;&#x521B;&#x5EFA;&#x6B21;&#x6570;createCount&#xFF0C;&#x5E76;&#x4E14;&#x5C06;&#x521B;&#x5EFA;&#x7684;&#x5BF9;&#x8C61;&#x653E;&#x5165;&#x5230;map&#x4E2D;&#x3002;<br>&#x5982;&#x679C;map&#x6DFB;&#x52A0;&#x5BF9;&#x8C61;&#x65F6;&#x8FD4;&#x56DE;&#x5BF9;&#x8C61;&#xFF0C;&#x8BF4;&#x660E;&#x5B58;&#x5728;&#x51B2;&#x7A81;&#xFF08;&#x53EF;&#x80FD;&#x591A;&#x7EBF;&#x7A0B;&#x539F;&#x56E0;&#x5728;&#x5176;&#x5B83;&#x7EBF;&#x7A0B;&#x4E2D;&#x521A;&#x597D;&#x521B;&#x5EFA;&#xFF09;&#xFF0C;&#x90A3;&#x91CD;&#x65B0;&#x5C06;&#x4E4B;&#x524D;&#x7684;&#x7F13;&#x5B58;&#x5BF9;&#x8C61;&#x4FDD;&#x5B58;&#x5230;map&#x4E2D;&#xFF1B;&#x5426;&#x5219;&#x91CD;&#x65B0;&#x8BA1;&#x7B97;&#x7F13;&#x5B58;&#x5927;&#x5C0F;size&#x3002;<br>&#x8FD9;&#x4E00;&#x6B65;&#x4E5F;&#x4FDD;&#x8BC1;&#x4E86;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;(thread-safe)&#x3002;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (mapValue != <span class="keyword">null</span>) {</span><br><span class="line">        entryRemoved(<span class="keyword">false</span>, key, createdValue, mapValue);</span><br><span class="line">        <span class="keyword">return</span> mapValue;</span><br><span class="line">    } <span class="keyword">else</span> {</span><br><span class="line">        trimToSize(maxSize);</span><br><span class="line">        <span class="keyword">return</span> createdValue;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>&#x5982;&#x679C;mapValue&#x4E0D;&#x4E3A;&#x7A7A;&#xFF0C;&#x4E5F;&#x5C31;&#x8BF4;&#x660E;&#x521B;&#x5EFA;&#x65F6;&#x5B58;&#x5728;&#x51B2;&#x7A81;&#xFF0C;&#x9700;&#x8981;&#x901A;&#x77E5;&#x65B0;&#x521B;&#x5EFA;&#x7684;&#x503C;createdValue&#x9700;&#x8981;&#x9500;&#x6BC1;&#xFF0C;&#x5E76;&#x4E14;&#x8FD4;&#x56DE;&#x65E7;&#x7684;&#x7F13;&#x5B58;&#x5BF9;&#x8C61;mapValue&#xFF1B;<br>&#x5426;&#x5219;&#x8C03;&#x7528;trimToSize&#x91CD;&#x65B0;&#x8C03;&#x6574;map&#xFF0C;&#x5E76;&#x4E14;&#x8FD4;&#x56DE;&#x65B0;&#x7684;&#x521B;&#x5EFA;&#x7684;&#x7F13;&#x5B58;&#x5BF9;&#x8C61;&#x3002;</p>
+<h1 id="4-4_&#x79FB;&#x9664;&#x7F13;&#x5B58;&#x5BF9;&#x8C61;remove&#x64CD;&#x4F5C;">4.4 &#x79FB;&#x9664;&#x7F13;&#x5B58;&#x5BF9;&#x8C61;remove&#x64CD;&#x4F5C;</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> V <span class="title">remove</span><span class="params">(K key)</span> </span>{</span><br><span class="line">    <span class="keyword">if</span> (key == <span class="keyword">null</span>) {</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">&quot;key == null&quot;</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    V previous;</span><br><span class="line">    <span class="keyword">synchronized</span> (<span class="keyword">this</span>) {</span><br><span class="line">        previous = map.remove(key);</span><br><span class="line">        <span class="keyword">if</span> (previous != <span class="keyword">null</span>) {</span><br><span class="line">            size -= safeSizeOf(key, previous);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (previous != <span class="keyword">null</span>) {</span><br><span class="line">        entryRemoved(<span class="keyword">false</span>, key, previous, <span class="keyword">null</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> previous;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>&#x79FB;&#x9664;&#x7F13;&#x5B58;&#x53EA;&#x9700;&#x8981;&#x901A;&#x8FC7;&#x79FB;&#x9664;map&#x4E2D;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x91CD;&#x65B0;&#x8C03;&#x6574;&#x7F13;&#x5B58;&#x5927;&#x5C0F;&#xFF0C;&#x540C;&#x65F6;&#x901A;&#x8FC7;entryRemoved&#x6765;&#x7ED9;LruCache&#x7684;&#x5B50;&#x7C7B;&#x5BF9;&#x8C61;&#x6765;&#x51B3;&#x5B9A;&#x662F;&#x5426;&#x4E3B;&#x52A8;&#x56DE;&#x6536;&#x7F13;&#x5B58;&#x5BF9;&#x8C61;&#x3002;</p>
+<h1 id="4-5_&#x7F13;&#x5B58;&#x8C03;&#x6574;trimToSize">4.5 &#x7F13;&#x5B58;&#x8C03;&#x6574;trimToSize</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">trimToSize</span><span class="params">(<span class="keyword">int</span> maxSize)</span> </span>{</span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">true</span>) {</span><br><span class="line">        K key;</span><br><span class="line">        V value;</span><br><span class="line">        <span class="keyword">synchronized</span> (<span class="keyword">this</span>) {</span><br><span class="line">            <span class="keyword">if</span> (size &lt; <span class="number">0</span> || (map.isEmpty() &amp;&amp; size != <span class="number">0</span>)) {</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(getClass().getName()</span><br><span class="line">                        + <span class="string">&quot;.sizeOf() is reporting inconsistent results!&quot;</span>);</span><br><span class="line">            }</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (size &lt;= maxSize) {</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            }</span><br><span class="line"></span><br><span class="line">            Map.Entry&lt;K, V&gt; toEvict = map.eldest();</span><br><span class="line">            <span class="keyword">if</span> (toEvict == <span class="keyword">null</span>) {</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            }</span><br><span class="line"></span><br><span class="line">            key = toEvict.getKey();</span><br><span class="line">            value = toEvict.getValue();</span><br><span class="line">            map.remove(key);</span><br><span class="line">            size -= safeSizeOf(key, value);</span><br><span class="line">            evictionCount++;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        entryRemoved(<span class="keyword">true</span>, key, value, <span class="keyword">null</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>&#x7F13;&#x5B58;&#x8C03;&#x6574;&#x51FD;&#x6570;trimToSize&#x4E3A;LruCache&#x7F13;&#x5B58;&#x7B56;&#x7565;&#x6838;&#x5FC3;&#x5B9E;&#x73B0;&#x3002;<br>&#x5F53;map&#x7F13;&#x5B58;&#x5927;&#x5C0F;size&#x5927;&#x4E8E;maxSize&#x65F6;&#xFF0C;&#x4F7F;&#x7528;LRU&#x7B97;&#x6CD5;&#x5C06;&#x6700;&#x4E45;&#x672A;&#x88AB;&#x4F7F;&#x7528;&#x7684;&#x5BF9;&#x8C61;&#x4ECE;map&#x4E2D;&#x79FB;&#x9664;&#x3002;<br>LRU&#x7B97;&#x6CD5;&#x5B9E;&#x73B0;&#x4F7F;&#x7528;&#x662F;LinkedHashMap.eldest()&#xFF0C;&#x8FD9;&#x91CC;&#x65E0;&#x9700;&#x8003;&#x8651;&#x7B97;&#x6CD5;&#x7684;&#x5177;&#x4F53;&#x5B9E;&#x73B0;&#xFF0C;&#x4FBF;&#x53EF;&#x4EE5;&#x5F88;&#x5FEB;&#x7684;&#x627E;&#x5230;&#x9700;&#x8981;&#x79FB;&#x9664;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x8FD9;&#x4E5F;&#x662F;LruCache&#x4E3A;&#x4EC0;&#x4E48;&#x4F7F;&#x7528;LinkedHashMap&#x7684;&#x539F;&#x56E0;&#x3002;</p>
+<h1 id="5-&#x603B;&#x7ED3;">5.&#x603B;&#x7ED3;</h1><p>&#x901A;&#x8FC7;LruCache&#x4E86;&#x89E3;&#x5230;&#x5982;&#x4F55;&#x5BF9;&#x7C7B;&#x8FDB;&#x884C;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x5904;&#x7406;&#x4EE5;&#x53CA;LinkedHashMap&#x4F7F;&#x7528;&#xFF0C;&#x540C;&#x65F6;LruCache&#x5C06;create&#x521B;&#x5EFA;&#x4EE5;&#x53CA;entryRemoved&#x91CA;&#x653E;&#x5F3A;&#x5F15;&#x7528;&#x5BF9;&#x8C61;&#x64CD;&#x4F5C;&#x7559;&#x7ED9;&#x5B50;&#x7C7B;&#xFF0C;&#x6709;&#x70B9;IoC&#x7684;&#x5473;&#x9053;&#x3002;</p>
+<h1 id="6-&#x76F8;&#x5173;&#x6587;&#x7AE0;&#xFF1A;">6.&#x76F8;&#x5173;&#x6587;&#x7AE0;&#xFF1A;</h1><p>&#x3000;&#x3000;<a href="http://m.blog.chinaunix.net/uid-26930580-id-4138306.html" target="_blank" rel="external">http://m.blog.chinaunix.net/uid-26930580-id-4138306.html</a><br>&#x3000;&#x3000;<a href="http://m.blog.csdn.net/article/details?id=9316683" target="_blank" rel="external">http://m.blog.csdn.net/article/details?id=9316683</a><br>&#x3000;&#x3000;<a href="http://blog.csdn.net/linghu_java/article/details/8574102" target="_blank" rel="external">http://blog.csdn.net/linghu_java/article/details/8574102</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://www.laiwangyo.com/2016/02/24/Android开源项目分析-LruCache/" data-id="cilso6gue0007skm37bbffy16" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://www.laiwangyo.com/2016/02/24/Android开源项目分析-LruCache/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/02/27/Android开源项目分析-DiskLruCache/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          Android开源项目分析-DiskLruCache
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/02/24/Android开源项目分析-计划/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">Android开源项目分析计划</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2016/02/24/Android开源项目分析-LruCache/" data-title="Android开源项目分析-LruCache" data-url="http://www.laiwangyo.com/2016/02/24/Android开源项目分析-LruCache/"></div>
+  </section>
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android开源项目分析/">Android开源项目分析</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android破解的那些破事/">Android破解的那些破事</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Openfire/">Openfire</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/XModeEngine脚本引擎/">XModeEngine脚本引擎</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Openfire/">Openfire</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/03/15/Android开源项目分析-Volley/">Android开源项目分析-Volley</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/10/破解的那些破事-记手动逆向smali代码/">破解的那些破事-记手动逆向smali代码</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/03/自定义界面脚本引擎XModeEngine-（三）变量与函数/">自定义界面脚本引擎XModeEngine-（三）变量与函数</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/02/自定义界面脚本引擎XModeEngine-（二）视图元素与事件/">自定义界面脚本引擎XModeEngine-（二）视图元素与事件</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/01/自定义界面脚本引擎XModeEngine-（一）描述/">自定义界面脚本引擎XModeEngine-（一）描述</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://taoyuanxiaoqi.com" target="_blank">桃园小七</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Powered by <a href=http://www.laiwangyo.com target="_blank">yazone</a><br>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">文章列表</a>
+  
+    <a href="/me" class="mobile-nav-link">关于我</a>
+  
+</nav>
+  <!-- totop start -->
+
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"yazone"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>
