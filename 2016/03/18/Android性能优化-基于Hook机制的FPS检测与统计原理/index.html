@@ -114,10 +114,10 @@
 <p>&#x3000;&#x3000;&#x5177;&#x4F53;&#x5904;&#x7406;&#x662F;&#x5728;&#x5B50;&#x7C7B;&#x4E2D;&#x5B9E;&#x73B0;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x8DDF;&#x8E2A;&#x7684;&#x662F;Choreographer&#x6D88;&#x606F;&#x5904;&#x7406;&#x3002;</p>
 <h2 id="2-3_FrameHandler&#x5E27;&#x540C;&#x6B65;&#x6D88;&#x606F;&#x5904;&#x7406;">2.3 FrameHandler&#x5E27;&#x540C;&#x6B65;&#x6D88;&#x606F;&#x5904;&#x7406;</h2><p>&#x3000;&#x3000;&#x5B50;&#x7C7B;android.view.Choreographer$FrameHandler&#x7EE7;&#x627F;Handler&#x7528;&#x6765;&#x5904;&#x7406;&#x5E27;&#x540C;&#x6B65;&#x6D88;&#x606F;&#xFF1A;<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">FrameHandler</span> <span class="keyword">extends</span> <span class="title">Handler</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FrameHandler</span><span class="params">(Looper looper)</span> </span>{</span><br><span class="line">        <span class="keyword">super</span>(looper);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>{</span><br><span class="line">        <span class="keyword">switch</span> (msg.what) {</span><br><span class="line">            <span class="keyword">case</span> MSG_DO_FRAME:</span><br><span class="line">                doFrame(System.nanoTime(), <span class="number">0</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> MSG_DO_SCHEDULE_VSYNC:</span><br><span class="line">                doScheduleVsync();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> MSG_DO_SCHEDULE_CALLBACK:</span><br><span class="line">                doScheduleCallback(msg.arg1);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure></p>
 <p>&#x3000;&#x3000;&#x56E0;&#x6B64;&#x8BA1;&#x7B97;&#x51FA;doFrame&#x7684;&#x8017;&#x65F6;&#x5C31;&#x80FD;&#x8BA1;&#x7B97;&#x51FA;&#x5F53;&#x524D;&#x7684;&#x5927;&#x81F4;&#x5E27;&#x7387;&#x3002;</p>
-<h1 id="3-_doFrame&#x4E0E;&#x5E27;&#x7387;">3. doFrame&#x4E0E;&#x5E27;&#x7387;</h1><p>&#x3000;&#x3000;&#x9996;&#x5148;&#x76F4;&#x89C2;&#x4E86;&#x89E3;&#x4E0B;doFrame&#x8017;&#x65F6;&#x4E0E;&#x4E3B;&#x7EBF;&#x7A0B;&#x52A0;&#x8F7D;&#x6570;&#x636E;&#x4E4B;&#x95F4;&#x7684;&#x5173;&#x7CFB;&#xFF0C;&#x4EE5;&#x4ECA;&#x65E5;&#x5934;&#x6761;&#x4E3A;&#x4F8B;&#xFF1A;<br><img src="/2016/03/18/Android&#x6027;&#x80FD;&#x4F18;&#x5316;-&#x57FA;&#x4E8E;Hook&#x673A;&#x5236;&#x7684;FPS&#x68C0;&#x6D4B;&#x4E0E;&#x7EDF;&#x8BA1;&#x539F;&#x7406;/&#x4ECA;&#x65E5;&#x5934;&#x6761;1.bmp" alt="&#x4ECA;&#x65E5;&#x5934;&#x6761;&#x8017;&#x65F6;1"><br><img src="/2016/03/18/Android&#x6027;&#x80FD;&#x4F18;&#x5316;-&#x57FA;&#x4E8E;Hook&#x673A;&#x5236;&#x7684;FPS&#x68C0;&#x6D4B;&#x4E0E;&#x7EDF;&#x8BA1;&#x539F;&#x7406;/&#x4ECA;&#x65E5;&#x5934;&#x6761;2.bmp" alt="&#x4ECA;&#x65E5;&#x5934;&#x6761;&#x8017;&#x65F6;2"><br>&#x3000;&#x3000;&#x201C;&#x4F4D;&#x7F6E;1&#x201D;&#xFF1A;&#x4ECA;&#x65E5;&#x5934;&#x6761;&#x9996;&#x5148;&#x52A0;&#x8F7D;&#x6B22;&#x8FCE;&#x754C;&#x9762;&#x505A;&#x5E7F;&#x544A;&#xFF0C;&#x52A0;&#x8F7D;&#x6570;&#x636E;&#x7B49;&#x539F;&#x56E0;&#x5BFC;&#x81F4;&#x8017;&#x65F6;&#x6BD4;&#x8F83;&#x957F;&#x3002;<br>&#x3000;&#x3000;&#x201C;&#x4F4D;&#x7F6E;2&#x201D;&#x3001;&#x201C;&#x4F4D;&#x7F6E;3&#x201D;&#x3001;&#x201C;&#x4F4D;&#x7F6E;3&#x201D;&#xFF1A;&#x52A0;&#x8F7D;&#x4E3B;&#x754C;&#x9762;&#x65F6;&#xFF0C;&#x4ECD;&#x7136;&#x6709;&#x5F88;&#x957F;&#x7684;&#x8017;&#x65F6;&#x3002;<br>&#x3000;&#x3000;&#x201C;&#x4F4D;&#x7F6E;5&#x201D;&#xFF1A;&#x5F53;&#x4E3B;&#x7EBF;&#x7A0B;&#x6570;&#x636E;&#x52A0;&#x8F7D;&#x5B8C;&#x6210;&#xFF0C;&#x8017;&#x65F6;&#x6062;&#x590D;&#x6B63;&#x5E38;&#x3002;</p>
+<h1 id="3-_doFrame&#x4E0E;&#x5E27;&#x7387;">3. doFrame&#x4E0E;&#x5E27;&#x7387;</h1><p>&#x3000;&#x3000;&#x9996;&#x5148;&#x76F4;&#x89C2;&#x4E86;&#x89E3;&#x4E0B;doFrame&#x8017;&#x65F6;&#x4E0E;&#x4E3B;&#x7EBF;&#x7A0B;&#x52A0;&#x8F7D;&#x6570;&#x636E;&#x4E4B;&#x95F4;&#x7684;&#x5173;&#x7CFB;&#xFF0C;&#x4EE5;&#x4ECA;&#x65E5;&#x5934;&#x6761;&#x4E3A;&#x4F8B;&#xFF1A;<br><img src="/2016/03/18/Android&#x6027;&#x80FD;&#x4F18;&#x5316;-&#x57FA;&#x4E8E;Hook&#x673A;&#x5236;&#x7684;FPS&#x68C0;&#x6D4B;&#x4E0E;&#x7EDF;&#x8BA1;&#x539F;&#x7406;/&#x4ECA;&#x65E5;&#x5934;&#x6761;1.bmp" alt="&#x4ECA;&#x65E5;&#x5934;&#x6761;&#x8017;&#x65F6;1"><br><img src="/2016/03/18/Android&#x6027;&#x80FD;&#x4F18;&#x5316;-&#x57FA;&#x4E8E;Hook&#x673A;&#x5236;&#x7684;FPS&#x68C0;&#x6D4B;&#x4E0E;&#x7EDF;&#x8BA1;&#x539F;&#x7406;/&#x4ECA;&#x65E5;&#x5934;&#x6761;2.bmp" alt="&#x4ECA;&#x65E5;&#x5934;&#x6761;&#x8017;&#x65F6;2"><br>&#x3000;&#x3000;&#x201C;&#x4F4D;&#x7F6E;1&#x201D;&#xFF1A;&#x4ECA;&#x65E5;&#x5934;&#x6761;&#x9996;&#x5148;&#x52A0;&#x8F7D;&#x6B22;&#x8FCE;&#x754C;&#x9762;&#x505A;&#x5E7F;&#x544A;&#xFF0C;&#x52A0;&#x8F7D;&#x6570;&#x636E;&#x7B49;&#x539F;&#x56E0;&#x5BFC;&#x81F4;&#x8017;&#x65F6;&#x6BD4;&#x8F83;&#x957F;&#x3002;<br>&#x3000;&#x3000;&#x201C;&#x4F4D;&#x7F6E;2&#x201D;&#x3001;&#x201C;&#x4F4D;&#x7F6E;3&#x201D;&#x3001;&#x201C;&#x4F4D;&#x7F6E;4&#x201D;&#xFF1A;&#x52A0;&#x8F7D;&#x4E3B;&#x754C;&#x9762;&#x65F6;&#xFF0C;&#x4ECD;&#x7136;&#x6709;&#x5F88;&#x957F;&#x7684;&#x8017;&#x65F6;&#x3002;<br>&#x3000;&#x3000;&#x201C;&#x4F4D;&#x7F6E;5&#x201D;&#xFF1A;&#x5F53;&#x4E3B;&#x7EBF;&#x7A0B;&#x6570;&#x636E;&#x52A0;&#x8F7D;&#x5B8C;&#x6210;&#xFF0C;&#x8017;&#x65F6;&#x6062;&#x590D;&#x6B63;&#x5E38;&#x3002;</p>
 <p>&#x3000;&#x3000;&#x73B0;&#x7F16;&#x5199;ListView&#x6D4B;&#x8BD5;&#xFF0C;&#x5C06;5000&#x6761;&#x6570;&#x636E;&#x6DFB;&#x52A0;&#x5230;&#xFF0C;&#x6BCF;&#x6B21;&#x83B7;&#x53D6;&#x6570;&#x636E;&#x90FD;&#x76F4;&#x63A5;&#x53BB;&#x6570;&#x636E;&#x5E93;&#x67E5;&#x8BE2;&#xFF0C;&#x7ED3;&#x679C;&#x5982;&#x4E0B;&#xFF1A;<br><img src="/2016/03/18/Android&#x6027;&#x80FD;&#x4F18;&#x5316;-&#x57FA;&#x4E8E;Hook&#x673A;&#x5236;&#x7684;FPS&#x68C0;&#x6D4B;&#x4E0E;&#x7EDF;&#x8BA1;&#x539F;&#x7406;/ListView&#x5E27;&#x7387;&#x6D4B;&#x8BD5;.bmp" alt="ListView&#x5E27;&#x7387;&#x6D4B;&#x8BD5;"><br>&#x3000;&#x3000;&#x201C;&#x4F4D;&#x7F6E;6&#x201D;&#xFF1A;Activity&#x521A;&#x521B;&#x5EFA;&#x5B8C;&#x9700;&#x8981;&#x663E;&#x793A;&#x65F6;&#x6570;&#x636E;&#x52A0;&#x8F7D;&#x65F6;&#x7684;&#x5E27;&#x7387;&#xFF0C;&#x5DF2;&#x7ECF;&#x8FBE;&#x5230;&#x4E86;2000ms&#x7684;&#x8017;&#x65F6;&#xFF0C;&#x6D4B;&#x8BD5;10000&#x6761;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x8017;&#x65F6;&#x4E3A;12000ms&#xFF0C;&#x6B64;&#x65F6;&#x754C;&#x9762;&#x4F1A;&#x9ED1;&#x5C4F;&#x4E00;&#x6BB5;&#x65F6;&#x95F4;&#x624D;&#x663E;&#x793A;&#x3002;<br>&#x3000;&#x3000;&#x201C;&#x4F4D;&#x7F6E;7&#x201D;&#xFF1A;&#x4E3A;&#x52A0;&#x8F7D;&#x5B8C;&#x540E;&#x5E27;&#x7387;&#x6B63;&#x5E38;&#x60C5;&#x51B5;&#x3002;<br>&#x3000;&#x3000;&#x201C;&#x4F4D;&#x7F6E;8&#x201D;&#xFF1A;&#x5F53;&#x5C1D;&#x8BD5;&#x6ED1;&#x52A8;ListView&#x65F6;&#xFF0C;&#x7531;&#x4E8E;&#x83B7;&#x53D6;&#x6570;&#x636E;&#x65F6;&#x95F4;&#x8FC7;&#x957F;&#xFF0C;&#x8868;&#x73B0;&#x4E0A;&#x5DF2;&#x7ECF;&#x660E;&#x663E;&#x5361;&#x987F;&#xFF0C;&#x6B64;&#x65F6;&#x770B;&#x5230;&#x8017;&#x65F6;&#x5DF2;&#x7ECF;&#x51E0;&#x767E;&#x6BEB;&#x79D2;&#xFF0C;&#x5982;&#x679C;&#x6309;&#x5E27;&#x7387;&#x8BA1;&#x7B97;&#x4E0D;&#x5230;10&#x5E27;&#x3002;</p>
 <h1 id="4-_Hook&#x5B9E;&#x73B0;&#x7B80;&#x5355;&#x63CF;&#x8FF0;">4. Hook&#x5B9E;&#x73B0;&#x7B80;&#x5355;&#x63CF;&#x8FF0;</h1><p>&#x3000;&#x3000;&#x7ECF;&#x8FC7;&#x4EE5;&#x4E0A;&#x5206;&#x6790;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x9996;&#x5148;hook&#x6389;Handler.dispatchMessage&#x51FD;&#x6570;&#xFF0C;&#x7136;&#x540E;&#x5BF9;Message.target&#x53D1;&#x9001;&#x76EE;&#x6807;&#x8FDB;&#x884C;&#x5224;&#x65AD;&#xFF0C;&#x5982;&#x679C;&#x4E3A;android.view.Choreographer$FrameHandler&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x53EF;&#x4EE5;&#x8BB0;&#x5F55;&#x5E76;&#x7EDF;&#x8BA1;&#x51FA;&#x8017;&#x65F6;&#x3002;</p>
-<h1 id="5-_&#x603B;&#x7ED3;">5. &#x603B;&#x7ED3;</h1><p>&#x3000;&#x3000;&#x8FD9;&#x91CC;&#x7B80;&#x5355;&#x63CF;&#x8FF0;&#x4E86;&#x4E3B;&#x7EBF;&#x7A0B;&#x4E2D;Looper&#x3001;Choreographer&#x4E4B;&#x95F4;&#x7684;&#x5173;&#x7CFB;&#x4EE5;&#x53CA;&#x5361;&#x987F;&#x7684;&#x539F;&#x56E0;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x8BB2;&#x63CF;&#x8FF0;&#x901A;&#x8FC7;Hook&#x65B9;&#x5F0F;&#x68C0;&#x6D4B;FPS&#x7684;&#x5177;&#x4F53;&#x5B9E;&#x73B0;&#x3002;</p>
+<h1 id="5-_&#x603B;&#x7ED3;">5. &#x603B;&#x7ED3;</h1><p>&#x3000;&#x3000;&#x8FD9;&#x91CC;&#x7B80;&#x5355;&#x63CF;&#x8FF0;&#x4E86;&#x4E3B;&#x7EBF;&#x7A0B;&#x4E2D;Looper&#x3001;Choreographer&#x4E4B;&#x95F4;&#x7684;&#x5173;&#x7CFB;&#x4EE5;&#x53CA;&#x5361;&#x987F;&#x7684;&#x539F;&#x56E0;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x5C06;&#x63CF;&#x8FF0;&#x901A;&#x8FC7;Hook&#x65B9;&#x5F0F;&#x68C0;&#x6D4B;FPS&#x7684;&#x5177;&#x4F53;&#x5B9E;&#x73B0;&#x3002;</p>
 
       
     </div>
@@ -138,6 +138,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2016/03/18/自定义界面脚本引擎XModeEngine-（四）帧率/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          自定义界面脚本引擎XModeEngine-（四）帧率
+        
+      </div>
+    </a>
   
   
     <a href="/2016/03/15/Android开源项目分析-Volley/" id="article-nav-older" class="article-nav-link-wrap">
@@ -162,7 +171,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android开源项目分析/">Android开源项目分析</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android性能优化/">Android性能优化</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android破解的那些破事/">Android破解的那些破事</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Openfire/">Openfire</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/XModeEngine脚本引擎/">XModeEngine脚本引擎</a><span class="category-list-count">3</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android开源项目分析/">Android开源项目分析</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android性能优化/">Android性能优化</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android破解的那些破事/">Android破解的那些破事</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Openfire/">Openfire</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/XModeEngine脚本引擎/">XModeEngine脚本引擎</a><span class="category-list-count">4</span></li></ul>
     </div>
   </div>
 
@@ -172,7 +181,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Openfire/">Openfire</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Openfire/">Openfire</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -190,7 +199,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -202,6 +211,14 @@
       <ul>
         
           <li>
+            <a href="/2016/03/22/Android性能优化-基于Hook机制的FPS检测与统计实现/">Android性能优化-基于Hook机制的FPS检测与统计实现</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/18/自定义界面脚本引擎XModeEngine-（四）帧率/">自定义界面脚本引擎XModeEngine-（四）帧率</a>
+          </li>
+        
+          <li>
             <a href="/2016/03/18/Android性能优化-基于Hook机制的FPS检测与统计原理/">Android性能优化-基于Hook机制的FPS检测与统计原理</a>
           </li>
         
@@ -211,14 +228,6 @@
         
           <li>
             <a href="/2016/03/10/破解的那些破事-记手动逆向smali代码/">破解的那些破事-记手动逆向smali代码</a>
-          </li>
-        
-          <li>
-            <a href="/2016/03/03/自定义界面脚本引擎XModeEngine-（三）变量与函数/">自定义界面脚本引擎XModeEngine-（三）变量与函数</a>
-          </li>
-        
-          <li>
-            <a href="/2016/03/02/自定义界面脚本引擎XModeEngine-（二）视图元素与事件/">自定义界面脚本引擎XModeEngine-（二）视图元素与事件</a>
           </li>
         
       </ul>
