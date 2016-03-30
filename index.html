@@ -24,6 +24,42 @@
   <link rel="stylesheet" href="/css/style.css" type="text/css">
   <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
   
+  
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/lazyFade.js"></script>
+	<script>
+		$(function(){
+				$('.list-group article').lazyFade({
+					 reverse: false,
+					duration: 1500,
+					delay: 50,
+					opacity: {
+						start: 0.01,
+						end: 1
+					}
+				});
+				
+				$('.list-group li').lazyFade({
+					 reverse: false,
+					duration: 1000,
+					delay: 50,
+					opacity: {
+						start: 0.01,
+						end: 1
+					}
+				});
+				
+				$('.widget li').lazyFade({
+					 reverse: false,
+					duration: 1000,
+					delay: 50,
+					opacity: {
+						start: 0.01,
+						end: 1
+					}
+				});
+	})
+	</script>
 </head>
 <body>
 <div id="container">
@@ -72,9 +108,63 @@
   </div>
 </header>
     <div class="outer">
-      <section id="main">
+      <section id="main" class="list-group">
+      		
   
-    <article id="post-[转]解密ThreadLocal" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Android性能优化-功耗问题分析" class="list-group-item article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/30/Android性能优化-功耗问题分析/" class="article-date">
+  <time datetime="2016-03-30T13:06:00.000Z" itemprop="datePublished">2016-03-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android性能优化/">Android性能优化</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/30/Android性能优化-功耗问题分析/">Android性能优化-功耗问题分析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&#x6458;&#x8981;&#xFF1A;&#x9879;&#x76EE;&#x4E2D;&#x529F;&#x8017;&#x95EE;&#x9898;&#x67E5;&#x627E;&#x3002;</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/03/30/Android性能优化-功耗问题分析/#more">更多</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://www.laiwangyo.com/2016/03/30/Android性能优化-功耗问题分析/" data-id="cimev9br90000iom3wmx8p167" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://www.laiwangyo.com/2016/03/30/Android性能优化-功耗问题分析/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-[转]解密ThreadLocal" class="list-group-item article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/03/24/[转]解密ThreadLocal/" class="article-date">
   <time datetime="2016-03-24T11:01:00.000Z" itemprop="datePublished">2016-03-24</time>
@@ -110,7 +200,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://www.laiwangyo.com/2016/03/24/[转]解密ThreadLocal/" data-id="cim667mvw00005km31er8y57c" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://www.laiwangyo.com/2016/03/24/[转]解密ThreadLocal/" data-id="cim7p6v40000mr0m3uzax8xg1" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -127,7 +217,7 @@
 
 
   
-    <article id="post-Android性能优化-基于Hook机制的FPS检测与统计实现" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Android性能优化-基于Hook机制的FPS检测与统计实现" class="list-group-item article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/03/22/Android性能优化-基于Hook机制的FPS检测与统计实现/" class="article-date">
   <time datetime="2016-03-22T03:09:00.000Z" itemprop="datePublished">2016-03-22</time>
@@ -163,7 +253,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://www.laiwangyo.com/2016/03/22/Android性能优化-基于Hook机制的FPS检测与统计实现/" data-id="cim2xsux10000dsm3qzbl0lp9" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://www.laiwangyo.com/2016/03/22/Android性能优化-基于Hook机制的FPS检测与统计实现/" data-id="cim7p6v4f000vr0m3mk6j4ohz" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -180,7 +270,7 @@
 
 
   
-    <article id="post-自定义界面脚本引擎XModeEngine-（四）帧率" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-自定义界面脚本引擎XModeEngine-（四）帧率" class="list-group-item article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/03/18/自定义界面脚本引擎XModeEngine-（四）帧率/" class="article-date">
   <time datetime="2016-03-18T09:27:00.000Z" itemprop="datePublished">2016-03-18</time>
@@ -216,7 +306,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://www.laiwangyo.com/2016/03/18/自定义界面脚本引擎XModeEngine-（四）帧率/" data-id="cilxhznch000590m3cymrndj6" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://www.laiwangyo.com/2016/03/18/自定义界面脚本引擎XModeEngine-（四）帧率/" data-id="cim7p6v290005r0m3pth6vkqf" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -233,7 +323,7 @@
 
 
   
-    <article id="post-Android性能优化-基于Hook机制的FPS检测与统计原理" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Android性能优化-基于Hook机制的FPS检测与统计原理" class="list-group-item article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/03/18/Android性能优化-基于Hook机制的FPS检测与统计原理/" class="article-date">
   <time datetime="2016-03-18T03:10:00.000Z" itemprop="datePublished">2016-03-18</time>
@@ -269,7 +359,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://www.laiwangyo.com/2016/03/18/Android性能优化-基于Hook机制的FPS检测与统计原理/" data-id="cilxd71av0000pom3q6mbuhsj" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://www.laiwangyo.com/2016/03/18/Android性能优化-基于Hook机制的FPS检测与统计原理/" data-id="cim7p6v4f000zr0m3ty7k572h" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -286,7 +376,7 @@
 
 
   
-    <article id="post-Android开源项目分析-Volley" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Android开源项目分析-Volley" class="list-group-item article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/03/15/Android开源项目分析-Volley/" class="article-date">
   <time datetime="2016-03-15T08:00:00.000Z" itemprop="datePublished">2016-03-15</time>
@@ -322,7 +412,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://www.laiwangyo.com/2016/03/15/Android开源项目分析-Volley/" data-id="cilvk3q720004bwm3vb6955gp" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://www.laiwangyo.com/2016/03/15/Android开源项目分析-Volley/" data-id="cim7p6v5q0015r0m31yj5bvnm" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -339,7 +429,7 @@
 
 
   
-    <article id="post-破解的那些破事-记手动逆向smali代码" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-破解的那些破事-记手动逆向smali代码" class="list-group-item article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/03/10/破解的那些破事-记手动逆向smali代码/" class="article-date">
   <time datetime="2016-03-10T13:30:00.000Z" itemprop="datePublished">2016-03-10</time>
@@ -375,7 +465,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://www.laiwangyo.com/2016/03/10/破解的那些破事-记手动逆向smali代码/" data-id="cilso418y000i44m329r05a19" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://www.laiwangyo.com/2016/03/10/破解的那些破事-记手动逆向smali代码/" data-id="cim7p6v40000ir0m3g7v5m044" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -392,7 +482,7 @@
 
 
   
-    <article id="post-自定义界面脚本引擎XModeEngine-（三）变量与函数" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-自定义界面脚本引擎XModeEngine-（三）变量与函数" class="list-group-item article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/03/03/自定义界面脚本引擎XModeEngine-（三）变量与函数/" class="article-date">
   <time datetime="2016-03-03T06:20:00.000Z" itemprop="datePublished">2016-03-03</time>
@@ -428,7 +518,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://www.laiwangyo.com/2016/03/03/自定义界面脚本引擎XModeEngine-（三）变量与函数/" data-id="cilvl5qe70003z8m3adn98syv" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://www.laiwangyo.com/2016/03/03/自定义界面脚本引擎XModeEngine-（三）变量与函数/" data-id="cim7p6v2p000cr0m3m7m621v0" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -445,7 +535,7 @@
 
 
   
-    <article id="post-自定义界面脚本引擎XModeEngine-（二）视图元素与事件" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-自定义界面脚本引擎XModeEngine-（二）视图元素与事件" class="list-group-item article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/03/02/自定义界面脚本引擎XModeEngine-（二）视图元素与事件/" class="article-date">
   <time datetime="2016-03-02T08:04:00.000Z" itemprop="datePublished">2016-03-02</time>
@@ -481,7 +571,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://www.laiwangyo.com/2016/03/02/自定义界面脚本引擎XModeEngine-（二）视图元素与事件/" data-id="cilvl7s43000bz8m368ae4az8" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://www.laiwangyo.com/2016/03/02/自定义界面脚本引擎XModeEngine-（二）视图元素与事件/" data-id="cim7p6v2p0009r0m3semfmpqn" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -498,7 +588,7 @@
 
 
   
-    <article id="post-自定义界面脚本引擎XModeEngine-（一）描述" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-自定义界面脚本引擎XModeEngine-（一）描述" class="list-group-item article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/03/01/自定义界面脚本引擎XModeEngine-（一）描述/" class="article-date">
   <time datetime="2016-03-01T01:06:00.000Z" itemprop="datePublished">2016-03-01</time>
@@ -534,64 +624,11 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://www.laiwangyo.com/2016/03/01/自定义界面脚本引擎XModeEngine-（一）描述/" data-id="cilso418y000f44m3aesu1vf0" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://www.laiwangyo.com/2016/03/01/自定义界面脚本引擎XModeEngine-（一）描述/" data-id="cim7p6v3k000fr0m3zod3z9s1" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
         <a href="http://www.laiwangyo.com/2016/03/01/自定义界面脚本引擎XModeEngine-（一）描述/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Android开源项目分析-DiskLruCache" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/02/27/Android开源项目分析-DiskLruCache/" class="article-date">
-  <time datetime="2016-02-27T01:38:00.000Z" itemprop="datePublished">2016-02-27</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Android开源项目分析/">Android开源项目分析</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/27/Android开源项目分析-DiskLruCache/">Android开源项目分析-DiskLruCache</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&#x6458;&#x8981;&#xFF1A;&#x672C;&#x6587;&#x5BF9;&#x5F00;&#x6E90;&#x4EE3;&#x7801;DiskLruCache&#x6E90;&#x7801;&#x8FDB;&#x884C;&#x5206;&#x6790;&#x3002;</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/02/27/Android开源项目分析-DiskLruCache/#more">更多</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://www.laiwangyo.com/2016/02/27/Android开源项目分析-DiskLruCache/" data-id="cilso6e6d0004skm3ifnnmt4i" class="article-share-link" data-share="baidu">分享到</a>
-      
-
-      
-        <a href="http://www.laiwangyo.com/2016/02/27/Android开源项目分析-DiskLruCache/#ds-thread" class="article-comment-link">评论</a>
       
 
       
@@ -609,7 +646,8 @@
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
-</section>
+
+      </section>
       
       <aside id="sidebar">
   
@@ -617,7 +655,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android开源项目分析/">Android开源项目分析</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android性能优化/">Android性能优化</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android技术文章摘录/">Android技术文章摘录</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android破解的那些破事/">Android破解的那些破事</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Openfire/">Openfire</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/XModeEngine脚本引擎/">XModeEngine脚本引擎</a><span class="category-list-count">4</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android开源项目分析/">Android开源项目分析</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android性能优化/">Android性能优化</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android技术文章摘录/">Android技术文章摘录</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android破解的那些破事/">Android破解的那些破事</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Openfire/">Openfire</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/XModeEngine脚本引擎/">XModeEngine脚本引擎</a><span class="category-list-count">4</span></li></ul>
     </div>
   </div>
 
@@ -627,7 +665,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Openfire/">Openfire</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Openfire/">Openfire</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -645,7 +683,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -655,6 +693,10 @@
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/03/30/Android性能优化-功耗问题分析/">Android性能优化-功耗问题分析</a>
+          </li>
         
           <li>
             <a href="/2016/03/24/[转]解密ThreadLocal/">[转]解密ThreadLocal</a>
@@ -670,10 +712,6 @@
         
           <li>
             <a href="/2016/03/18/Android性能优化-基于Hook机制的FPS检测与统计原理/">Android性能优化-基于Hook机制的FPS检测与统计原理</a>
-          </li>
-        
-          <li>
-            <a href="/2016/03/15/Android开源项目分析-Volley/">Android开源项目分析-Volley</a>
           </li>
         
       </ul>
@@ -755,7 +793,7 @@ var duoshuoQuery = {short_name:"yazone"};
 
 <!-- 百度分享 end -->
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script -->
 
 
 

@@ -24,6 +24,42 @@
   <link rel="stylesheet" href="/css/style.css" type="text/css">
   <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
   
+  
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/lazyFade.js"></script>
+	<script>
+		$(function(){
+				$('.list-group article').lazyFade({
+					 reverse: false,
+					duration: 1500,
+					delay: 50,
+					opacity: {
+						start: 0.01,
+						end: 1
+					}
+				});
+				
+				$('.list-group li').lazyFade({
+					 reverse: false,
+					duration: 1000,
+					delay: 50,
+					opacity: {
+						start: 0.01,
+						end: 1
+					}
+				});
+				
+				$('.widget li').lazyFade({
+					 reverse: false,
+					duration: 1000,
+					delay: 50,
+					opacity: {
+						start: 0.01,
+						end: 1
+					}
+				});
+	})
+	</script>
 </head>
 <body>
 <div id="container">
@@ -72,7 +108,8 @@
   </div>
 </header>
     <div class="outer">
-      <section id="main"><article id="post-破解的那些破事-记手动逆向smali代码" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main" class="list-group">
+      		<article id="post-破解的那些破事-记手动逆向smali代码" class="list-group-item article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/03/10/破解的那些破事-记手动逆向smali代码/" class="article-date">
   <time datetime="2016-03-10T13:30:00.000Z" itemprop="datePublished">2016-03-10</time>
@@ -127,7 +164,7 @@ GfNhtb1EyOFhQipt6uYAJemxkSl0BD2CBOcVWTTpAJr5U3NoFhRuVj+lZQIDAQAB</span><br></pre
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://www.laiwangyo.com/2016/03/10/破解的那些破事-记手动逆向smali代码/" data-id="cilso418y000i44m329r05a19" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://www.laiwangyo.com/2016/03/10/破解的那些破事-记手动逆向smali代码/" data-id="cim7p6v40000ir0m3g7v5m044" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -167,7 +204,8 @@ GfNhtb1EyOFhQipt6uYAJemxkSl0BD2CBOcVWTTpAJr5U3NoFhRuVj+lZQIDAQAB</span><br></pre
   <section id="comments">
     <div id="ds-thread" class="ds-thread" data-thread-key="2016/03/10/破解的那些破事-记手动逆向smali代码/" data-title="破解的那些破事-记手动逆向smali代码" data-url="http://www.laiwangyo.com/2016/03/10/破解的那些破事-记手动逆向smali代码/"></div>
   </section>
-</section>
+
+      </section>
       
       <aside id="sidebar">
   
@@ -175,7 +213,7 @@ GfNhtb1EyOFhQipt6uYAJemxkSl0BD2CBOcVWTTpAJr5U3NoFhRuVj+lZQIDAQAB</span><br></pre
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android开源项目分析/">Android开源项目分析</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android性能优化/">Android性能优化</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android技术文章摘录/">Android技术文章摘录</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android破解的那些破事/">Android破解的那些破事</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Openfire/">Openfire</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/XModeEngine脚本引擎/">XModeEngine脚本引擎</a><span class="category-list-count">4</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android开源项目分析/">Android开源项目分析</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android性能优化/">Android性能优化</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android技术文章摘录/">Android技术文章摘录</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android破解的那些破事/">Android破解的那些破事</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Openfire/">Openfire</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/XModeEngine脚本引擎/">XModeEngine脚本引擎</a><span class="category-list-count">4</span></li></ul>
     </div>
   </div>
 
@@ -185,7 +223,7 @@ GfNhtb1EyOFhQipt6uYAJemxkSl0BD2CBOcVWTTpAJr5U3NoFhRuVj+lZQIDAQAB</span><br></pre
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Openfire/">Openfire</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Openfire/">Openfire</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -203,7 +241,7 @@ GfNhtb1EyOFhQipt6uYAJemxkSl0BD2CBOcVWTTpAJr5U3NoFhRuVj+lZQIDAQAB</span><br></pre
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -213,6 +251,10 @@ GfNhtb1EyOFhQipt6uYAJemxkSl0BD2CBOcVWTTpAJr5U3NoFhRuVj+lZQIDAQAB</span><br></pre
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/03/30/Android性能优化-功耗问题分析/">Android性能优化-功耗问题分析</a>
+          </li>
         
           <li>
             <a href="/2016/03/24/[转]解密ThreadLocal/">[转]解密ThreadLocal</a>
@@ -228,10 +270,6 @@ GfNhtb1EyOFhQipt6uYAJemxkSl0BD2CBOcVWTTpAJr5U3NoFhRuVj+lZQIDAQAB</span><br></pre
         
           <li>
             <a href="/2016/03/18/Android性能优化-基于Hook机制的FPS检测与统计原理/">Android性能优化-基于Hook机制的FPS检测与统计原理</a>
-          </li>
-        
-          <li>
-            <a href="/2016/03/15/Android开源项目分析-Volley/">Android开源项目分析-Volley</a>
           </li>
         
       </ul>
@@ -313,7 +351,7 @@ var duoshuoQuery = {short_name:"yazone"};
 
 <!-- 百度分享 end -->
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script -->
 
 
 
