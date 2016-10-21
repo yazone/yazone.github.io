@@ -1,0 +1,435 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Camera学习-概念篇-图像 | 图南的学鸠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="&amp;#x672C;&amp;#x6587;&amp;#x4ECB;&amp;#x7ECD;Camera&amp;#x6210;&amp;#x50CF;&amp;#x76F8;&amp;#x5173;&amp;#x6982;&amp;#x5FF5;&amp;#x3002;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Camera学习-概念篇-图像">
+<meta property="og:url" content="http://www.laiwangyo.com/2016/10/21/Camera学习-概念篇-图像/index.html">
+<meta property="og:site_name" content="图南的学鸠">
+<meta property="og:description" content="&amp;#x672C;&amp;#x6587;&amp;#x4ECB;&amp;#x7ECD;Camera&amp;#x6210;&amp;#x50CF;&amp;#x76F8;&amp;#x5173;&amp;#x6982;&amp;#x5FF5;&amp;#x3002;">
+<meta property="og:image" content="http://www.laiwangyo.com/2016/10/21/Camera学习-概念篇-图像/Aperture.png">
+<meta property="og:image" content="http://www.laiwangyo.com/2016/10/21/Camera学习-概念篇-图像/FocalLength.png">
+<meta property="og:image" content="http://www.laiwangyo.com/2016/10/21/Camera学习-概念篇-图像/Saturation.png">
+<meta property="og:image" content="http://www.laiwangyo.com/2016/10/21/Camera学习-概念篇-图像/Sharpness.png">
+<meta property="og:image" content="http://www.laiwangyo.com/2016/10/21/Camera学习-概念篇-图像/Contrast1.png">
+<meta property="og:image" content="http://www.laiwangyo.com/2016/10/21/Camera学习-概念篇-图像/Contrast2.png">
+<meta property="og:image" content="http://www.laiwangyo.com/2016/10/21/Camera学习-概念篇-图像/ColorTemperature.png">
+<meta property="og:image" content="http://www.laiwangyo.com/2016/10/21/Camera学习-概念篇-图像/Shading.png">
+<meta property="og:image" content="http://www.laiwangyo.com/2016/10/21/Camera学习-概念篇-图像/Flare.png">
+<meta property="og:image" content="http://www.laiwangyo.com/2016/10/21/Camera学习-概念篇-图像/Flicker.png">
+<meta property="og:image" content="http://www.laiwangyo.com/2016/10/21/Camera学习-概念篇-图像/Moire.png">
+<meta property="og:image" content="http://www.laiwangyo.com/2016/10/21/Camera学习-概念篇-图像/FalseColor.png">
+<meta property="og:image" content="http://www.laiwangyo.com/2016/10/21/Camera学习-概念篇-图像/PurpleFringe.png">
+<meta property="og:image" content="http://www.laiwangyo.com/2016/10/21/Camera学习-概念篇-图像/Bayer.png">
+<meta property="og:image" content="http://www.laiwangyo.com/2016/10/21/Camera学习-概念篇-图像/Resolution.png">
+<meta property="og:image" content="http://www.laiwangyo.com/2016/10/21/Camera学习-概念篇-图像/ColorError.png">
+<meta property="og:image" content="http://www.laiwangyo.com/2016/10/21/Camera学习-概念篇-图像/BlackLevel.png">
+<meta property="og:image" content="http://www.laiwangyo.com/2016/10/21/Camera学习-概念篇-图像/GammaCurve.png">
+<meta property="og:image" content="http://www.laiwangyo.com/2016/10/21/Camera学习-概念篇-图像/Latitude.png">
+<meta property="og:image" content="http://www.laiwangyo.com/2016/10/21/Camera学习-概念篇-图像/ImageQuality.png">
+<meta property="og:updated_time" content="2016-10-21T06:23:37.070Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Camera学习-概念篇-图像">
+<meta name="twitter:description" content="&amp;#x672C;&amp;#x6587;&amp;#x4ECB;&amp;#x7ECD;Camera&amp;#x6210;&amp;#x50CF;&amp;#x76F8;&amp;#x5173;&amp;#x6982;&amp;#x5FF5;&amp;#x3002;">
+<meta name="twitter:image" content="http://www.laiwangyo.com/2016/10/21/Camera学习-概念篇-图像/Aperture.png">
+  
+    <link rel="alternative" href="/atom.xml" title="图南的学鸠" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">图南的学鸠</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">代码中带点唏嘘，生命中带点惊喜</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">文章列表</a>
+        
+          <a class="main-nav-link" href="/me">关于我</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="www.laiwangyo.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-Camera学习-概念篇-图像" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/21/Camera学习-概念篇-图像/" class="article-date">
+  <time datetime="2016-10-21T05:20:00.000Z" itemprop="datePublished">2016-10-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Camera/">Camera</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Camera学习-概念篇-图像
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div class="toc-wrap">
+        	<div class="toc-title">Index</div>
+        	<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Shutter（快门）"><span class="toc-number">1.</span> <span class="toc-text">Shutter（快门）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Aperture（光圈）"><span class="toc-number">2.</span> <span class="toc-text">Aperture（光圈）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ISO（感光度）"><span class="toc-number">3.</span> <span class="toc-text">ISO（感光度）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Focal-Length（焦距）"><span class="toc-number">4.</span> <span class="toc-text">Focal Length（焦距）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Saturation（饱和度）"><span class="toc-number">5.</span> <span class="toc-text">Saturation（饱和度）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sharpness（锐度）"><span class="toc-number">6.</span> <span class="toc-text">Sharpness（锐度）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Contrast（对比度）"><span class="toc-number">7.</span> <span class="toc-text">Contrast（对比度）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Color-Temperature（色温）"><span class="toc-number">8.</span> <span class="toc-text">Color Temperature（色温）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Shading（渐晕效应）"><span class="toc-number">9.</span> <span class="toc-text">Shading（渐晕效应）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Flare（眩光）"><span class="toc-number">10.</span> <span class="toc-text">Flare（眩光）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Defect-Pixel（坏点）"><span class="toc-number">11.</span> <span class="toc-text">Defect Pixel（坏点）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Flicker（频闪）"><span class="toc-number">12.</span> <span class="toc-text">Flicker（频闪）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Moire（摩尔纹）"><span class="toc-number">13.</span> <span class="toc-text">Moire（摩尔纹）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#False-Color（错误色）"><span class="toc-number">14.</span> <span class="toc-text">False Color（错误色）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Purple-Fringe（紫边）"><span class="toc-number">15.</span> <span class="toc-text">Purple Fringe（紫边）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Image-File-Format-RGB-YUV-Bayer"><span class="toc-number">16.</span> <span class="toc-text">Image File Format-RGB/YUV/Bayer</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Resolution（解像力-amp-分辨率）"><span class="toc-number">17.</span> <span class="toc-text">Resolution（解像力&分辨率）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Color-Error（色差）"><span class="toc-number">18.</span> <span class="toc-text">Color Error（色差）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Black-Level（暗级）"><span class="toc-number">19.</span> <span class="toc-text">Black Level（暗级）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Gamma-Curve（Gamma曲线）"><span class="toc-number">20.</span> <span class="toc-text">Gamma Curve（Gamma曲线）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Image-Noise（图像噪声）"><span class="toc-number">21.</span> <span class="toc-text">Image Noise（图像噪声）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Latitude（宽容度）"><span class="toc-number">22.</span> <span class="toc-text">Latitude（宽容度）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#图像质量"><span class="toc-number">23.</span> <span class="toc-text">图像质量</span></a></li></ol>
+    		</div>
+
+        <p>&#x672C;&#x6587;&#x4ECB;&#x7ECD;Camera&#x6210;&#x50CF;&#x76F8;&#x5173;&#x6982;&#x5FF5;&#x3002;<a id="more"></a></p>
+<h1 id="Shutter&#xFF08;&#x5FEB;&#x95E8;&#xFF09;"><a href="#Shutter&#xFF08;&#x5FEB;&#x95E8;&#xFF09;" class="headerlink" title="Shutter&#xFF08;&#x5FEB;&#x95E8;&#xFF09;"></a>Shutter&#xFF08;&#x5FEB;&#x95E8;&#xFF09;</h1><p>&#x5FEB;&#x95E8;&#xFF0C;&#x539F;&#x6307;&#x4F20;&#x7EDF;&#x76F8;&#x673A;&#x4E0A;&#x63A7;&#x5236;&#x611F;&#x5149;&#x7247;&#x6709;&#x6548;&#x66DD;&#x5149;&#x65F6;&#x95F4;&#x7684;&#x4E00;&#x79CD;&#x88C5;&#x7F6E;&#xFF0C;&#x624B;&#x673A;&#x76F8;&#x673A;&#x4E0A;&#x662F;&#x6307;&#x66DD;&#x5149;&#x65F6;&#x95F4;&#x7684;&#x957F;&#x77ED;&#x3002;</p>
+<h1 id="Aperture&#xFF08;&#x5149;&#x5708;&#xFF09;"><a href="#Aperture&#xFF08;&#x5149;&#x5708;&#xFF09;" class="headerlink" title="Aperture&#xFF08;&#x5149;&#x5708;&#xFF09;"></a>Aperture&#xFF08;&#x5149;&#x5708;&#xFF09;</h1><p>&#x5149;&#x5708;&#x8868;&#x793A;&#x5149;&#x901A;&#x8FC7;&#x7684;&#x6709;&#x6548;&#x5B54;&#x7684;&#x76F4;&#x5F84;&#x3002;&#x901A;&#x5E38;&#x662F;&#x4E00;&#x4E2A;&#x7528;&#x6765;&#x63A7;&#x5236;&#x5149;&#x7EBF;&#x900F;&#x8FC7;&#x955C;&#x5934;&#xFF0C;&#x8FDB;&#x5165;&#x673A;&#x8EAB;&#x5185;&#x611F;&#x5149;&#x9762;&#x7684;&#x5149;&#x4EAE;&#x7684;&#x88C5;&#x7F6E;&#xFF0C;&#x5B83;&#x5728;&#x955C;&#x5934;&#x5185;&#x3002;&#x5B83;&#x7684;&#x5927;&#x5C0F;&#x51B3;&#x5B9A;&#x7740;&#x901A;&#x8FC7;&#x955C;&#x5934;&#x8FDB;&#x5165;&#x611F;&#x5149;&#x5143;&#x4EF6;&#x7684;&#x5149;&#x7EBF;&#x7684;&#x591A;&#x5C11;&#x3002;<br>&#x5149;&#x5708;&#x5927;&#x5C0F;&#x7528;f&#x503C;&#x8868;&#x793A;&#xFF0C;&#x5149;&#x5708;F&#x503C;=&#x955C;&#x5934;&#x7684;&#x7126;&#x8DDD;/&#x955C;&#x5934;&#x5149;&#x5708;&#x7684;&#x76F4;&#x5F84;&#x3002;<br><img src="/2016/10/21/Camera&#x5B66;&#x4E60;-&#x6982;&#x5FF5;&#x7BC7;-&#x56FE;&#x50CF;/Aperture.png" alt="Aperture"></p>
+<h1 id="ISO&#xFF08;&#x611F;&#x5149;&#x5EA6;&#xFF09;"><a href="#ISO&#xFF08;&#x611F;&#x5149;&#x5EA6;&#xFF09;" class="headerlink" title="ISO&#xFF08;&#x611F;&#x5149;&#x5EA6;&#xFF09;"></a>ISO&#xFF08;&#x611F;&#x5149;&#x5EA6;&#xFF09;</h1><p>&#x539F;&#x672C;&#x662F;&#x4F20;&#x7EDF;&#x6444;&#x5F71;&#x7528;&#x6765;&#x8861;&#x91CF;&#x5E95;&#x7247;&#x611F;&#x5149;&#x5EA6;&#x7684;&#x5355;&#x4F4D;&#xFF0C;&#x6570;&#x503C;&#x8D8A;&#x9AD8;&#xFF0C;&#x611F;&#x5149;&#x5EA6;&#x8D8A;&#x5F3A;&#xFF0C;&#x4F46;&#x566A;&#x58F0;&#x8D8A;&#x660E;&#x663E;&#xFF0C;&#x6570;&#x7801;&#x76F8;&#x673A;&#x4E5F;&#x6CBF;&#x7528;&#x4E86;&#x6B64;&#x6807;&#x51C6;&#x3002;ISO&#x6570;&#x503C;&#x6BCF;&#x589E;&#x52A0;&#x4E00;&#x500D;&#xFF0C;&#x611F;&#x5149;&#x5EA6;&#x4E5F;&#x589E;&#x52A0;&#x4E00;&#x500D;&#xFF1B;SV&#x4E3A;&#x8861;&#x91CF;ISO&#x7684;&#x5355;&#x4F4D;&#xFF0C;ISO100&#x65F6;&#xFF0C;SV=5&#x3002;</p>
+<h1 id="Focal-Length&#xFF08;&#x7126;&#x8DDD;&#xFF09;"><a href="#Focal-Length&#xFF08;&#x7126;&#x8DDD;&#xFF09;" class="headerlink" title="Focal Length&#xFF08;&#x7126;&#x8DDD;&#xFF09;"></a>Focal Length&#xFF08;&#x7126;&#x8DDD;&#xFF09;</h1><p>&#x7126;&#x8DDD;&#x7531;&#x4E8E;&#x6444;&#x5F71;&#x673A;&#x955C;&#x5934;&#x7684;&#x5149;&#x5B66;&#x900F;&#x955C;&#xFF08;lens&#xFF09;&#x800C;&#x5F62;&#x6210;&#x3002;&#x6444;&#x5F71;&#x673A;&#x6216;&#x653E;&#x6620;&#x673A;&#x7684;&#x91D1;&#x5C5E;&#x7B52;&#x5BB9;&#x7EB3;&#x4E86;&#x4E00;&#x7EC4;&#x4E24;&#x8FB9;&#x6216;&#x4E00;&#x8FB9;&#x6709;&#x5F27;&#x5EA6;&#xFF08;&#x51F8;&#x6216;&#x51F9;&#xFF09;&#x7684;&#x900F;&#x955C;&#xFF0C;&#x7EC4;&#x6210;&#x4E00;&#x4E2A;&#x7EFC;&#x5408;&#x955C;&#x5934;&#x3002;&#x4ECE;&#x7269;&#x4F53;&#x4E0D;&#x540C;&#x90E8;&#x5206;&#x5C04;&#x51FA;&#x7684;&#x5149;&#x7EBF;&#xFF0C;&#x901A;&#x8FC7;&#x955C;&#x5934;&#x4E4B;&#x540E;&#xFF0C;&#x805A;&#x7126;&#x5728;&#x5E95;&#x7247;&#x7684;&#x4E00;&#x4E2A;&#x70B9;&#x4E0A;&#xFF0C;&#x4F7F;&#x5F71;&#x50CF;&#x5177;&#x6709;&#x6E05;&#x6670;&#x7684;&#x8F6E;&#x5ED3;&#x4E0E;&#x771F;&#x5B9E;&#x7684;&#x8D28;&#x611F;&#xFF0C;&#x8FD9;&#x4E2A;&#x70B9;&#x5C31;&#x53EB;&#x7126;&#x70B9;&#xFF08;focus&#xFF09;&#x3002;&#x6240;&#x8C13;&#x7126;&#x8DDD;&#xFF08;focal length&#xFF09;&#xFF0C;&#x6B63;&#x662F;&#x4ECE;&#x955C;&#x5934;&#x4E4B;&#x955C;&#x7247;&#x4E2D;&#x95F4;&#x70B9;&#x5230;&#x5149;&#x7EBF;&#x80FD;&#x6E05;&#x6670;&#x805A;&#x7126;&#x7684;&#x90A3;&#x4E00;&#x70B9;&#x4E4B;&#x95F4;&#x7684;&#x8DDD;&#x79BB;&#x3002;<br>&#x8F83;&#x5E38;&#x89C1;&#x7684;&#x6709;&#xFF1A;8mm&#xFF0C;15mm&#xFF0C;24mm&#xFF0C;28mm&#xFF0C;35mm&#xFF0C;50mm&#xFF0C;85mm&#xFF0C;105mm&#xFF0C;135mm&#xFF0C;200mm&#xFF0C;400mm&#xFF0C;600mm&#xFF0C;1200mm&#x7B49;&#xFF0C;&#x8FD8;&#x6709;&#x957F;&#x8FBE;2500mm&#x8D85;&#x957F;&#x7126;&#x671B;&#x8FDC;&#x955C;&#x5934;&#x3002;<br><img src="/2016/10/21/Camera&#x5B66;&#x4E60;-&#x6982;&#x5FF5;&#x7BC7;-&#x56FE;&#x50CF;/FocalLength.png" alt="Focal Length"></p>
+<h1 id="Saturation&#xFF08;&#x9971;&#x548C;&#x5EA6;&#xFF09;"><a href="#Saturation&#xFF08;&#x9971;&#x548C;&#x5EA6;&#xFF09;" class="headerlink" title="Saturation&#xFF08;&#x9971;&#x548C;&#x5EA6;&#xFF09;"></a>Saturation&#xFF08;&#x9971;&#x548C;&#x5EA6;&#xFF09;</h1><p>&#x8272;&#x5F69;&#x6709;&#x5404;&#x79CD;&#x4E0D;&#x540C;&#x7684;&#x8868;&#x793A;&#x65B9;&#x5F0F;&#xFF0C;&#x5E38;&#x89C1;&#x7684;&#x6709;RGB&#x3001;Lab&#x3001;HSV&#x7B49;&#x8272;&#x5F69;&#x57DF;&#xFF08;Color Domain&#xFF09;&#xFF0C;&#x9971;&#x548C;&#x5EA6;&#xFF08;Saturation&#xFF09;&#x4E3A;HSV Domain&#x7684;&#x4E00;&#x4E2A;&#x7EF4;&#x5EA6;&#x3002;</p>
+<ul>
+<li>H&#xFF1A;Hue&#xFF0C;&#x8272;&#x76F8;&#xFF0C;&#x8272;&#x5F69;&#x7684;&#x8272;&#x8C03;&#xFF0C;&#x8272;&#x5F69;&#x5728;&#x6807;&#x51C6;&#x8272;&#x73AF;&#x4E0A;&#x7684;&#x4F4D;&#x7F6E;&#xFF0C;&#x4EE5;&#x89D2;&#x5EA6;&#x8868;&#x793A;</li>
+<li>S&#xFF1A;Saturation&#xFF0C;&#x9971;&#x548C;&#x5EA6;&#xFF0C;&#x8272;&#x5F69;&#x7684;&#x7EAF;&#x5EA6;&#xFF0C;&#x4EE5;%&#x8868;&#x793A;&#x3002;0%&#xFF08;&#x7070;&#x8272;&#xFF09;&#xFF0C;100%&#xFF08;&#x5B8C;&#x5168;&#x9971;&#x548C;&#xFF09;</li>
+<li>V&#xFF1A;Luminance&#xFF0C;&#x660E;&#x5EA6;&#xFF0C;&#x8272;&#x5F69;&#x7684;&#x4EAE;&#x5EA6;&#xFF0C;&#x4EE5;%&#x8868;&#x793A;&#x3002;0%&#xFF08;&#x9ED1;&#x8272;&#xFF09;&#xFF0C;100%&#xFF08;&#x767D;&#x8272;&#xFF09;</li>
+</ul>
+<p><img src="/2016/10/21/Camera&#x5B66;&#x4E60;-&#x6982;&#x5FF5;&#x7BC7;-&#x56FE;&#x50CF;/Saturation.png" alt="Saturation"></p>
+<h1 id="Sharpness&#xFF08;&#x9510;&#x5EA6;&#xFF09;"><a href="#Sharpness&#xFF08;&#x9510;&#x5EA6;&#xFF09;" class="headerlink" title="Sharpness&#xFF08;&#x9510;&#x5EA6;&#xFF09;"></a>Sharpness&#xFF08;&#x9510;&#x5EA6;&#xFF09;</h1><p>Sharpness&#x662F;&#x6307;&#x5F71;&#x50CF;&#x7684;&#x9510;&#x5229;&#x5EA6;&#xFF0C;&#x5F71;&#x50CF;&#x4E2D;&#x9AD8;&#x9891;&#x6210;&#x5206;&#x8D8A;&#x591A;&#xFF0C;&#x5F71;&#x50CF;&#x5C31;&#x8D8A;&#x9510;&#x5229;&#x3002;&#x9510;&#x5EA6;&#x4E3B;&#x8981;&#x7531;&#x955C;&#x5934;&#x51B3;&#x5B9A;&#xFF0C;&#x955C;&#x5934;&#x54C1;&#x8D28;&#x597D;&#xFF0C;&#x6210;&#x50CF;&#x8D8A;&#x9510;&#x5229;&#xFF1B;&#x955C;&#x5934;&#x54C1;&#x8D28;&#x5DEE;&#xFF0C;&#x6210;&#x50CF;&#x8D8A;&#x6A21;&#x7CCA;&#x3002;<br>Sharpness&#x53EF;&#x4EE5;&#x7531;&#x540E;&#x7AEF;&#x5F71;&#x50CF;&#x5904;&#x7406;&#x6765;&#x52A0;&#x5F3A;&#xFF0C;&#x4F46;&#x662F;&#x4F1A;&#x6709;Side Effect&#xFF1A;</p>
+<ul>
+<li>Over Shoot&#xFF1A;&#x4E3A;&#x4E86;&#x52A0;&#x5F3A;&#x9510;&#x5EA6;&#xFF0C;&#x5BFC;&#x81F4;&#x5F71;&#x50CF;&#x5728;Edge&#x51FA;&#x73B0;&#x767D;&#x8FB9;&#xFF1B;</li>
+<li>Noise Enhance&#xFF1A;&#x4E3A;&#x4E86;&#x52A0;&#x5F3A;&#x9510;&#x5EA6;&#xFF0C;&#x5BFC;&#x81F4;&#x5F71;&#x50CF;&#x7684;Noise&#x88AB;&#x5F53;&#x6210;Edge&#x653E;&#x5927;&#x3002;</li>
+</ul>
+<p><img src="/2016/10/21/Camera&#x5B66;&#x4E60;-&#x6982;&#x5FF5;&#x7BC7;-&#x56FE;&#x50CF;/Sharpness.png" alt="Sharpness"></p>
+<h1 id="Contrast&#xFF08;&#x5BF9;&#x6BD4;&#x5EA6;&#xFF09;"><a href="#Contrast&#xFF08;&#x5BF9;&#x6BD4;&#x5EA6;&#xFF09;" class="headerlink" title="Contrast&#xFF08;&#x5BF9;&#x6BD4;&#x5EA6;&#xFF09;"></a>Contrast&#xFF08;&#x5BF9;&#x6BD4;&#x5EA6;&#xFF09;</h1><p>Contrast&#x4E3A;&#x5BF9;&#x6BD4;&#x5EA6;&#xFF0C;&#x4EE3;&#x8868;&#x5F71;&#x50CF;&#x4E2D;&#x4EAE;&#xFF08;&#x767D;&#xFF09;&#x548C;&#x6697;&#xFF08;&#x9ED1;&#xFF09;&#x7684;&#x5DEE;&#x5F02;&#x3002;&#x6240;&#x8C13;&#x9AD8;&#x5BF9;&#x6BD4;&#x5C31;&#x662F;&#x767D;&#x7684;&#x5730;&#x65B9;&#x591F;&#x4EAE;&#xFF0C;&#x9ED1;&#x7684;&#x5730;&#x65B9;&#x591F;&#x9ED1;&#x3002;&#x4E00;&#x822C;&#x5BF9;&#x6BD4;&#x5EA6;&#x4F4E;&#x6709;&#x4EE5;&#x4E0B;&#x4E24;&#x79CD;&#x60C5;&#x51B5;&#xFF1A;</p>
+<ul>
+<li>&#x6574;&#x4F53;&#x8FC7;&#x4EAE;&#xFF1A;&#x8FC7;&#x66DD;&#x3001;Gamma&#x62C9;&#x5F97;&#x592A;&#x9AD8;</li>
+<li>&#x6574;&#x4F53;&#x8FC7;&#x6697;&#xFF1A;&#x66DD;&#x5149;&#x4E0D;&#x8DB3;&#x3001;Gamma&#x62C9;&#x5F97;&#x592A;&#x4F4E;</li>
+</ul>
+<p><img src="/2016/10/21/Camera&#x5B66;&#x4E60;-&#x6982;&#x5FF5;&#x7BC7;-&#x56FE;&#x50CF;/Contrast1.png" alt="Contrast"><br><img src="/2016/10/21/Camera&#x5B66;&#x4E60;-&#x6982;&#x5FF5;&#x7BC7;-&#x56FE;&#x50CF;/Contrast2.png" alt="Contrast"></p>
+<h1 id="Color-Temperature&#xFF08;&#x8272;&#x6E29;&#xFF09;"><a href="#Color-Temperature&#xFF08;&#x8272;&#x6E29;&#xFF09;" class="headerlink" title="Color Temperature&#xFF08;&#x8272;&#x6E29;&#xFF09;"></a>Color Temperature&#xFF08;&#x8272;&#x6E29;&#xFF09;</h1><p>&#x8272;&#x6E29;&#x7684;&#x5B9A;&#x4E49;&#xFF1A;&#x5C06;&#x9ED1;&#x4F53;&#x4ECE;&#x7EDD;&#x5BF9;&#x96F6;&#x5EA6;&#x5F00;&#x59CB;&#x52A0;&#x6E29;&#xFF0C;&#x6E29;&#x5EA6;&#x6BCF;&#x5347;&#x9AD8;&#x4E00;&#x5EA6;&#x79F0;&#x4E3A;1&#x5F00;&#x6C0F;&#x5EA6;(&#x7528;&#x5B57;&#x6BCD;K&#x6765;&#x8868;&#x793A;)&#xFF0C;&#x5F53;&#x6E29;&#x5EA6;&#x5347;&#x9AD8;&#x5230;&#x4E00;&#x5B9A;&#x7A0B;&#x5EA6;&#x65F6;&#x5019;&#xFF0C;&#x9ED1;&#x4F53;&#x4FBF;&#x8F90;&#x5C04;&#x51FA;&#x53EF;&#x89C1;&#x5149;&#xFF0C;&#x5176;&#x5149;&#x8C31;&#x6210;&#x4EFD;&#x4EE5;&#x53CA;&#x7ED9;&#x4EBA;&#x7684;&#x611F;&#x89C9;&#x4E5F;&#x4F1A;&#x7740;&#x6E29;&#x5EA6;&#x7684;&#x4E0D;&#x65AD;&#x5347;&#x9AD8;&#x53D1;&#x751F;&#x76F8;&#x5E94;&#x7684;&#x53D8;&#x5316;&#x3002;&#x4E8E;&#x662F;&#xFF0C;&#x5C31;&#x628A;&#x9ED1;&#x4F53;&#x8F90;&#x5C04;&#x4E00;&#x5B9A;&#x8272;&#x5149;&#x7684;&#x6E29;&#x5EA6;&#x5B9A;&#x4E3A;&#x53D1;&#x5C04;&#x76F8;&#x540C;&#x8272;&#x5149;&#x5149;&#x6E90;&#x7684;&#x8272;&#x6E29;&#x3002;<br>&#x5E38;&#x89C1;&#x5149;&#x6E90;&#x8272;&#x6E29;&#xFF1A;</p>
+<table>
+<thead>
+<tr>
+<th>&#x5149;&#x6E90;</th>
+<th>&#x8272;&#x6E29;&#xFF08;K&#xFF09;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&#x94A8;&#x4E1D;&#x706F;&#xFF08;&#x767D;&#x70BD;&#x706F;&#xFF09;</td>
+<td>2500-3200k</td>
+</tr>
+<tr>
+<td>&#x78B3;&#x68D2;&#x706F;</td>
+<td>4000-5500k</td>
+</tr>
+<tr>
+<td>&#x8367;&#x5149;&#x706F;&#xFF08;&#x65E5;&#x5149;&#x706F;&#xFF0C;&#x8282;&#x80FD;&#x706F;&#xFF09;</td>
+<td>4500-6500k</td>
+</tr>
+<tr>
+<td>&#x6C19;&#x706F;</td>
+<td>5600 k</td>
+</tr>
+<tr>
+<td>&#x70AD;&#x7CBE;&#x706F;</td>
+<td>5500&#xFF5E;6500k</td>
+</tr>
+<tr>
+<td>&#x65E5;&#x5149;&#x5E73;&#x5747;</td>
+<td>5400k</td>
+</tr>
+<tr>
+<td>&#x6709;&#x4E91;&#x5929;&#x6C14;&#x4E0B;&#x7684;&#x65E5;&#x5149;</td>
+<td>6500-7000k</td>
+</tr>
+<tr>
+<td>&#x9634;&#x5929;&#x65E5;&#x5149;</td>
+<td>12000-18000k</td>
+</tr>
+</tbody>
+</table>
+<p>&#x968F;&#x7740;&#x8272;&#x6E29;&#x7684;&#x5347;&#x9AD8;&#xFF0C;&#x5149;&#x6E90;&#x7684;&#x989C;&#x8272;&#x7531;&#x6696;&#x8272;&#x5411;&#x51B7;&#x8272;&#x8FC7;&#x6E21;&#xFF0C;&#x5149;&#x6E90;&#x4E2D;&#x7684;&#x80FD;&#x91CF;&#x5206;&#x5E03;&#x4E5F;&#x7531;&#x7EA2;&#x5149;&#x7AEF;&#x5411;&#x84DD;&#x5149;&#x7AEF;&#x504F;&#x79FB;&#x3002;</p>
+<p><img src="/2016/10/21/Camera&#x5B66;&#x4E60;-&#x6982;&#x5FF5;&#x7BC7;-&#x56FE;&#x50CF;/ColorTemperature.png" alt="Color Temperature"></p>
+<p>&#x503C;&#x5F97;&#x6CE8;&#x610F;&#x7684;&#x662F;&#xFF0C;&#x5B9E;&#x9645;&#x5149;&#x6E90;&#x7684;&#x5149;&#x8C31;&#x5206;&#x5E03;&#x5404;&#x4E0D;&#x76F8;&#x540C;&#xFF0C;&#x800C;&#x8272;&#x6E29;&#x53EA;&#x662F;&#x4EE3;&#x8868;&#x4E86;&#x80FD;&#x91CF;&#x7684;&#x504F;&#x91CD;&#x7A0B;&#x5EA6;&#xFF0C;&#x5E76;&#x4E0D;&#x53CD;&#x6620;&#x5177;&#x4F53;&#x7684;&#x5149;&#x8C31;&#x5206;&#x5E03;&#xFF0C;&#x6240;&#x4EE5;&#x5373;&#x4F7F;&#x76F8;&#x540C;&#x8272;&#x6E29;&#x7684;&#x5149;&#x6E90;&#xFF0C;&#x4E5F;&#x53EF;&#x80FD;&#x5F15;&#x8D77;&#x4E0D;&#x540C;&#x7684;&#x8272;&#x5F69;&#x53CD;&#x5E94;&#x3002;<br>&#x4EBA;&#x773C;&#x53CA;&#x5927;&#x8111;&#x5BF9;&#x8272;&#x6E29;&#x6709;&#x4E00;&#x5B9A;&#x7684;&#x751F;&#x7406;&#x548C;&#x5FC3;&#x7406;&#x7684;&#x81EA;&#x9002;&#x5E94;&#x6027;&#xFF0C;&#x6240;&#x4EE5;&#x770B;&#x5230;&#x7684;&#x989C;&#x8272;&#x53D7;&#x8272;&#x6E29;&#x504F;&#x79FB;&#x7684;&#x5F71;&#x54CD;&#x8F83;&#x5C0F;&#xFF0C;&#x800C;Camera&#x7684;Sensor&#x6CA1;&#x6709;&#x8FD9;&#x79CD;&#x80FD;&#x529B;&#xFF0C;&#x6240;&#x4EE5;&#x62CD;&#x51FA;&#x6765;&#x7684;&#x7167;&#x7247;&#x4E0D;&#x7ECF;&#x8FC7;&#x767D;&#x5E73;&#x8861;&#x5904;&#x7406;&#x7684;&#x8BDD;&#xFF0C;&#x548C;&#x4EBA;&#x773C;&#x770B;&#x5230;&#x7684;&#x989C;&#x8272;&#x4F1A;&#x6709;&#x8F83;&#x5927;&#x7684;&#x504F;&#x5DEE;&#xFF08;&#x867D;&#x7136;&#x4EBA;&#x773C;&#x770B;&#x5230;&#x7684;&#x548C;&#x767D;&#x5149;&#x4E0B;&#x771F;&#x5B9E;&#x7684;&#x8272;&#x5F69;&#x4E5F;&#x6709;&#x504F;&#x5DEE;&#xFF09;&#x3002;<br>&#x592A;&#x9633;&#x5149;&#x8272;&#x6E29;&#x968F;&#x5929;&#x6C14;&#x548C;&#x65F6;&#x95F4;&#x53D8;&#x5316;&#x7684;&#x539F;&#x56E0;&#xFF0C;&#x4E0E;&#x4E0D;&#x540C;&#x9891;&#x7387;&#x5149;&#x7684;&#x6298;&#x5C04;&#x7387;&#x6709;&#x5173;&#xFF1A;&#x6CE2;&#x957F;&#x957F;&#x7684;&#x5149;&#x7EBF;&#xFF0C;&#x6298;&#x5C04;&#x7387;&#x5C0F;&#xFF0C;&#x900F;&#x5C04;&#x80FD;&#x529B;&#x5F3A;&#xFF0C;&#x6CE2;&#x957F;&#x77ED;&#x7684;&#x5149;&#x7EBF;&#xFF0C;&#x6298;&#x5C04;&#x7387;&#x5927;&#xFF0C;&#x5BB9;&#x6613;&#x88AB;&#x6563;&#x5C04;&#xFF0C;&#x6298;&#x5C04;&#x7387;&#x4F4E;&#xFF0C;&#x8FD9;&#x4E5F;&#x5C31;&#x662F;&#x4E3A;&#x4EC0;&#x4E48;&#x4EA4;&#x901A;&#x706F;&#x7528;&#x7EA2;&#x8272;&#xFF0C;&#x9632;&#x96FE;&#x706F;&#x901A;&#x5E38;&#x662F;&#x9EC4;&#x8272;&#xFF0C;&#x5929;&#x7A7A;&#x4E3A;&#x4EC0;&#x4E48;&#x662F;&#x84DD;&#x8272;&#x7684;&#x7B49;&#x7B49;&#x73B0;&#x8C61;&#x7684;&#x539F;&#x56E0;&#x3002;</p>
+<h1 id="Shading&#xFF08;&#x6E10;&#x6655;&#x6548;&#x5E94;&#xFF09;"><a href="#Shading&#xFF08;&#x6E10;&#x6655;&#x6548;&#x5E94;&#xFF09;" class="headerlink" title="Shading&#xFF08;&#x6E10;&#x6655;&#x6548;&#x5E94;&#xFF09;"></a>Shading&#xFF08;&#x6E10;&#x6655;&#x6548;&#x5E94;&#xFF09;</h1><p>Shading&#x662F;&#x5728;&#x56FE;&#x50CF;&#x8FB9;&#x7F18;&#x89C2;&#x6D4B;&#x5230;&#x4EAE;&#x5EA6;&#x9010;&#x6E10;&#x51CF;&#x5C0F;&#x7684;&#x73B0;&#x8C61;&#x3002;<br>&#x955C;&#x5934;&#x8FB9;&#x6CBF;&#x7684;&#x6210;&#x50CF;&#x5149;&#x7EBF;&#x548C;&#x955C;&#x5934;&#x5149;&#x8F74;&#x6709;&#x4E00;&#x4E2A;&#x8F83;&#x5927;&#x7684;&#x5939;&#x89D2;&#xFF0C;&#x6CBF;&#x7740;&#x89C6;&#x573A;&#x8FB9;&#x7F18;&#x5149;&#x7EBF;&#x7684;&#x5149;&#x5708;&#x51CF;&#x5C0F;&#x3002;&#x901A;&#x5149;&#x8DEF;&#x5F84;&#x53D8;&#x957F;&#xFF0C;&#x8FB9;&#x89D2;&#x5149;&#x7EBF;&#x6210;&#x50CF;&#x7684;&#x4F4D;&#x79FB;&#x5C31;&#x8F83;&#x5927;&#xFF0C;&#x4F7F;&#x5F97;&#x955C;&#x5934;&#x8FB9;&#x7F18;&#x7684;&#x5149;&#x7EBF;&#x662F;&#x968F;&#x7740;&#x89C6;&#x89D2;&#x7684;&#x53D8;&#x5927;&#xFF0C;&#x6210;&#x50CF;&#x4EAE;&#x5EA6;&#x6025;&#x5267;&#x7684;&#x4E0B;&#x964D;&#xFF0C;&#x5448;&#x73B0;&#x51FA;&#x753B;&#x9762;&#x89D2;&#x843D;&#x7684;&#x5F71;&#x50CF;&#x53D1;&#x6697;&#x3002;<br><img src="/2016/10/21/Camera&#x5B66;&#x4E60;-&#x6982;&#x5FF5;&#x7BC7;-&#x56FE;&#x50CF;/Shading.png" alt="Shading"></p>
+<h1 id="Flare&#xFF08;&#x7729;&#x5149;&#xFF09;"><a href="#Flare&#xFF08;&#x7729;&#x5149;&#xFF09;" class="headerlink" title="Flare&#xFF08;&#x7729;&#x5149;&#xFF09;"></a>Flare&#xFF08;&#x7729;&#x5149;&#xFF09;</h1><p>&#x955C;&#x5934;&#x7684;&#x8868;&#x9762;&#x53CD;&#x5C04;&#x6216;&#x955C;&#x7B52;&#x3001;&#x53CD;&#x5149;&#x955C;&#x7EC4;&#x7684;&#x5185;&#x9762;&#x6240;&#x5F15;&#x8D77;&#x7684;&#x53CD;&#x5C04;&#x5149;&#xFF0C;&#x5230;&#x8FBE;&#x5E95;&#x9762;&#x540E;&#x9020;&#x6210;&#x753B;&#x9762;&#x6574;&#x4F53;&#x6216;&#x4E00;&#x90E8;&#x5206;&#x4EA7;&#x751F;&#x4E86;&#x96FE;&#x8499;&#xFF0C;&#x964D;&#x4F4E;&#x4E86;&#x56FE;&#x50CF;&#x7684;&#x9510;&#x5EA6;&#x3002;&#x955C;&#x7247;&#x7684;&#x9540;&#x819C;&#x53CA;&#x5185;&#x9762;&#x9632;&#x53CD;&#x5C04;&#x5904;&#x7406;&#x7684;&#x52A0;&#x5F3A;&#xFF0C;&#x53EF;&#x4EE5;&#x5927;&#x5E45;&#x5EA6;&#x7684;&#x51CF;&#x5C11;&#x5149;&#x6591;&#xFF0C;&#x4F46;&#x88AB;&#x62CD;&#x6444;&#x7269;&#x4F53;&#x7684;&#x72B6;&#x51B5;&#x4E0D;&#x76F8;&#x540C;&#xFF0C;&#x4E0D;&#x53EF;&#x80FD;&#x5B8C;&#x5168;&#x6D88;&#x9664;&#x3002;<br><img src="/2016/10/21/Camera&#x5B66;&#x4E60;-&#x6982;&#x5FF5;&#x7BC7;-&#x56FE;&#x50CF;/Flare.png" alt="Flare"></p>
+<h1 id="Defect-Pixel&#xFF08;&#x574F;&#x70B9;&#xFF09;"><a href="#Defect-Pixel&#xFF08;&#x574F;&#x70B9;&#xFF09;" class="headerlink" title="Defect Pixel&#xFF08;&#x574F;&#x70B9;&#xFF09;"></a>Defect Pixel&#xFF08;&#x574F;&#x70B9;&#xFF09;</h1><p>&#x574F;&#x70B9;&#x4E00;&#x822C;&#x6307;&#x5728;Sensor&#x5236;&#x9020;&#x8FC7;&#x7A0B;&#x4E2D;&#x56E0;&#x4E3A;&#x5355;&#x4E2A;&#x50CF;&#x7D20;&#x7684;&#x7535;&#x8DEF;&#x5F02;&#x5E38;&#x800C;&#x4E0D;&#x80FD;&#x6B63;&#x5E38;&#x8868;&#x73B0;&#x611F;&#x5149;&#x4EAE;&#x5EA6;&#x3002;&#x5176;&#x8868;&#x73B0;&#x5F62;&#x5F0F;&#x4E3A;&#x5168;&#x9ED1;&#x60C5;&#x51B5;&#x4E0B;&#x6210;&#x50CF;&#x4E2D;&#x5355;&#x4E2A;&#x7684;&#x767D;&#x8272;&#x548C;&#x5F69;&#x8272;&#x7684;&#x70B9;&#x6216;&#x8005;&#x5168;&#x767D;&#x60C5;&#x51B5;&#x4E0B;&#x6210;&#x50CF;&#x4E2D;&#x7684;&#x9ED1;&#x70B9;&#x3002;<br>&#x5982;&#x679C;&#x574F;&#x70B9;&#x65E0;&#x6CD5;&#x88AB;&#x6821;&#x6B63;&#x7684;&#x8BDD;&#xFF0C;&#x4F1A;&#x5F71;&#x54CD;&#x5230;&#x6B63;&#x5E38;&#x62CD;&#x7167;&#x7684;&#x56FE;&#x7247;&#x3002;</p>
+<h1 id="Flicker&#xFF08;&#x9891;&#x95EA;&#xFF09;"><a href="#Flicker&#xFF08;&#x9891;&#x95EA;&#xFF09;" class="headerlink" title="Flicker&#xFF08;&#x9891;&#x95EA;&#xFF09;"></a>Flicker&#xFF08;&#x9891;&#x95EA;&#xFF09;</h1><p>Flicker&#x662F;&#x7531;&#x9891;&#x7387;&#x5E72;&#x6270;&#x5F15;&#x8D77;&#xFF0C;&#x4EA4;&#x6D41;&#x7535;&#x5149;&#x6E90;&#x90FD;&#x6709;&#x5149;&#x5F3A;&#x7684;&#x6CE2;&#x52A8;&#xFF0C;&#x5728;&#x4E2D;&#x56FD;&#x4EA4;&#x6D41;&#x7535;&#x9891;&#x7387;&#x662F;50Hz&#xFF0C;&#x5149;&#x5F3A;&#x7684;&#x6CE2;&#x52A8;&#x5C31;&#x662F;100Hz&#xFF0C;&#x5468;&#x671F;&#x4E3A;10ms&#x3002;&#x5982;&#x679C;Camera&#x66DD;&#x5149;&#x65F6;&#x95F4;&#x4E0D;&#x662F;10ms&#x7684;&#x6574;&#x6570;&#x500D;&#xFF0C;&#x90A3;&#x4E48;&#x5728;&#x4E0D;&#x540C;&#x7684;&#x611F;&#x5149;&#x9762;&#x63A5;&#x6536;&#x5230;&#x7684;&#x5149;&#x80FD;&#x91CF;&#x4E00;&#x5B9A;&#x4E0D;&#x4E00;&#x6837;&#xFF0C;&#x4F53;&#x73B0;&#x5728;&#x56FE;&#x50CF;&#x4E0A;&#x5C31;&#x662F;&#x660E;&#x6697;&#x6761;&#x7EB9;&#x3002;<br><img src="/2016/10/21/Camera&#x5B66;&#x4E60;-&#x6982;&#x5FF5;&#x7BC7;-&#x56FE;&#x50CF;/Flicker.png" alt="Flicker"></p>
+<h1 id="Moire&#xFF08;&#x6469;&#x5C14;&#x7EB9;&#xFF09;"><a href="#Moire&#xFF08;&#x6469;&#x5C14;&#x7EB9;&#xFF09;" class="headerlink" title="Moire&#xFF08;&#x6469;&#x5C14;&#x7EB9;&#xFF09;"></a>Moire&#xFF08;&#x6469;&#x5C14;&#x7EB9;&#xFF09;</h1><p>&#x6469;&#x5C14;&#x7EB9;&#x662F;&#x6570;&#x7801;&#x76F8;&#x673A;&#x7B49;&#x8BBE;&#x5907;&#x4E0A;&#x7684;&#x611F;&#x5149;&#x5143;&#x4EF6;&#x51FA;&#x73B0;&#x7684;&#x9AD8;&#x9891;&#x5E72;&#x6270;&#xFF0C;&#x4F1A;&#x4F7F;&#x56FE;&#x7247;&#x51FA;&#x73B0;&#x5F69;&#x8272;&#x7684;&#x9AD8;&#x9891;&#x7387;&#x6761;&#x7EB9;&#xFF1B;</p>
+<p>&#x6469;&#x5C14;&#x7EB9;&#x662F;&#x5DEE;&#x62CD;&#x539F;&#x7406;&#x7684;&#x4E00;&#x79CD;&#x8868;&#x73B0;&#xFF0C;&#x7A7A;&#x95F4;&#x9891;&#x7387;&#x7565;&#x6709;&#x5DEE;&#x5F02;&#x7684;&#x6761;&#x7EB9;&#x53E0;&#x52A0;&#xFF0C;&#x7531;&#x4E8E;&#x6761;&#x7EB9;&#x95F4;&#x9694;&#x7684;&#x5DEE;&#x5F02;&#x3001;&#x91CD;&#x5408;&#x4F4D;&#x7F6E;&#x4F1A;&#x9010;&#x6E10;&#x504F;&#x79FB;&#xFF0C;&#x4E5F;&#x4F1A;&#x5F62;&#x6210;&#x5DEE;&#x62CD;&#xFF1B;<br>&#x6D88;&#x9664;&#x6469;&#x5C14;&#x7EB9;&#xFF0C;&#x5E94;&#x8BE5;&#x4F7F;&#x955C;&#x5934;&#x5206;&#x8FA8;&#x7387;&#x8FDC;&#x5C0F;&#x4E8E;&#x611F;&#x5149;&#x5143;&#x4EF6;&#x7684;&#x7A7A;&#x95F4;&#x9891;&#x7387;&#x6216;&#x8005;&#x611F;&#x5149;&#x4EF6;&#x50CF;&#x7D20;&#x5BC6;&#x5EA6;&#x80FD;&#x591F;&#x5927;&#x5927;&#x63D0;&#x9AD8;&#x3001;&#x8FDC;&#x8FDC;&#x8D85;&#x8FC7;&#x955C;&#x5934;&#x7684;&#x5206;&#x8FA8;&#x7387;&#x3002;<br><img src="/2016/10/21/Camera&#x5B66;&#x4E60;-&#x6982;&#x5FF5;&#x7BC7;-&#x56FE;&#x50CF;/Moire.png" alt="Moire"></p>
+<h1 id="False-Color&#xFF08;&#x9519;&#x8BEF;&#x8272;&#xFF09;"><a href="#False-Color&#xFF08;&#x9519;&#x8BEF;&#x8272;&#xFF09;" class="headerlink" title="False Color&#xFF08;&#x9519;&#x8BEF;&#x8272;&#xFF09;"></a>False Color&#xFF08;&#x9519;&#x8BEF;&#x8272;&#xFF09;</h1><p>False color&#x7684;&#x5F62;&#x6210;&#x9664;&#x4E86;&#x6469;&#x5C14;&#x6548;&#x5E94;&#x4E4B;&#x5916;&#xFF0C;&#x611F;&#x5149;&#x5668;&#x7684;&#x4E09;&#x539F;&#x8272;RGB&#x8272;&#x5757;&#x6392;&#x5217;&#x4E5F;&#x662F;&#x5176;&#x4EA7;&#x751F;&#x7684;&#x539F;&#x56E0;&#x3002;<br>&#x5728;&#x989C;&#x8272;&#x53D6;&#x6837;&#x7684;&#x540C;&#x65F6;&#xFF0C;&#x56E0;&#x4E3A;&#x7A7A;&#x95F4;&#x5DEE;&#x800C;&#x6CA1;&#x6709;&#x53D6;&#x6837;&#x5230;&#x989C;&#x8272;&#xFF0C;&#x6570;&#x7801;&#x76F8;&#x673A;&#x4E2D;&#x7684;&#x5F71;&#x50CF;&#x5904;&#x7406;&#x5F15;&#x64CE;&#x4ECD;&#x4F1A;&#x6309;&#x7167;bayer pattern&#x8272;&#x5757;&#x7684;&#x987A;&#x5E8F;&#x6392;&#x5217;&#xFF08;RGB&#xFF09;&#xFF0C;&#x8BD5;&#x56FE;&#x4E3A;&#x6BCF;&#x4E00;&#x4E2A;&#x50CF;&#x7D20;&#x53BB;&#x5206;&#x914D;&#x5E94;&#x6709;&#x7684;&#x989C;&#x8272;&#x3002;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x5728;&#x5927;&#x91CF;&#x8272;&#x5757;&#x5747;&#x5300;&#x7684;&#x5206;&#x5E03;&#x65F6;&#x662F;&#x6B63;&#x786E;&#x7684;&#xFF0C;&#x4F46;&#x5F53;&#x9047;&#x5230;&#x7A81;&#x51FA;&#x90E8;&#x6216;&#x8005;&#x7EC6;&#x5FAE;&#x6784;&#x9020;&#x65F6;&#xFF0C;&#x8FD9;&#x6837;&#x7684;&#x989C;&#x8272;&#x6362;&#x7B97;&#x5F80;&#x5F80;&#x4F1A;&#x51FA;&#x73B0;&#x9519;&#x8BEF;&#x548C;&#x4EA7;&#x751F;False Color&#x3002;<br><img src="/2016/10/21/Camera&#x5B66;&#x4E60;-&#x6982;&#x5FF5;&#x7BC7;-&#x56FE;&#x50CF;/FalseColor.png" alt="FalseColor"></p>
+<h1 id="Purple-Fringe&#xFF08;&#x7D2B;&#x8FB9;&#xFF09;"><a href="#Purple-Fringe&#xFF08;&#x7D2B;&#x8FB9;&#xFF09;" class="headerlink" title="Purple Fringe&#xFF08;&#x7D2B;&#x8FB9;&#xFF09;"></a>Purple Fringe&#xFF08;&#x7D2B;&#x8FB9;&#xFF09;</h1><p>&#x7D2B;&#x8FB9;&#xFF0C;&#x76EE;&#x524D;&#x4EA7;&#x751F;&#x7684;&#x539F;&#x56E0;&#x6709;&#x597D;&#x51E0;&#x79CD;&#x8BF4;&#x6CD5;&#x3002;&#x6BD4;&#x8F83;&#x5E7F;&#x4E3A;&#x63A5;&#x53D7;&#x7684;&#x5C31;&#x662F;&#x955C;&#x5934;&#x8272;&#x6563;&#x548C;&#x989C;&#x8272;&#x63D2;&#x503C;&#x8FD0;&#x7B97;&#x7684;&#x95EE;&#x9898;&#x5BFC;&#x81F4;&#x3002;&#xFF08;&#x56FA;&#x6709;&#x955C;&#x7247;&#x4F1A;&#x5BF9;&#x4E0D;&#x540C;&#x7684;&#x6CE2;&#x957F;&#x4EA7;&#x751F;&#x8272;&#x6563;&#xFF0C;&#x84DD;B&#x3001;&#x7EA2;R&#x4E24;&#x8272;&#x6DF7;&#x5408;&#x8BEF;&#x5DEE;&#x800C;&#x4EA7;&#x751F;&#xFF09;&#x3002;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x53D1;&#x751F;&#x5728;&#x62CD;&#x6444;&#x9AD8;&#x53CD;&#x5DEE;&#x7684;&#x666F;&#x7269;&#x65F6;&#xFF0C;&#x5728;&#x660E;&#x6697;&#x4EA4;&#x754C;&#x7684;&#x8FB9;&#x7F18;&#x90E8;&#x5206;&#x4F1A;&#x51FA;&#x73B0;&#x5F02;&#x5E38;&#x7684;&#x7D2B;&#x8272;&#x3002;<br><img src="/2016/10/21/Camera&#x5B66;&#x4E60;-&#x6982;&#x5FF5;&#x7BC7;-&#x56FE;&#x50CF;/PurpleFringe.png" alt="PurpleFringe"></p>
+<h1 id="Image-File-Format-RGB-YUV-Bayer"><a href="#Image-File-Format-RGB-YUV-Bayer" class="headerlink" title="Image File Format-RGB/YUV/Bayer"></a>Image File Format-RGB/YUV/Bayer</h1><p>RGB&#xFF1A;&#x6839;&#x636E;&#x4E09;&#x57FA;&#x8272;&#x539F;&#x7406;&#xFF0C;&#x5927;&#x90E8;&#x5206;&#x5149;F&#x90FD;&#x53EF;&#x4EE5;&#x7528;&#x4E0D;&#x540C;&#x5206;&#x91CF;&#x7684;R&#x3001;G&#x3001;B&#x4E09;&#x4E2A;&#x76F8;&#x52A0;&#x6DF7;&#x5408;&#x800C;&#x6210;&#x3002;F=r[R]+g[G]+b[B]&#xFF0C;&#x5176;&#x4E2D;r&#x3001;g&#x3001;b&#x5206;&#x522B;&#x4E3A;&#x4E09;&#x57FA;&#x8272;&#x53C2;&#x4E0E;&#x6DF7;&#x5408;&#x7684;&#x7CFB;&#x6570;&#x3002;&#x8C03;&#x6574;&#x4E09;&#x8005;&#x7684;&#x503C;&#x53EF;&#x4EE5;&#x6DF7;&#x5408;&#x51FA;&#x9ED1;&#x8272;&#x5149;&#x548C;&#x767D;&#x8272;&#x5149;&#x4E4B;&#x95F4;&#x7684;&#x5404;&#x79CD;&#x989C;&#x8272;&#x7684;&#x5149;&#x3002;<br>YUV&#xFF1A;&#x73B0;&#x4EE3;&#x5F69;&#x8272;&#x5F71;&#x50CF;&#x7CFB;&#x7EDF;&#x4E2D;&#xFF0C;&#x91C7;&#x7528;&#x5F69;&#x8272;&#x7684;sensor&#x8FDB;&#x884C;&#x6444;&#x50CF;&#xFF0C;&#x5C06;&#x6240;&#x5F97;&#x7684;&#x5F69;&#x8272;&#x5F71;&#x50CF;&#x4FE1;&#x53F7;&#x8FDB;&#x884C;&#x63D2;&#x503C;&#x5206;&#x8272;&#xFF0C;&#x5206;&#x522B;&#x653E;&#x5927;&#x6821;&#x6B63;&#x540E;&#x5F97;&#x5230;RGB&#x3002;&#x518D;&#x7ECF;&#x8FC7;&#x77E9;&#x9635;&#x53D8;&#x6362;&#x7535;&#x8DEF;&#x5F97;&#x5230;&#x4EAE;&#x5EA6;&#x4FE1;&#x53F7;Y&#x548C;&#x4E24;&#x4E2A;&#x8272;&#x5DEE;&#x4FE1;&#x53F7;R-Y&#xFF08;&#x5373;U&#xFF09;&#x3001;B-Y&#xFF08;&#x5373;V&#xFF09;&#x3002;&#x8FD9;&#x79CD;&#x8272;&#x5F69;&#x7684;&#x8868;&#x793A;&#x65B9;&#x5F0F;&#x5C31;&#x662F;YUV&#x8272;&#x5F69;&#x7A7A;&#x95F4;&#x3002;&#x6839;&#x636E;YUV&#x7684;&#x91C7;&#x6837;&#x683C;&#x5F0F;&#x53EF;&#x4EE5;&#x5206;&#x4E3A;YUV444&#x3001;YUV4222&#x3001;YUV420&#x3002;<br>Bayer Pattern&#xFF1A;Sensor&#x83B7;&#x53D6;&#x5F69;&#x8272;&#x56FE;&#x50CF;&#x7684;&#x65B9;&#x6CD5;&#x662F;&#x5728;Sensor&#x8868;&#x9762;&#x8986;&#x76D6;&#x53EA;&#x542B;&#x7EA2;&#x3001;&#x7EFF;&#x3001;&#x84DD;3&#x8272;&#x7684;&#x9A6C;&#x8D5B;&#x514B;&#x6EE4;&#x955C;&#x3002;&#x5BF9;&#x9F50;&#x8F93;&#x51FA;&#x4FE1;&#x53F7;&#x901A;&#x8FC7;&#x4E00;&#x5B9A;&#x7684;&#x5904;&#x7406;&#x7B97;&#x6CD5;&#x5B9E;&#x73B0;&#x5F69;&#x8272;&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x79CD;&#x611F;&#x5149;&#x5668;&#x4EF6;&#x7684;&#x6392;&#x5217;&#x65B9;&#x5F0F;&#x88AB;&#x79F0;&#x4E3A;Bayer Pattern&#x3002;&#x56E0;&#x4E3A;&#x53EA;&#x8BB0;&#x5F55;&#x4E86;&#x5355;&#x4E2A;&#x7684;&#x611F;&#x5149;&#x4FE1;&#x606F;&#xFF0C;&#x901A;&#x5E38;&#x4E5F;&#x79F0;&#x4E3A;raw image&#x3002;<br><img src="/2016/10/21/Camera&#x5B66;&#x4E60;-&#x6982;&#x5FF5;&#x7BC7;-&#x56FE;&#x50CF;/Bayer.png" alt="Bayer"></p>
+<p>RGB&#x8F6C;&#x6362;YUV&#x516C;&#x5F0F;&#x5982;&#x4E0B;&#xFF1A;<br>Y = 0.299R + 0.587G + 0.114B<br>U = -0.147R - 0.289G + 0.436B<br>V = 0.615R - 0.515G - 0.100B<br>YUV&#x8F6C;&#x6362;RGB&#x516C;&#x5F0F;&#x5982;&#x4E0B;&#xFF1A;<br>R = Y + 1.14V<br>G = Y - 0.39U - 0.58V<br>B = Y + 2.03U</p>
+<h1 id="Resolution&#xFF08;&#x89E3;&#x50CF;&#x529B;-amp-&#x5206;&#x8FA8;&#x7387;&#xFF09;"><a href="#Resolution&#xFF08;&#x89E3;&#x50CF;&#x529B;-amp-&#x5206;&#x8FA8;&#x7387;&#xFF09;" class="headerlink" title="Resolution&#xFF08;&#x89E3;&#x50CF;&#x529B;&amp;&#x5206;&#x8FA8;&#x7387;&#xFF09;"></a>Resolution&#xFF08;&#x89E3;&#x50CF;&#x529B;&amp;&#x5206;&#x8FA8;&#x7387;&#xFF09;</h1><p>&#x5206;&#x8FA8;&#x7387;&#x6307;&#x6210;&#x50CF;&#x5E73;&#x9762;&#x4E0A;1&#x6BEB;&#x7C73;&#x95F4;&#x8DDD;&#x5185;&#x80FD;&#x5206;&#x8FA8;&#x5F00;&#x7684;&#x9ED1;&#x767D;&#x76F8;&#x95F4;&#x7684;&#x7EBF;&#x6761;&#x5BF9;&#x6570;&#xFF0C;&#x5355;&#x4F4D;&#x4E3A;&#x201C;&#x7EBF;&#x5BF9;/&#x6BEB;&#x7C73;&#x201D;&#xFF08;lp/mm&#x3001;line-pairs/mm&#xFF09;&#x3002;&#x53D7;&#x9650;&#x4E8E;&#x5149;&#x5B66;&#x3001;&#x6750;&#x6599;&#x548C;&#x5176;&#x5B83;&#x79CD;&#x79CD;&#x56E0;&#x7D20;&#xFF0C;&#x6BCF;&#x4E00;&#x4E2A;&#x955C;&#x5934;&#x3001;&#x6BCF;&#x4E00;&#x53F0;&#x6570;&#x7801;&#x76F8;&#x673A;&#x90FD;&#x6709;&#x5176;&#x5206;&#x8FA8;&#x80FD;&#x529B;&#x7684;&#x6781;&#x9650;&#x3002;<br>&#x8BC4;&#x5224;&#x5206;&#x8FA8;&#x7387;&#x65B9;&#x6CD5;&#xFF1A;</p>
+<ul>
+<li>MTF&#xFF1A;&#x5F15;&#x8FDB;&#x53CD;&#x5DEE;&#x5BF9;&#x6BD4;&#x7684;&#x6982;&#x5FF5;&#x6765;&#x68C0;&#x5B9A;&#x955C;&#x5934;&#x89E3;&#x50CF;&#x529B;&#x3002;</li>
+<li>&#x76EE;&#x6D4B;ISO12233&#xFF1A;&#x8FBE;&#x5230;&#x591A;&#x5C11;TV lines&#x3002;</li>
+</ul>
+<p><img src="/2016/10/21/Camera&#x5B66;&#x4E60;-&#x6982;&#x5FF5;&#x7BC7;-&#x56FE;&#x50CF;/Resolution.png" alt="Resolution"></p>
+<h1 id="Color-Error&#xFF08;&#x8272;&#x5DEE;&#xFF09;"><a href="#Color-Error&#xFF08;&#x8272;&#x5DEE;&#xFF09;" class="headerlink" title="Color Error&#xFF08;&#x8272;&#x5DEE;&#xFF09;"></a>Color Error&#xFF08;&#x8272;&#x5DEE;&#xFF09;</h1><p><img src="/2016/10/21/Camera&#x5B66;&#x4E60;-&#x6982;&#x5FF5;&#x7BC7;-&#x56FE;&#x50CF;/ColorError.png" alt="Color Error"></p>
+<h1 id="Black-Level&#xFF08;&#x6697;&#x7EA7;&#xFF09;"><a href="#Black-Level&#xFF08;&#x6697;&#x7EA7;&#xFF09;" class="headerlink" title="Black Level&#xFF08;&#x6697;&#x7EA7;&#xFF09;"></a>Black Level&#xFF08;&#x6697;&#x7EA7;&#xFF09;</h1><p>&#x7531;&#x4E8E;&#x7535;&#x5B50;&#x611F;&#x5149;&#x5143;&#x4EF6;&#x53D7;&#x70ED;&#x800C;&#x4EA7;&#x751F;&#x7535;&#x5B50;&#x7684;&#x6270;&#x52A8;&#xFF0C;&#x5F62;&#x6210;&#x6697;&#x7535;&#x6D41;&#x3002;&#x6B64;&#x6697;&#x7535;&#x6D41;&#x8BA9;&#x7535;&#x5B50;&#x611F;&#x5149;&#x5143;&#x4EF6;&#x5728;&#x6CA1;&#x6709;&#x5916;&#x5728;&#x5149;&#x6E90;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x4ECD;&#x7136;&#x4F1A;&#x7D2F;&#x79EF;&#x4FE1;&#x53F7;&#xFF0C;&#x5BFC;&#x81F4;&#x62CD;&#x6444;&#x9ED1;&#x8272;&#x7684;&#x5F71;&#x50CF;&#x7ED3;&#x679C;&#x4E0D;&#x591F;&#x9ED1;&#x3001;&#x6574;&#x4F53;&#x5448;&#x73B0;&#x96FE;&#x72B6;&#x6216;&#x4EA7;&#x751F;&#x504F;&#x8272;&#x3002;<br>&#x53EF;&#x4EE5;&#x901A;&#x8FC7;sensor&#x672C;&#x8EAB;&#x5C06;output Raw&#x51CF;&#x53BB;&#x5BF9;&#x5E94;&#x7684;Black Level&#x503C;&#x6216;&#x901A;&#x8FC7;ISP&#x5C06;Input Raw&#x51CF;&#x53BB;&#x5BF9;&#x5E94;&#x7684;Black Level&#x503C;&#x6765;&#x8FDB;&#x884C;&#x6821;&#x51C6;&#x3002;<br><img src="/2016/10/21/Camera&#x5B66;&#x4E60;-&#x6982;&#x5FF5;&#x7BC7;-&#x56FE;&#x50CF;/BlackLevel.png" alt="BlackLevel"></p>
+<h1 id="Gamma-Curve&#xFF08;Gamma&#x66F2;&#x7EBF;&#xFF09;"><a href="#Gamma-Curve&#xFF08;Gamma&#x66F2;&#x7EBF;&#xFF09;" class="headerlink" title="Gamma Curve&#xFF08;Gamma&#x66F2;&#x7EBF;&#xFF09;"></a>Gamma Curve&#xFF08;Gamma&#x66F2;&#x7EBF;&#xFF09;</h1><p>&#x6570;&#x7801;&#x611F;&#x5149;&#x5143;&#x4EF6;&#x5BF9;&#x4EAE;&#x90E8;&#x548C;&#x6697;&#x90E8;&#x7684;&#x654F;&#x611F;&#x5EA6;&#x76F8;&#x540C;&#xFF0C;&#x5448;&#x7EBF;&#x6027;&#x66DD;&#x5149;&#xFF1B;&#x4EBA;&#x773C;&#x5BF9;&#x6697;&#x90E8;&#x7684;&#x654F;&#x611F;&#x5EA6;&#x8F83;&#x9AD8;&#xFF0C;&#x5448;&#x975E;&#x7EBF;&#x6027;&#x3002;Gamma&#x7528;&#x6765;&#x63D0;&#x9AD8;&#x6697;&#x90E8;&#x6765;&#x8865;&#x507F;&#x611F;&#x5149;&#x5143;&#x4EF6;&#x548C;&#x4EBA;&#x773C;&#x4E4B;&#x95F4;&#x8FD9;&#x79CD;&#x4EAE;&#x5EA6;&#x7684;&#x5DEE;&#x5F02;&#x3002;<br>Gamma&#x62C9;&#x5F97;&#x8D8A;&#x9AD8;&#xFF0C;&#x4EAE;&#x5EA6;&#x8D8A;&#x4EAE;&#xFF0C;&#x4F46;&#x4F1A;&#x5BFC;&#x81F4;&#x566A;&#x58F0;&#x8D8A;&#x591A;&#x3002;<br><img src="/2016/10/21/Camera&#x5B66;&#x4E60;-&#x6982;&#x5FF5;&#x7BC7;-&#x56FE;&#x50CF;/GammaCurve.png" alt="GammaCurve"></p>
+<h1 id="Image-Noise&#xFF08;&#x56FE;&#x50CF;&#x566A;&#x58F0;&#xFF09;"><a href="#Image-Noise&#xFF08;&#x56FE;&#x50CF;&#x566A;&#x58F0;&#xFF09;" class="headerlink" title="Image Noise&#xFF08;&#x56FE;&#x50CF;&#x566A;&#x58F0;&#xFF09;"></a>Image Noise&#xFF08;&#x56FE;&#x50CF;&#x566A;&#x58F0;&#xFF09;</h1><p>&#xFF08;&#x4E00;&#xFF09;&#x968F;&#x673A;&#x566A;&#x58F0;</p>
+<ul>
+<li>&#x6697;&#x7535;&#x6D41;&#xFF08;&#x9AD8;&#x70ED;&#x6FC0;&#x53D1;&#x7684;&#x7535;&#x5B50;&#xFF09;&#x6563;&#x7C92;&#x566A;&#x58F0;</li>
+<li>MOSFET&#x590D;&#x4F4D;&#x566A;&#x58F0;&#xFF08;KTC&#x566A;&#x58F0;&#x6216;&#x8005;&#x7535;&#x5BB9;&#x566A;&#x58F0;&#xFF09;</li>
+<li>&#x653E;&#x5927;&#x5668;&#x566A;&#x58F0;</li>
+<li>&#x5149;&#x6563;&#x7C92;&#xFF08;&#x5149;&#x7684;&#x7C92;&#x5B50;&#x6CE2;&#x52A8;&#x6027;&#x4EA7;&#x751F;&#x7684;&#xFF09;&#x566A;&#x58F0;</li>
+<li>&#x7535;&#x6E90;&#x566A;&#x58F0;</li>
+<li>&#x91CF;&#x5316;&#x566A;&#x58F0;</li>
+</ul>
+<p>&#xFF08;&#x4E8C;&#xFF09;&#x56FA;&#x5B9A;&#x56FE;&#x50CF;&#x566A;&#x58F0;&#xFF08;FPN&#xFF09;<br>&#x5747;&#x5300;&#x5149;&#x7167;&#x6761;&#x4EF6;&#x4E0B;&#x5355;&#x4E2A;&#x50CF;&#x7D20;&#x8F93;&#x51FA;&#x7684;&#x4FE1;&#x53F7;&#x53D8;&#x5316;&#x3002;<br>&#x7531;&#x4E8E;CMOS&#x6BCF;&#x4E2A;&#x611F;&#x5149;&#x4E8C;&#x6781;&#x7BA1;&#x65C1;&#x90FD;&#x642D;&#x914D;&#x4E86;&#x4E00;&#x4E2A;ADC&#x653E;&#x5927;&#x5668;&#xFF0C;&#x5982;&#x679C;&#x4EE5;&#x767E;&#x4E07;&#x50CF;&#x7D20;&#x8BA1;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x9700;&#x8981;&#x767E;&#x4E07;&#x4E2A;&#x4EE5;&#x4E0A;&#x7684;ADC&#x653E;&#x5927;&#x5668;&#x3002;&#x6BCF;&#x4E2A;&#x50CF;&#x7D20;&#x7ED3;&#x6784;&#x4E2D;&#x7684;&#x5149;&#x7535;&#x4E8C;&#x6781;&#x7BA1;&#x7684;&#x5C3A;&#x5BF8;&#x3001;&#x63BA;&#x6742;&#x6D53;&#x5EA6;&#x3001;&#x751F;&#x6210;&#x8FC7;&#x7A0B;&#x4E2D;&#x7684;&#x6CBE;&#x6C61;&#x4EE5;&#x53CA;MOS&#x573A;&#x6548;&#x5E94;&#x7BA1;&#x7684;&#x53C2;&#x6570;&#x7684;&#x504F;&#x5DEE;&#x7B49;&#x90FD;&#x4F1A;&#x9020;&#x6210;&#x50CF;&#x7D20;&#x8F93;&#x51FA;&#x4FE1;&#x53F7;&#x7684;&#x53D8;&#x5316;&#x3002;&#x8868;&#x73B0;&#x4E3A;&#xFF1A;</p>
+<ul>
+<li>&#x8F6C;&#x79FB;&#x52A3;&#x5316;&#xFF08;&#x4F4E;&#x7167;&#x5EA6;&#x9ED1;&#x70B9;&#x548C;&#x5F69;&#x8272;&#x7684;&#x56FA;&#x5B9A;&#x76F4;&#x7EBF;&#xFF09;</li>
+<li>&#x5149;&#x7535;&#x4E8C;&#x6781;&#x7BA1;&#x7684;&#x89C2;&#x5149;&#x5EA6;&#x4E0D;&#x5747;&#x5300;&#xFF08;&#x4EAE;&#x767D;&#x70B9;&#x3001;&#x4EAE;&#x70B9;&#x3001;&#x9ED1;&#x70B9;&#x4E0E;&#x4EAE;&#x6591;&#x7EB9;&#xFF09;</li>
+</ul>
+<h1 id="Latitude&#xFF08;&#x5BBD;&#x5BB9;&#x5EA6;&#xFF09;"><a href="#Latitude&#xFF08;&#x5BBD;&#x5BB9;&#x5EA6;&#xFF09;" class="headerlink" title="Latitude&#xFF08;&#x5BBD;&#x5BB9;&#x5EA6;&#xFF09;"></a>Latitude&#xFF08;&#x5BBD;&#x5BB9;&#x5EA6;&#xFF09;</h1><p>&#x5BBD;&#x5BB9;&#x5EA6;&#x662F;&#x6307;&#x611F;&#x5149;&#x6750;&#x6599;&#x6309;&#x6BD4;&#x4F8B;&#x6B63;&#x786E;&#x8BB0;&#x5F55;&#x666F;&#x7269;&#x4EAE;&#x5EA6;&#x8303;&#x56F4;&#x7684;&#x80FD;&#x529B;&#x3002;&#x88AB;&#x6444;&#x666F;&#x7269;&#x8868;&#x9762;&#x7531;&#x6700;&#x4EAE;&#x90E8;&#x5206;&#x81F3;&#x6700;&#x6697;&#x90E8;&#x5206;&#x7684;&#x5DEE;&#x522B;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#x660E;&#x6697;&#x95F4;&#x7684;&#x6BD4;&#x4F8B;&#x6570;&#x5B57;&#x6765;&#x8868;&#x793A;&#x3002;&#x5047;&#x8BBE;&#xFF1A;&#x666F;&#x7269;&#x6700;&#x4EAE;&#x90E8;&#x5206;&#x6BD4;&#x6700;&#x6697;&#x90E8;&#x5206;&#x8981;&#x660E;&#x4EAE;50&#x500D;&#xFF0C;&#x90A3;&#x4E48;&#x5B83;&#x4EEC;&#x4E4B;&#x95F4;&#x7684;&#x6BD4;&#x4F8B;&#x6570;&#x5B57;&#x662F;1:50&#xFF0C;&#x8FD9;&#x5C31;&#x662F;&#x666F;&#x7269;&#x7684;&#x660E;&#x6697;&#x5DEE;&#x522B;&#x3002;&#x611F;&#x5149;&#x7247;&#x6240;&#x5177;&#x6709;&#x7684;&#x6B63;&#x786E;&#x8868;&#x73B0;&#x88AB;&#x6444;&#x666F;&#x7269;&#x660E;&#x6697;&#x5DEE;&#x522B;&#x7684;&#x80FD;&#x529B;&#xFF0C;&#x5373;&#x4E3A;&#x611F;&#x5149;&#x6750;&#x6599;&#x7684;&#x5BBD;&#x5BB9;&#x5EA6;&#xFF0C;&#x901A;&#x5E38;&#x4E5F;&#x79F0;&#x4E3A;&#x66DD;&#x5149;&#x5BBD;&#x5BB9;&#x5EA6;&#x3002;<br>&#x9ED1;&#x767D;&#x80F6;&#x7247;&#x7684;&#x5BBD;&#x5BB9;&#x5EA6;&#x662F;1:128&#x5DE6;&#x53F3;&#xFF0C;&#x5F69;&#x8272;&#x8D1F;&#x7247;&#x7684;&#x5BBD;&#x5BB9;&#x5EA6;&#x5728;1:32&#xFF5E;64&#x5DE6;&#x53F3;&#xFF0C; &#x5F69;&#x8272;&#x53CD;&#x8F6C;&#x7247;&#x7684;&#x5BBD;&#x5BB9;&#x5EA6;&#x4EC5;&#x4E3A;1:16&#xFF5E;32&#x5DE6;&#x53F3;&#xFF0C;&#x76F8;&#x7EB8;&#x7684;&#x5BBD;&#x5BB9;&#x5EA6;&#x5927;&#x7EA6;&#x5728;1:30&#x5DE6;&#x53F3;&#x3002;<br>&#x5728;&#x6444;&#x5F71;&#x66DD;&#x5149;&#x4E2D;&#xFF0C;&#x4F7F;&#x7528;&#x5BBD;&#x5BB9;&#x5EA6;&#x8F83;&#x5927;&#x7684;&#x611F;&#x5149;&#x80F6;&#x7247;&#x53BB;&#x62CD;&#x6444;&#x4EAE;&#x5EA6;&#x5DEE;&#x8F83;&#x5C0F;&#x7684;&#x666F;&#x7269;&#xFF0C;&#x5373;&#x4F7F;&#x66DD;&#x5149;&#x91CF;&#x7A0D;&#x5FAE;&#x591A;&#x4E00;&#x4E9B;&#x6216;&#x5C11;&#x4E00;&#x4E9B;&#xFF0C;&#x5BF9;&#x5E95;&#x7247;&#x5BC6;&#x5EA6;&#x7684;&#x5F71;&#x54CD;&#x4E0D;&#x5927;&#x3002;&#x4ECE;&#x5B9E;&#x7528;&#x7684;&#x89D2;&#x5EA6;&#x6765;&#x8BB2;&#xFF0C;&#x611F;&#x5149;&#x80F6;&#x7247;&#x7684;&#x5BBD;&#x5BB9;&#x5EA6;&#x8D8A;&#x5927;&#xFF0C;&#x5BF9;&#x66DD;&#x5149;&#x63A7;&#x5236;&#x8D8A;&#x6709;&#x5229;&#x3002;<br>&#x66DD;&#x5149;&#x4E0E;&#x611F;&#x5149;&#x80F6;&#x7247;&#x5BBD;&#x5BB9;&#x5EA6;&#x4E4B;&#x95F4;&#x7684;&#x5173;&#x7CFB;&#xFF0C;&#x5927;&#x81F4;&#x5B58;&#x5728;&#x4EE5;&#x4E0B;&#x4E09;&#x79CD;&#x60C5;&#x51B5;&#xFF1A;<br>&#xFF08;&#x4E00;&#xFF09;&#x5BBD;&#x5BB9;&#x5EA6;&#x7B49;&#x4E8E;&#x666F;&#x7269;&#x4EAE;&#x5EA6;&#x8303;&#x56F4;<br>&#x5F53;&#x611F;&#x5149;&#x80F6;&#x7247;&#x5BBD;&#x5BB9;&#x5EA6;&#x7B49;&#x4E8E;&#x666F;&#x7269;&#x4EAE;&#x5EA6;&#x660E;&#x6697;&#x6BD4;&#x4F8B;&#x6570;&#x65F6;&#xFF0C;&#x611F;&#x5149;&#x80F6;&#x7247;&#x6240;&#x80FD;&#x8BB0;&#x5F55;&#x7684;&#x4EAE;&#x5EA6;&#x8303;&#x56F4;&#x6B63;&#x597D;&#x4E0E;&#x666F;&#x7269;&#x7531;&#x6700;&#x4EAE;&#x5230;&#x6700;&#x6697;&#x7684;&#x95F4;&#x8DDD;&#x76F8;&#x540C;&#xFF0C;&#x5728;&#x66DD;&#x5149;&#x4E0A;&#x6CA1;&#x6709;&#x5176;&#x4ED6;&#x53EF;&#x9009;&#x62E9;&#x7684;&#x4F59;&#x5730;&#x3002;&#x5982;&#x66DD;&#x5149;&#x7A0D;&#x6709;&#x51FA;&#x5165;&#xFF0C;&#x5373;&#x4F1A;&#x4F7F;&#x660E;&#x4EAE;&#x90E8;&#x5206;&#x6216;&#x9634;&#x6697;&#x90E8;&#x5206;&#x7684;&#x5C42;&#x6B21;&#x53D7;&#x5230;&#x635F;&#x5BB3;&#x3002;<br>&#xFF08;&#x4E8C;&#xFF09;&#x5BBD;&#x5BB9;&#x5EA6;&#x5927;&#x4E8E;&#x666F;&#x7269;&#x4EAE;&#x5EA6;&#x8303;&#x56F4;<br>&#x5F53;&#x611F;&#x5149;&#x80F6;&#x7247;&#x5BBD;&#x5BB9;&#x5EA6;&#x5927;&#x4E8E;&#x666F;&#x7269;&#x4EAE;&#x5EA6;&#x660E;&#x6697;&#x6BD4;&#x4F8B;&#x6570;&#x65F6;&#xFF0C;&#x611F;&#x5149;&#x80F6;&#x7247;&#x6240;&#x80FD;&#x8BB0;&#x5F55;&#x7684;&#x8FD9;&#x5EA6;&#x8303;&#x56F4;&#x8D85;&#x8FC7;&#x666F;&#x7269;&#x7531;&#x6700;&#x4EAE;&#x5230;&#x6700;&#x6697;&#x7684;&#x95F4;&#x8DDD;&#xFF0C;&#x5728;&#x66DD;&#x5149;&#x4E0A;&#x7559;&#x6709;&#x5F88;&#x5927;&#x7684;&#x9009;&#x62E9;&#x4F59;&#x5730;&#xFF0C;&#x901A;&#x5E38;&#x662F;&#x5728;&#x53EF;&#x5BB9;&#x8BB8;&#x7684;&#x8303;&#x56F4;&#x5185;&#xFF0C;&#x9009;&#x7528;&#x6700;&#x4F4E;&#x66DD;&#x5149;&#x91CF;&#x4F5C;&#x4E3A;&#x66DD;&#x5149;&#x6807;&#x51C6;&#xFF0C;&#x8FD9;&#x6837;&#x6240;&#x83B7;&#x5F97;&#x7684;&#x5E95;&#x7247;&#x5BC6;&#x5EA6;&#x8FBE;&#x5230;&#x6700;&#x4F4E;&#x66DD;&#x5149;&#x91CF;&#x7684;&#x6807;&#x51C6;&#xFF0C;&#x5370;&#x653E;&#x7167;&#x7247;&#x6216;&#x62F7;&#x8D1D;&#x6B63;&#x7247;&#x5747;&#x53EF;&#x83B7;&#x5F97;&#x6700;&#x4F73;&#x7684;&#x5F71;&#x50CF;&#x6548;&#x679C;&#x3002;&#x5728;&#x80F6;&#x7247;&#x5BBD;&#x5BB9;&#x5EA6;&#x5927;&#x4E8E;&#x666F;&#x7269;&#x4EAE;&#x5EA6;&#x8303;&#x56F4;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x6444;&#x5F71;&#x66DD;&#x5149;&#x91CF;&#x7684;&#x63A7;&#x5236;&#x5373;&#x4F7F;&#x7565;&#x6709;&#x51FA;&#x5165;&#xFF0C;&#x4E5F;&#x4E0D;&#x4F1A;&#x5F71;&#x54CD;&#x5230;&#x666F;&#x7269;&#x660E;&#x6697;&#x5C42;&#x6B21;&#x7684;&#x518D;&#x73B0;&#x3002;<br>&#xFF08;&#x4E09;&#xFF09;&#x5BBD;&#x5BB9;&#x5EA6;&#x5C0F;&#x4E8E;&#x666F;&#x7269;&#x4EAE;&#x5EA6;&#x8303;&#x56F4;<br>&#x5F53;&#x611F;&#x5149;&#x80F6;&#x7247;&#x5BBD;&#x5BB9;&#x5EA6;&#x5C0F;&#x4E8E;&#x666F;&#x7269;&#x4EAE;&#x5EA6;&#x660E;&#x6697;&#x6BD4;&#x4F8B;&#x6570;&#x65F6;&#xFF0C;&#x611F;&#x5149;&#x80F6;&#x7247;&#x6240;&#x80FD;&#x8BB0;&#x5F55;&#x7684;&#x4EAE;&#x5EA6;&#x8303;&#x56F4;&#x8FDC;&#x4E0D;&#x53CA;&#x666F;&#x7269;&#x7531;&#x6700;&#x4EAE;&#x5230;&#x6700;&#x6697;&#x7684;&#x95F4;&#x8DDD;&#x8303;&#x56F4;&#xFF0C;&#x5728;&#x66DD;&#x5149;&#x4E0A;&#x5F88;&#x96BE;&#x63A7;&#x5236;&#xFF0C;&#x8981;&#x60F3;&#x5168;&#x90E8;&#x8BB0;&#x5F55;&#x4E0B;&#x666F;&#x7269;&#x7684;&#x660E;&#x6697;&#x6BD4;&#x4F8B;&#x662F;&#x4E0D;&#x53EF;&#x80FD;&#x7684;&#x3002;&#x4E00;&#x822C;&#x6765;&#x8BF4;&#xFF0C;&#x8FD9;&#x65F6;&#x5E94;&#x6309;&#x88AB;&#x6444;&#x4E3B;&#x4F53;&#x7684;&#x4E0D;&#x540C;&#x60C5;&#x51B5;&#xFF0C;&#x9009;&#x62E9;&#x66DD;&#x5149;&#x7684;&#x4FA7;&#x91CD;&#x70B9;&#xFF0C;&#x4EE5;&#x88AB;&#x6444;&#x666F;&#x7269;&#x4E3B;&#x8981;&#x90E8;&#x4F4D;&#x7684;&#x4EAE;&#x5EA6;&#x6765;&#x4F5C;&#x4E3A;&#x66DD;&#x5149;&#x7684;&#x57FA;&#x51C6;&#xFF0C;&#x517C;&#x987E;&#x5230;&#x5176;&#x4ED6;&#x90E8;&#x5206;&#x7684;&#x5C42;&#x6B21;&#x3002;&#x5F88;&#x663E;&#x7136;&#xFF0C;&#x5728;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#x7684;&#x66DD;&#x5149;&#xFF0C;&#x52BF;&#x5FC5;&#x8981;&#x635F;&#x5931;&#x76F8;&#x5F53;&#x4E00;&#x90E8;&#x5206;&#x7684;&#x4EAE;&#x5EA6;&#x8303;&#x56F4;&#x7684;&#x5C42;&#x6B21;&#xFF0C;&#x5176;&#x5173;&#x952E;&#x5728;&#x4E8E;&#x6070;&#x5F53;&#x5730;&#x786E;&#x5B9A;&#x66DD;&#x5149;&#x4FA7;&#x91CD;&#x70B9;&#xFF0C;&#x6240;&#x635F;&#x5931;&#x7684;&#x53EA;&#x662F;&#x6B21;&#x8981;&#x90E8;&#x4F4D;&#x7684;&#x4E00;&#x4E9B;&#x5C42;&#x6B21;&#x3002;</p>
+<p><img src="/2016/10/21/Camera&#x5B66;&#x4E60;-&#x6982;&#x5FF5;&#x7BC7;-&#x56FE;&#x50CF;/Latitude.png" alt="Latitude"><br>&#x4EBA;&#x773C;&#x7684;&#x611F;&#x5149;&#x5BBD;&#x5BB9;&#x5EA6;&#x6BD4;&#x80F6;&#x7247;&#x8981;&#x9AD8;&#x5F88;&#x591A;&#xFF0C;&#x800C;&#x80F6;&#x7247;&#x7684;&#x611F;&#x5149;&#x5BBD;&#x5BB9;&#x5EA6;&#x8981;&#x6BD4;&#x6570;&#x7801;&#x76F8;&#x673A;CCD&#x9AD8;&#x51FA;&#x5F88;&#x591A;&#xFF01;&#x4E86;&#x89E3;&#x8FD9;&#x4E2A;&#x6982;&#x5FF5;&#x4E4B;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x4E0D;&#x96BE;&#x4E86;&#x89E3;&#xFF0C;&#x4E3A;&#x4EC0;&#x4E48;&#x5728;&#x9006;&#x5149;&#x7684;&#x6761;&#x4EF6;&#x4E0B;&#xFF0C;&#x4EBA;&#x773C;&#x80FD;&#x770B;&#x6E05;&#x80CC;&#x5149;&#x7684;&#x5EFA;&#x7B51;&#x7269;&#x4EE5;&#x53CA;&#x8000;&#x773C;&#x7684;&#x5929;&#x7A7A;&#x4E91;&#x5F69;&#x3002;&#x800C;&#x4E00;&#x65E6;&#x62CD;&#x6444;&#x51FA;&#x6765;&#xFF0C;&#x8981;&#x4E48;&#x5C31;&#x662F;&#x4E91;&#x5F69;&#x989C;&#x8272;&#x7EDA;&#x70C2;&#x800C;&#x5EFA;&#x7B51;&#x7269;&#x53D8;&#x6210;&#x4E86;&#x9ED1;&#x7CCA;&#x7CCA;&#x7684;&#x526A;&#x5F71;&#xFF0C;&#x8981;&#x4E48;&#x5C31;&#x662F;&#x5EFA;&#x7B51;&#x7269;&#x8272;&#x5F69;&#x7EC6;&#x8282;&#x6E05;&#x695A;&#x800C;&#x539F;&#x672C;&#x7F8E;&#x4E3D;&#x7684;&#x4E91;&#x5F69;&#x5374;&#x6210;&#x4E86;&#x767D;&#x8272;&#x7684;&#x4E00;&#x7247;&#x3002;<br>&#x518D;&#x770B;&#x4EBA;&#x773C;&#x7684;&#x7ED3;&#x6784;&#xFF0C;&#x6709;&#x77B3;&#x5B54;&#x53EF;&#x4EE5;&#x63A7;&#x5236;&#x901A;&#x5149;&#x91CF;&#xFF0C;&#x6709;&#x6746;&#x72B6;&#x611F;&#x5149;&#x7EC6;&#x80DE;&#x548C;&#x690E;&#x72B6;&#x611F;&#x5149;&#x7EC6;&#x80DE;&#x4EE5;&#x9002;&#x5E94;&#x4E0D;&#x540C;&#x7684;&#x5149;&#x5F3A;&#xFF0C;&#x53EF;&#x89C1;&#x5373;&#x4F7F;&#x4EBA;&#x773C;&#x6709;&#x7740;&#x5F88;&#x9AD8;&#x7684;&#x611F;&#x5149;&#x5BBD;&#x5BB9;&#x5EA6;&#xFF0C;&#x4F9D;&#x7136;&#x6709;&#x4EAE;&#x5EA6;&#x8C03;&#x8282;&#x7CFB;&#x7EDF;&#xFF0C;&#x4EE5;&#x9002;&#x5E94;&#x5149;&#x5F3A;&#x53D8;&#x5316;&#x3002;</p>
+<h1 id="&#x56FE;&#x50CF;&#x8D28;&#x91CF;"><a href="#&#x56FE;&#x50CF;&#x8D28;&#x91CF;" class="headerlink" title="&#x56FE;&#x50CF;&#x8D28;&#x91CF;"></a>&#x56FE;&#x50CF;&#x8D28;&#x91CF;</h1><p>&#x56FE;&#x50CF;&#x8D28;&#x91CF;&#x6307;&#x4EBA;&#x4EEC;&#x5BF9;&#x4E00;&#x5E45;&#x56FE;&#x50CF;&#x89C6;&#x89C9;&#x611F;&#x53D7;&#x7684;&#x8BC4;&#x4EF7;&#xFF0C;&#x5B83;&#x5305;&#x62EC;&#x4E3B;&#x89C2;&#x8BC4;&#x4EF7;&#x548C;&#x5BA2;&#x89C2;&#x8BC4;&#x4EF7;&#x3002;</p>
+<p>&#xFF08;&#x4E00;&#xFF09;&#x4E3B;&#x89C2;&#x8BC4;&#x4EF7;<br>&#x4E3B;&#x89C2;&#x8BC4;&#x4EF7;&#x901A;&#x5E38;&#x8BA4;&#x4E3A;&#x56FE;&#x50CF;&#x8D28;&#x91CF;&#x6307;&#x88AB;&#x6D4B;&#x56FE;&#x50CF;&#xFF08;&#x5373;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#xFF09;&#x76F8;&#x5BF9;&#x4E8E;&#x6807;&#x51C6;&#x56FE;&#x50CF;&#xFF08;&#x5373;&#x539F;&#x56FE;&#x50CF;&#xFF09;&#x5728;&#x4EBA;&#x773C;&#x89C6;&#x89C9;&#x7CFB;&#x7EDF;&#x4E2D;&#x4EA7;&#x751F;&#x8BEF;&#x5DEE;&#x7684;&#x7A0B;&#x5EA6;&#x3002;&#x6362;&#x4E00;&#x53E5;&#x8BDD;&#x8BF4;&#x5C31;&#x662F;&#x76F8;&#x5BF9;&#x4E8E;&#x539F;&#x56FE;&#x50CF;&#xFF0C;&#x4EBA;&#x773C;&#x8BA4;&#x4E3A;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x51E0;&#x4E4E;&#x6CA1;&#x6709;&#x964D;&#x8D28;&#x6216;&#x635F;&#x4F24;&#xFF0C;&#x5219;&#x8BF4;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x7684;&#x8D28;&#x91CF;&#x9AD8;&#xFF0C;&#x5426;&#x5219;&#x8BF4;&#x56FE;&#x50CF;&#x8D28;&#x91CF;&#x5DEE;&#x3002;&#x53E6;&#x4E00;&#x79CD;&#x5B9A;&#x4E49;&#x6307;&#x5728;&#x6CA1;&#x6709;&#x539F;&#x56FE;&#x50CF;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x4EBA;&#x773C;&#x80FD;&#x6E05;&#x6670;&#x5730;&#x5206;&#x8FA8;&#x56FE;&#x50CF;&#x4E2D;&#x7684;&#x4E8B;&#x7269;&#xFF0C;&#x5BF9;&#x56FE;&#x50CF;&#x4E2D;&#x524D;&#x666F;&#x548C;&#x80CC;&#x666F;&#x3001;&#x7269;&#x4F53;&#x7684;&#x8F6E;&#x5ED3;&#x3001;&#x7EB9;&#x7406;&#x7B49;&#x7B49;&#x80FD;&#x8F83;&#x597D;&#x5730;&#x533A;&#x5206;&#xFF0C;&#x5219;&#x8BF4;&#x56FE;&#x50CF;&#x8D28;&#x91CF;&#x597D;&#xFF0C;&#x5426;&#x5219;&#x8BF4;&#x56FE;&#x50CF;&#x8D28;&#x91CF;&#x5DEE;&#x3002;<br>&#xFF08;&#x4E8C;&#xFF09;&#x5BA2;&#x89C2;&#x8BC4;&#x4EF7;<br>&#x5BA2;&#x89C2;&#x8BC4;&#x4EF7;&#x662F;&#x6307;&#x5C06;&#x6D4B;&#x8BD5;&#x6570;&#x636E;&#x5316;&#xFF0C;&#x7531;&#x673A;&#x5668;&#x7B97;&#x6CD5;&#x8BA1;&#x7B97;&#x5F97;&#x51FA;&#x7ED3;&#x679C;&#x3002;<br><img src="/2016/10/21/Camera&#x5B66;&#x4E60;-&#x6982;&#x5FF5;&#x7BC7;-&#x56FE;&#x50CF;/ImageQuality.png" alt="&#x56FE;&#x50CF;&#x8D28;&#x91CF;"><br>&#x5728;&#x56FD;&#x9645;&#x4E0A;&#xFF0C;Imatest&#x548C;DxO Analyzer&#x662F;&#x6BD4;&#x8F83;&#x6709;&#x540D;&#x7684;&#x5F71;&#x50CF;&#x8D28;&#x91CF;&#x5BA2;&#x89C2;&#x8BC4;&#x6D4B;&#x8F6F;&#x4EF6;&#x7CFB;&#x7EDF;&#x3002;Imatest&#x548C;DxO Analyzer&#x6709;&#x5F02;&#x66F2;&#x540C;&#x5DE5;&#x4E4B;&#x5904;&#xFF0C;&#x90FD;&#x662F;&#x628A;&#x5F71;&#x54CD;&#x5F71;&#x50CF;&#x8D28;&#x91CF;&#x7684;&#x5404;&#x4E2A;&#x56E0;&#x7D20;&#x62C6;&#x5206;&#x5F00;&#x6765;&#xFF0C;&#x5206;&#x522B;&#x5BF9;&#x5404;&#x4E2A;&#x56E0;&#x7D20;&#x8FDB;&#x884C;&#x6D4B;&#x8BD5;&#xFF0C;&#x7531;&#x8F6F;&#x4EF6;&#x5206;&#x6790;&#x5F97;&#x51FA;&#x7ED3;&#x8BBA;&#xFF0C;&#x53EF;&#x4EE5;&#x975E;&#x5E38;&#x76F4;&#x89C2;&#x770B;&#x5230;&#x5404;&#x4E2A;&#x65B9;&#x9762;&#x7684;&#x8868;&#x73B0;&#x3002;<br>Imatest(<a href="http://www.imatest.com" target="_blank" rel="external">http://www.imatest.com</a> )&#x662F;&#x7F8E;&#x56FD;Imatest&#x516C;&#x53F8;&#x65D7;&#x4E0B;&#x7684;&#x5F71;&#x50CF;&#x8D28;&#x91CF;&#x8BC4;&#x6D4B;&#x8F6F;&#x4EF6;&#x7CFB;&#x7EDF;&#xFF0C;&#x6D4B;&#x8BD5;&#x9879;&#x76EE;&#x6709;&#x955C;&#x5934;&#x5206;&#x8FA8;&#x7387;&#x6D4B;&#x8BD5;&#xFF08;SFR&#xFF0D;MTF&#xFF09;&#x3001;&#x8272;&#x5DEE;&#x3001;&#x8272;&#x5F69;&#x8FD8;&#x539F;&#x5EA6;&#x3001;&#x8272;&#x5F69;&#x7A7A;&#x95F4;&#x7B49;&#x7B49;&#x3002;<br>DxO Analyzer(<a href="http://www.dxo.com" target="_blank" rel="external">http://www.dxo.com</a> )&#x662F;&#x6CD5;&#x56FD;DxO&#x516C;&#x53F8;&#x65D7;&#x4E0B;&#x7684;&#x5F71;&#x50CF;&#x8D28;&#x91CF;&#x8BC4;&#x6D4B;&#x8F6F;&#x4EF6;&#x7CFB;&#x7EDF;&#xFF0C;&#x6D4B;&#x8BD5;&#x9879;&#x76EE;&#x4E0E;imatest&#x5927;&#x540C;&#x5C0F;&#x5F02;&#x3002;DxO&#x7CFB;&#x7EDF;&#x4E0D;&#x4EC5;&#x53EF;&#x4EE5;&#x6D4B;&#x8BD5;&#x955C;&#x5934;&#x3001;sensor/ISP/video&#xFF0C;&#x751A;&#x81F3;&#x662F;&#x591A;&#x9635;&#x5217;&#x7684;&#x6444;&#x50CF;&#x5934;&#x3002;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://www.laiwangyo.com/2016/10/21/Camera学习-概念篇-图像/" data-id="ciui4cmv0000030mou1hboll0" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://www.laiwangyo.com/2016/10/21/Camera学习-概念篇-图像/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Camera/">Camera</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/10/21/Camera学习-概念篇-标准光源/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          Camera学习-概念篇-标准光源
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/10/20/Camera学习-概念篇-相机/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">Camera学习-概念篇-相机</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2016/10/21/Camera学习-概念篇-图像/" data-title="Camera学习-概念篇-图像" data-url="http://www.laiwangyo.com/2016/10/21/Camera学习-概念篇-图像/"></div>
+  </section>
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android开源项目分析/">Android开源项目分析</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android性能优化/">Android性能优化</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android技术文章摘录/">Android技术文章摘录</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android破解的那些破事/">Android破解的那些破事</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Camera/">Camera</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Openfire/">Openfire</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/XModeEngine脚本引擎/">XModeEngine脚本引擎</a><span class="category-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Camera/">Camera</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Openfire/">Openfire</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能/">性能</a><span class="tag-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Camera/" style="font-size: 13.33px;">Camera</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/性能/" style="font-size: 16.67px;">性能</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/10/21/Camera学习-调试篇-基本流程/">Camera学习-调试篇-基本流程</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/21/Camera学习-概念篇-标准光源/">Camera学习-概念篇-标准光源</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/21/Camera学习-概念篇-图像/">Camera学习-概念篇-图像</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/20/Camera学习-概念篇-相机/">Camera学习-概念篇-相机</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/20/Camera学习-概述篇/">Camera学习-概述篇</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://taoyuanxiaoqi.com" target="_blank">桃园小七</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Powered by <a href=http://www.laiwangyo.com target="_blank">yazone</a><br>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">文章列表</a>
+  
+    <a href="/me" class="mobile-nav-link">关于我</a>
+  
+</nav>
+  <!-- totop start -->
+
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"yazone"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+</div>
+</body>
+</html>
