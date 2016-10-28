@@ -1,0 +1,325 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Camera学习-概念篇-Sensor介绍 | 图南的学鸠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="&amp;#x672C;&amp;#x90E8;&amp;#x5206;&amp;#x4E3B;&amp;#x8981;&amp;#x4ECB;&amp;#x7ECD;MTK&amp;#x5E73;&amp;#x53F0;&amp;#x652F;&amp;#x6301;&amp;#x7684;Image Sensor&amp;#x7C7B;&amp;#x578B;&amp;#xFF0C;&amp;#x786C;&amp;#x4EF6;&amp;#x63A5;&amp;#x53E3;&amp;#x4EE5;&amp;#x53CA;&amp;#x5E38;&amp;#x89C1;&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Camera学习-概念篇-Sensor介绍">
+<meta property="og:url" content="http://www.laiwangyo.com/2016/10/28/Camera学习-概念篇-Sensor介绍/index.html">
+<meta property="og:site_name" content="图南的学鸠">
+<meta property="og:description" content="&amp;#x672C;&amp;#x90E8;&amp;#x5206;&amp;#x4E3B;&amp;#x8981;&amp;#x4ECB;&amp;#x7ECD;MTK&amp;#x5E73;&amp;#x53F0;&amp;#x652F;&amp;#x6301;&amp;#x7684;Image Sensor&amp;#x7C7B;&amp;#x578B;&amp;#xFF0C;&amp;#x786C;&amp;#x4EF6;&amp;#x63A5;&amp;#x53E3;&amp;#x4EE5;&amp;#x53CA;&amp;#x5E38;&amp;#x89C1;&amp;">
+<meta property="og:image" content="http://www.laiwangyo.com/2016/10/28/Camera学习-概念篇-Sensor介绍/Interface.png">
+<meta property="og:image" content="http://www.laiwangyo.com/2016/10/28/Camera学习-概念篇-Sensor介绍/Schematic.png">
+<meta property="og:image" content="http://www.laiwangyo.com/2016/10/28/Camera学习-概念篇-Sensor介绍/Parallel.png">
+<meta property="og:image" content="http://www.laiwangyo.com/2016/10/28/Camera学习-概念篇-Sensor介绍/DataFormat.png">
+<meta property="og:updated_time" content="2016-10-28T09:45:33.363Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Camera学习-概念篇-Sensor介绍">
+<meta name="twitter:description" content="&amp;#x672C;&amp;#x90E8;&amp;#x5206;&amp;#x4E3B;&amp;#x8981;&amp;#x4ECB;&amp;#x7ECD;MTK&amp;#x5E73;&amp;#x53F0;&amp;#x652F;&amp;#x6301;&amp;#x7684;Image Sensor&amp;#x7C7B;&amp;#x578B;&amp;#xFF0C;&amp;#x786C;&amp;#x4EF6;&amp;#x63A5;&amp;#x53E3;&amp;#x4EE5;&amp;#x53CA;&amp;#x5E38;&amp;#x89C1;&amp;">
+<meta name="twitter:image" content="http://www.laiwangyo.com/2016/10/28/Camera学习-概念篇-Sensor介绍/Interface.png">
+  
+    <link rel="alternative" href="/atom.xml" title="图南的学鸠" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">图南的学鸠</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">代码中带点唏嘘，生命中带点惊喜</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">文章列表</a>
+        
+          <a class="main-nav-link" href="/me">关于我</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="www.laiwangyo.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-Camera学习-概念篇-Sensor介绍" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/28/Camera学习-概念篇-Sensor介绍/" class="article-date">
+  <time datetime="2016-10-28T07:41:00.000Z" itemprop="datePublished">2016-10-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Camera/">Camera</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Camera学习-概念篇-Sensor介绍
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div class="toc-wrap">
+        	<div class="toc-title">Index</div>
+        	<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Image-Sensor类型"><span class="toc-number">1.</span> <span class="toc-text">1.Image Sensor类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#a-YUV-Sensor"><span class="toc-number">1.1.</span> <span class="toc-text">a) YUV Sensor</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#b-Raw-Sensor"><span class="toc-number">1.2.</span> <span class="toc-text">b) Raw Sensor</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-硬件接口"><span class="toc-number">2.</span> <span class="toc-text">2.硬件接口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-常见基本概念"><span class="toc-number">3.</span> <span class="toc-text">3.常见基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#a-三路电压"><span class="toc-number">3.1.</span> <span class="toc-text">a) 三路电压</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#b-I2C信号"><span class="toc-number">3.2.</span> <span class="toc-text">b) I2C信号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#c-mipi几条lane"><span class="toc-number">3.3.</span> <span class="toc-text">c) mipi几条lane</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#d-parallel高低八位"><span class="toc-number">3.4.</span> <span class="toc-text">d) parallel高低八位</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#e-Data-Format"><span class="toc-number">3.5.</span> <span class="toc-text">e) Data Format</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#f-MCLK"><span class="toc-number">3.6.</span> <span class="toc-text">f) MCLK</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#g-PCLK"><span class="toc-number">3.7.</span> <span class="toc-text">g) PCLK</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#h-mipi-信号"><span class="toc-number">3.8.</span> <span class="toc-text">h) mipi 信号</span></a></li></ol></li></ol>
+    		</div>
+
+        <p>&#x672C;&#x90E8;&#x5206;&#x4E3B;&#x8981;&#x4ECB;&#x7ECD;MTK&#x5E73;&#x53F0;&#x652F;&#x6301;&#x7684;Image Sensor&#x7C7B;&#x578B;&#xFF0C;&#x786C;&#x4EF6;&#x63A5;&#x53E3;&#x4EE5;&#x53CA;&#x5E38;&#x89C1;&#x57FA;&#x672C;&#x6982;&#x5FF5;&#x3002;<a id="more"></a></p>
+<h1 id="1-Image-Sensor&#x7C7B;&#x578B;"><a href="#1-Image-Sensor&#x7C7B;&#x578B;" class="headerlink" title="1.Image Sensor&#x7C7B;&#x578B;"></a>1.Image Sensor&#x7C7B;&#x578B;</h1><h2 id="a-YUV-Sensor"><a href="#a-YUV-Sensor" class="headerlink" title="a) YUV Sensor"></a>a) YUV Sensor</h2><p>&#x3000;&#x3000;YUV Sensor&#x8F93;&#x51FA;&#x7684;Data&#x683C;&#x5F0F;&#x4E3A;YUV&#xFF0C;&#x56FE;&#x50CF;&#x7684;&#x6548;&#x679C;&#x5904;&#x7406;&#x4F7F;&#x7528;Sensor&#x5185;&#x90E8;&#x7684;ISP&#xFF0C;BB&#x7AEF;&#x63A5;&#x6536;YUV&#x683C;&#x5F0F;&#x7684;data&#x540E;&#x53EA;&#x8FDB;&#x884C;&#x683C;&#x5F0F;&#x7684;&#x8F6C;&#x6362;&#xFF0C;&#x6548;&#x679C;&#x65B9;&#x9762;&#x4E0D;&#x8FDB;&#x884C;&#x5904;&#x7406;&#xFF0C;&#x7531;&#x4E8E;Sensor&#x5185;&#x90E8;&#x7684;ISP&#x5904;&#x7406;&#x80FD;&#x529B;&#x6709;&#x9650;&#xFF0C;&#x4E14;YUV Sensor&#x7684;&#x6570;&#x636E;&#x91CF;&#x6BD4;&#x8F83;&#x5927;&#xFF08;YUV422&#x7684;&#x683C;&#x5F0F;1&#x4E2A;pixel2&#x4E2A;byte&#xFF09;&#xFF0C;&#x4E00;&#x822C;Size&#x90FD;&#x6BD4;&#x8F83;&#x5C0F;&#xFF0C;&#x5E38;&#x89C1;&#x7684;YUV sensor&#x90FD;&#x662F;5M&#x4EE5;&#x4E0B;&#x3002;</p>
+<h2 id="b-Raw-Sensor"><a href="#b-Raw-Sensor" class="headerlink" title="b) Raw Sensor"></a>b) Raw Sensor</h2><p>&#x3000;&#x3000;Raw Sensor&#x8F93;&#x51FA;&#x7684;Data&#x683C;&#x5F0F;&#x4E3A;Raw&#xFF0C;&#x56FE;&#x50CF;&#x7684;&#x6548;&#x679C;&#x5904;&#x7406;&#x4F7F;&#x7528;BB&#x7AEF;&#x7684;ISP&#xFF0C;BB&#x7AEF;&#x63A5;&#x6536;Raw data&#x540E;&#x8FDB;&#x884C;&#x4E00;&#x7CFB;&#x5217;&#x7684;&#x56FE;&#x50CF;&#x5904;&#x7406;&#xFF08;OB&#xFF0C;Shading&#xFF0C;AWB&#xFF0C;Gamma&#xFF0C;EE&#xFF0C;ANR&#x7B49;&#xFF09;&#xFF0C;&#x6548;&#x679C;&#x65B9;&#x9762;&#x7531;BB&#x7AEF;&#x63A7;&#x5236;&#xFF0C;&#x9700;&#x8981;&#x9488;&#x5BF9;&#x4E0D;&#x540C;&#x7684;&#x6A21;&#x7EC4;&#x8FDB;&#x884C;&#x6548;&#x679C;&#x8C03;&#x8BD5;&#xFF0C;Raw sensor&#x662F;&#x76EE;&#x524D;&#x7684;&#x4E3B;&#x6D41;&#xFF0C;&#x6570;&#x636E;&#x91CF;&#x6BD4;YUV Sensor&#x5C0F;&#xFF08;RAW10 &#x683C;&#x5F0F;&#x7684;sensor 1&#x4E2A;pixel 10&#x4E2A;bit&#xFF09;&#x4F7F;&#x7528;&#x5E73;&#x53F0;ISP&#x5904;&#x7406;&#xFF0C;&#x80FD;&#x652F;&#x6301;&#x8F83;&#x5927;&#x7684;size&#x3002;</p>
+<h1 id="2-&#x786C;&#x4EF6;&#x63A5;&#x53E3;"><a href="#2-&#x786C;&#x4EF6;&#x63A5;&#x53E3;" class="headerlink" title="2.&#x786C;&#x4EF6;&#x63A5;&#x53E3;"></a>2.&#x786C;&#x4EF6;&#x63A5;&#x53E3;</h1><p>&#x3000;&#x3000;&#x7B80;&#x5355;&#x8BF4;&#x6765;&#xFF0C;Camera&#x7684;&#x63A5;&#x53E3;&#x5206;&#x4E3A;&#x5E76;&#x884C;&#x548C;&#x4E32;&#x884C;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#xFF0C;&#x800C;&#x76EE;&#x524D;MTK&#x5E73;&#x53F0;&#x4E3B;&#x8981;&#x652F;&#x6301;&#x7684;&#x4E32;&#x884C;&#x65B9;&#x5F0F;&#x4E3A;mipi&#x63A5;&#x53E3;&#xFF0C;Parallel&#x63A5;&#x53E3;&#x548C;mipi&#x63A5;&#x53E3;&#x7684;&#x4ECB;&#x7ECD;&#x53EF;&#x4EE5;&#x53C2;&#x8003;&#x4E0B;&#x56FE;:<br><img src="/2016/10/28/Camera&#x5B66;&#x4E60;-&#x6982;&#x5FF5;&#x7BC7;-Sensor&#x4ECB;&#x7ECD;/Interface.png" alt=""><br><img src="/2016/10/28/Camera&#x5B66;&#x4E60;-&#x6982;&#x5FF5;&#x7BC7;-Sensor&#x4ECB;&#x7ECD;/Schematic.png" alt=""></p>
+<h1 id="3-&#x5E38;&#x89C1;&#x57FA;&#x672C;&#x6982;&#x5FF5;"><a href="#3-&#x5E38;&#x89C1;&#x57FA;&#x672C;&#x6982;&#x5FF5;" class="headerlink" title="3.&#x5E38;&#x89C1;&#x57FA;&#x672C;&#x6982;&#x5FF5;"></a>3.&#x5E38;&#x89C1;&#x57FA;&#x672C;&#x6982;&#x5FF5;</h1><h2 id="a-&#x4E09;&#x8DEF;&#x7535;&#x538B;"><a href="#a-&#x4E09;&#x8DEF;&#x7535;&#x538B;" class="headerlink" title="a) &#x4E09;&#x8DEF;&#x7535;&#x538B;"></a>a) &#x4E09;&#x8DEF;&#x7535;&#x538B;</h2><p>&#x3000;&#x3000;camera&#x5305;&#x542B;&#x7684;&#x4E09;&#x8DEF;&#x7535;&#x538B;&#x4E3A;&#x6A21;&#x62DF;&#x7535;&#x538B;&#xFF08;VCAMA&#xFF09;&#xFF0C;&#x6570;&#x5B57;&#x7535;&#x538B;&#xFF08;VCAMD&#xFF09;&#xFF0C;IO&#x53E3;&#x7535;&#x538B;&#xFF08;VCAMIO&#xFF09;&#x3002;</p>
+<h2 id="b-I2C&#x4FE1;&#x53F7;"><a href="#b-I2C&#x4FE1;&#x53F7;" class="headerlink" title="b) I2C&#x4FE1;&#x53F7;"></a>b) I2C&#x4FE1;&#x53F7;</h2><p>&#x3000;&#x3000;BB&#x4E0E;Sensor&#x7AEF;&#x901A;&#x8FC7;I2C&#x6765;&#x901A;&#x4FE1;&#xFF08;&#x8BFB;&#x5199;&#x5BC4;&#x5B58;&#x5668;&#xFF09;&#xFF0C;&#x5305;&#x62EC;SCL&#xFF08;I2C Clock&#xFF09; SDA&#xFF08;I2C Data&#xFF09;&#x4FE1;&#x53F7;&#x3002;</p>
+<h2 id="c-mipi&#x51E0;&#x6761;lane"><a href="#c-mipi&#x51E0;&#x6761;lane" class="headerlink" title="c) mipi&#x51E0;&#x6761;lane"></a>c) mipi&#x51E0;&#x6761;lane</h2><p>&#x3000;&#x3000;mipi data&#x662F;&#x6210;&#x5BF9;&#x7684;&#x5DEE;&#x5206;&#x4FE1;&#x53F7;&#xFF0C;MIPI_RDN&#x548C;MIPI_RDP&#xFF0C;&#x6709;&#x51E0;&#x5BF9;&#x8FD9;&#x6837;&#x7684;pin&#x811A;&#xFF0C;&#x5219;&#x8BF4;&#x660E;&#x662F;&#x51E0;&#x6761;lane&#xFF0C;&#x540C;&#x4E00;&#x9897;sensor&#x7531;&#x4E8E;register setting&#x4E0D;&#x540C;&#xFF0C;&#x8F93;&#x51FA;&#x7684;&#x4FE1;&#x53F7;&#x6709;&#x53EF;&#x80FD;&#x662F;2 lane&#x6216;&#x8005;4lane&#x7B49;&#x3002;</p>
+<h2 id="d-parallel&#x9AD8;&#x4F4E;&#x516B;&#x4F4D;"><a href="#d-parallel&#x9AD8;&#x4F4E;&#x516B;&#x4F4D;" class="headerlink" title="d) parallel&#x9AD8;&#x4F4E;&#x516B;&#x4F4D;"></a>d) parallel&#x9AD8;&#x4F4E;&#x516B;&#x4F4D;</h2><p>&#x3000;&#x3000;Parallel&#x63A5;&#x53E3;&#x4E00;&#x822C;Data&#x6709;10&#x6839;pin&#xFF0C;&#x5206;&#x522B;&#x53EB;&#x505A;Data0~Data9&#xFF0C;Parallel sensor&#x8F93;&#x51FA;&#x7684;data&#x4FE1;&#x53F7;&#x662F;8&#x6839;pin&#x65F6;&#xFF0C;&#x8FD9;&#x516B;&#x6839;pin&#x63A5;&#x5230;&#x7684;&#x662F;Data0~Data7&#x8FD8;&#x662F;Data2~Data9&#xFF0C;&#x9700;&#x8981;&#x914D;&#x7F6E;&#x6B63;&#x786E;&#xFF0C;&#x53EB;&#x505A;&#x63A5;&#x5230;&#x9AD8;&#x516B;&#x4F4D;&#x6216;&#x8005;&#x4F4E;&#x516B;&#x4F4D;&#xFF0C;&#x63A5;&#x9519;&#x4E86;&#x53EF;&#x80FD;&#x4EA7;&#x751F;&#x5982;&#x4E0B;&#x73B0;&#x8C61;:<br><img src="/2016/10/28/Camera&#x5B66;&#x4E60;-&#x6982;&#x5FF5;&#x7BC7;-Sensor&#x4ECB;&#x7ECD;/Parallel.png" alt="Parallel"></p>
+<h2 id="e-Data-Format"><a href="#e-Data-Format" class="headerlink" title="e) Data Format"></a>e) Data Format</h2><p>&#x3000;&#x3000;Sensor&#x8F93;&#x51FA;&#x7684;&#x6570;&#x636E;&#x683C;&#x5F0F;&#xFF0C;&#x5BF9;&#x4E8E;YUV Sensor&#x6765;&#x8BF4;&#xFF0C;Data Fomat&#x4E00;&#x822C;&#x6709;YUYV&#xFF0C;YVYU&#xFF0C;UYVY&#x7B49;&#xFF0C;&#x914D;&#x7F6E;&#x4E0D;&#x5BF9;&#x53EF;&#x80FD;&#x4F1A;&#x5BFC;&#x81F4;&#x989C;&#x8272;&#x548C;&#x4EAE;&#x5EA6;&#x9519;&#x6389;&#xFF0C;&#x4F8B;&#x5982;&#x4E0B;&#x56FE;:<br><img src="/2016/10/28/Camera&#x5B66;&#x4E60;-&#x6982;&#x5FF5;&#x7BC7;-Sensor&#x4ECB;&#x7ECD;/DataFormat.png" alt="Data Format"></p>
+<p>&#x3000;&#x3000;&#x5BF9;&#x4E8E;Raw Sensor&#x6765;&#x8BF4;&#xFF0C;Data Format&#x5C31;&#x662F;First Pixel&#x7684;&#x989C;&#x8272;&#xFF0C;&#x5206;&#x4E3A;R&#xFF0C;Gr&#xFF0C;Gb&#xFF0C;B&#xFF0C;&#x914D;&#x7F6E;&#x4E0D;&#x5BF9;&#x4F1A;&#x5BFC;&#x81F4;&#x989C;&#x8272;&#x9519;&#x8BEF;&#x3002;</p>
+<h2 id="f-MCLK"><a href="#f-MCLK" class="headerlink" title="f) MCLK"></a>f) MCLK</h2><p>&#x3000;&#x3000;BB&#x63D0;&#x4F9B;&#x7ED9;Sensor&#x7684;&#x5916;&#x90E8;clock&#x3002;</p>
+<h2 id="g-PCLK"><a href="#g-PCLK" class="headerlink" title="g) PCLK"></a>g) PCLK</h2><p>&#x3000;&#x3000;Parallel&#x63A5;&#x53E3;&#x7684;Sensor&#x8F93;&#x51FA;&#x7684;clock&#xFF0C;&#x8BE5;clock&#x53D8;&#x5316;&#x4E00;&#x6B21;&#xFF0C;data&#x66F4;&#x65B0;&#x4E00;&#x6B21;&#x3002;</p>
+<h2 id="h-mipi-&#x4FE1;&#x53F7;"><a href="#h-mipi-&#x4FE1;&#x53F7;" class="headerlink" title="h) mipi &#x4FE1;&#x53F7;"></a>h) mipi &#x4FE1;&#x53F7;</h2><p>&#x3000;&#x3000;mipi&#x4FE1;&#x53F7;&#x5305;&#x62EC;mipi clock&#x548C;mipi data&#xFF0C;&#x8BE5;&#x4FE1;&#x53F7;&#x662F;&#x9AD8;&#x901F;&#x4FE1;&#x53F7;&#xFF0C;&#x7528;&#x6765;&#x4F20;&#x8F93;mipi&#x6570;&#x636E;&#x5305;&#x3002;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://www.laiwangyo.com/2016/10/28/Camera学习-概念篇-Sensor介绍/" data-id="ciuthtku10000domohgstzkbf" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://www.laiwangyo.com/2016/10/28/Camera学习-概念篇-Sensor介绍/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Camera/">Camera</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/10/28/Camera学习-概念篇-MTK_Camera_软件架构/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          Camera学习-概念篇-MTK_Camera_软件架构
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/10/21/Camera学习-调试篇-基本流程/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">Camera学习-调试篇-基本流程</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2016/10/28/Camera学习-概念篇-Sensor介绍/" data-title="Camera学习-概念篇-Sensor介绍" data-url="http://www.laiwangyo.com/2016/10/28/Camera学习-概念篇-Sensor介绍/"></div>
+  </section>
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android开源项目分析/">Android开源项目分析</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android性能优化/">Android性能优化</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android技术文章摘录/">Android技术文章摘录</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android破解的那些破事/">Android破解的那些破事</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Camera/">Camera</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Openfire/">Openfire</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/XModeEngine脚本引擎/">XModeEngine脚本引擎</a><span class="category-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Camera/">Camera</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Openfire/">Openfire</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能/">性能</a><span class="tag-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Camera/" style="font-size: 15px;">Camera</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/性能/" style="font-size: 15px;">性能</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/10/28/Camera学习-概念篇-MTK_Camera_软件架构/">Camera学习-概念篇-MTK_Camera_软件架构</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/28/Camera学习-概念篇-Sensor介绍/">Camera学习-概念篇-Sensor介绍</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/21/Camera学习-调试篇-基本流程/">Camera学习-调试篇-基本流程</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/21/Camera学习-概念篇-标准光源/">Camera学习-概念篇-标准光源</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/21/Camera学习-概念篇-图像/">Camera学习-概念篇-图像</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://taoyuanxiaoqi.com" target="_blank">桃园小七</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Powered by <a href=http://www.laiwangyo.com target="_blank">yazone</a><br>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">文章列表</a>
+  
+    <a href="/me" class="mobile-nav-link">关于我</a>
+  
+</nav>
+  <!-- totop start -->
+
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"yazone"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+</div>
+</body>
+</html>
