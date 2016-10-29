@@ -4,14 +4,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: 性能 | 图南的学鸠</title>
+  <title>Camera学习-调试篇-Banding&amp;Flicker产生的原因 | 图南的学鸠</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="图南的学鸠">
-<meta property="og:url" content="http://www.laiwangyo.com/tags/性能/index.html">
+  <meta name="description" content="&amp;#x3000;&amp;#x3000;&amp;#x5728;&amp;#x67D0;&amp;#x4E9B;&amp;#x573A;&amp;#x666F;&amp;#x4E0B;&amp;#xFF0C;&amp;#x4F7F;&amp;#x7528;&amp;#x8005;&amp;#x53EF;&amp;#x4EE5;&amp;#x770B;&amp;#x5230;&amp;#x76F8;&amp;#x673A;&amp;#x753B;&amp;#x9762;&amp;#x51FA;&amp;#x73B0;&amp;#x4E00;&amp;#x6761;&amp;#x4E00;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Camera学习-调试篇-Banding&Flicker产生的原因">
+<meta property="og:url" content="http://www.laiwangyo.com/2016/10/29/Camera学习-调试篇-Banding&Flicker产生的原因/index.html">
 <meta property="og:site_name" content="图南的学鸠">
+<meta property="og:description" content="&amp;#x3000;&amp;#x3000;&amp;#x5728;&amp;#x67D0;&amp;#x4E9B;&amp;#x573A;&amp;#x666F;&amp;#x4E0B;&amp;#xFF0C;&amp;#x4F7F;&amp;#x7528;&amp;#x8005;&amp;#x53EF;&amp;#x4EE5;&amp;#x770B;&amp;#x5230;&amp;#x76F8;&amp;#x673A;&amp;#x753B;&amp;#x9762;&amp;#x51FA;&amp;#x73B0;&amp;#x4E00;&amp;#x6761;&amp;#x4E00;">
+<meta property="og:image" content="http://www.laiwangyo.com/2016/10/29/Camera学习-调试篇-Banding&Flicker产生的原因/Normal.png">
+<meta property="og:image" content="http://www.laiwangyo.com/2016/10/29/Camera学习-调试篇-Banding&Flicker产生的原因/Banding.png">
+<meta property="og:updated_time" content="2016-10-29T08:29:36.324Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="图南的学鸠">
+<meta name="twitter:title" content="Camera学习-调试篇-Banding&Flicker产生的原因">
+<meta name="twitter:description" content="&amp;#x3000;&amp;#x3000;&amp;#x5728;&amp;#x67D0;&amp;#x4E9B;&amp;#x573A;&amp;#x666F;&amp;#x4E0B;&amp;#xFF0C;&amp;#x4F7F;&amp;#x7528;&amp;#x8005;&amp;#x53EF;&amp;#x4EE5;&amp;#x770B;&amp;#x5230;&amp;#x76F8;&amp;#x673A;&amp;#x753B;&amp;#x9762;&amp;#x51FA;&amp;#x73B0;&amp;#x4E00;&amp;#x6761;&amp;#x4E00;">
+<meta name="twitter:image" content="http://www.laiwangyo.com/2016/10/29/Camera学习-调试篇-Banding&Flicker产生的原因/Normal.png">
   
     <link rel="alternative" href="/atom.xml" title="图南的学鸠" type="application/atom+xml">
   
@@ -69,153 +76,89 @@
   </div>
 </header>
     <div class="outer">
-      <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/05/02/Android性能优化-视图布局/" class="archive-article-date">
-  <time datetime="2016-05-02T02:16:00.000Z" itemprop="datePublished">5月 2</time>
+      <section id="main"><article id="post-Camera学习-调试篇-Banding&amp;Flicker产生的原因" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/29/Camera学习-调试篇-Banding&Flicker产生的原因/" class="article-date">
+  <time datetime="2016-10-29T07:48:00.000Z" itemprop="datePublished">2016-10-29</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Camera/">Camera</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/02/Android性能优化-视图布局/">Android性能优化-视图布局</a>
+    <h1 class="article-title" itemprop="name">
+      Camera学习-调试篇-Banding&amp;Flicker产生的原因
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/04/18/Android性能优化-内部类引发的内存泄漏/" class="archive-article-date">
-  <time datetime="2016-04-18T07:16:00.000Z" itemprop="datePublished">4月 18</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/18/Android性能优化-内部类引发的内存泄漏/">Android性能优化-内部类引发的内存泄漏</a>
-    </h1>
-  
+        <div class="toc-wrap">
+        	<div class="toc-title">Index</div>
+        	
+    		</div>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/04/13/Android性能优化-电量分析工具BatteryHistorian概述/" class="archive-article-date">
-  <time datetime="2016-04-13T08:47:00.000Z" itemprop="datePublished">4月 13</time>
-</a>
+        <p>&#x3000;&#x3000;&#x5728;&#x67D0;&#x4E9B;&#x573A;&#x666F;&#x4E0B;&#xFF0C;&#x4F7F;&#x7528;&#x8005;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x76F8;&#x673A;&#x753B;&#x9762;&#x51FA;&#x73B0;&#x4E00;&#x6761;&#x4E00;&#x6761;&#x7684;&#x6EDA;&#x52A8;&#x6697;&#x6761;&#x7EB9;&#xFF0C;&#x5BF9;&#x6BD4;&#x4EE5;&#x4E0B;&#x4E24;&#x5F20;&#x56FE;&#x7247;&#xFF1A;</p>
+<table><tr><td><img src="/2016/10/29/Camera&#x5B66;&#x4E60;-&#x8C03;&#x8BD5;&#x7BC7;-Banding&amp;Flicker&#x4EA7;&#x751F;&#x7684;&#x539F;&#x56E0;/Normal.png" border="0" alt="&#x6B63;&#x5E38;&#x60C5;&#x51B5;"></td><td><img src="/2016/10/29/Camera&#x5B66;&#x4E60;-&#x8C03;&#x8BD5;&#x7BC7;-Banding&amp;Flicker&#x4EA7;&#x751F;&#x7684;&#x539F;&#x56E0;/Banding.png" border="0" alt="Banding&#x60C5;&#x51B5;"></td></tr></table>
+
+<p>&#x3000;&#x3000;&#x6211;&#x4EEC;&#x628A;&#x8FD9;&#x79CD;&#x73B0;&#x8C61;&#x53EB;&#x505A;Banding&#x6216;&#x8005;Flicker&#xFF0C;&#x4E3A;&#x4EC0;&#x4E48;&#x4F1A;&#x4EA7;&#x751F;&#x8FD9;&#x79CD;&#x73B0;&#x8C61;&#x5462;&#xFF1F;&#x901A;&#x5E38;&#x8FD9;&#x79CD;&#x73B0;&#x8C61;&#x662F;CMOS Sensor&#x66DD;&#x5149;&#x65F6;&#x95F4;&#x65B9;&#x9762;&#x7684;&#x56E0;&#x7D20;&#x5F15;&#x8D77;&#x7684;&#x3002;<a id="more"></a></p>
+<ul>
+<li>&#x4ECE;Camera&#x65B9;&#x9762;&#x6765;&#x8BB2;&#xFF0C;CMOS Sensor&#x662F;&#x6BCF;&#x884C;&#x5206;&#x522B;&#x66DD;&#x5149;&#x7684;&#xFF0C;&#x4E0D;&#x540C;&#x884C;&#x66DD;&#x5149;&#x7684;&#x8D77;&#x59CB;&#x65F6;&#x95F4;&#x70B9;&#x5E76;&#x4E0D;&#x76F8;&#x540C;&#xFF1B;</li>
+<li>&#x4ECE;&#x5149;&#x6E90;&#x65B9;&#x9762;&#x6765;&#x8BB2;&#xFF0C;&#x4EE5;&#x7A33;&#x5B9A;&#x7684;50Hz&#x5149;&#x6E90;&#x4E3A;&#x4F8B;&#xFF0C;&#x80FD;&#x91CF;&#x79EF;&#x7D2F;&#x7684;&#x5468;&#x671F;&#x9891;&#x7387;&#x662F;100Hz&#xFF0C;&#x5468;&#x671F;&#x4E3A;T=1/100=10MS&#xFF0C;&#x6240;&#x4EE5;&#x5728;&#x4EFB;&#x610F;&#x8D77;&#x59CB;&#x65F6;&#x95F4;&#x70B9;&#xFF0C;&#x540C;&#x6837;&#x7684;N&#x4E2A;T&#xFF08;N=1,2,3,4&#x2026;.&#xFF09;&#xFF0C;camera&#x63A5;&#x6536;&#x5230;&#x7684;&#x80FD;&#x91CF;&#x662F;&#x4E00;&#x81F4;&#x7684;,&#x8FD9;&#x91CC;N&#x662F;&#x6B63;&#x6574;&#x6570;&#xFF1B;&#x5982;&#x679C;N&#x4E0D;&#x662F;&#x6B63;&#x6574;&#x6570;&#xFF0C;&#x90A3;&#x4E48;&#xFF0C;&#x5728;&#x4E0D;&#x540C;&#x7684;&#x8D77;&#x59CB;&#x65F6;&#x95F4;&#xFF0C;&#x540C;&#x6837;&#x7684;N&#x4E2A;T&#xFF0C;camera&#x63A5;&#x53D7;&#x5230;&#x7684;&#x80FD;&#x91CF;&#x5C31;&#x4E0D;&#x4E00;&#x5B9A;&#x5B8C;&#x5168;&#x4E00;&#x81F4;&#xFF1B;</li>
+<li>&#x4ECE;&#x73B0;&#x8C61;&#x6765;&#x770B;&#xFF0C;Sensor&#x63A5;&#x53D7;&#x5230;&#x7684;&#x80FD;&#x91CF;&#x8868;&#x73B0;&#x4E3A;&#x4EAE;&#x5EA6;&#x3002;Sensor&#x7684;&#x7279;&#x5F81;&#x5DF2;&#x7ECF;&#x51B3;&#x5B9A;&#x6BCF;&#x884C;&#x5728;&#x4E0D;&#x540C;&#x7684;&#x8D77;&#x59CB;&#x65F6;&#x95F4;&#x5F00;&#x59CB;&#x66DD;&#x5149;&#xFF0C;&#x90A3;&#x6211;&#x4EEC;&#x5C31;&#x53EA;&#x80FD;&#x4FDD;&#x8BC1;&#x66DD;&#x5149;&#x65F6;&#x95F4;&#x662F;&#x80FD;&#x91CF;&#x79EF;&#x7D2F;&#x7684;&#x6574;&#x6570;&#x500D;&#x4E86;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6EE1;&#x8DB3;&#x8FD9;&#x4E2A;&#x6761;&#x4EF6;&#xFF0C;&#x53EF;&#x80FD;&#x5C31;&#x4F1A;&#x770B;&#x5230;&#x5982;&#x4E0A;&#x56FE;&#x6240;&#x793A;&#x7684;banding&#x73B0;&#x8C61;&#x3002;</li>
+</ul>
+<p>&#x3000;&#x3000;&#x4EA4;&#x6D41;&#x7535;&#x5728;&#x4E2D;&#x56FD;&#x4E3A;50HZ&#xFF0C;&#x6B27;&#x6D32;&#x4E3A;60HZ&#xFF0C;&#x56E0;&#x6B64;&#x65E5;&#x5149;&#x706F;&#x7B49;&#x4EA7;&#x751F;&#x7684;&#x5149;&#x6E90;&#x4E5F;&#x6709;&#x4E00;&#x5B9A;&#x7684;&#x9891;&#x7387;&#xFF1A;</p>
+<ul>
+<li>50Hz&#x5149;&#x6E90;&#xFF0C;&#x80FD;&#x91CF;&#x79EF;&#x7D2F;&#x7684;&#x5468;&#x671F;&#x662F;T=1/(50*2)=10ms</li>
+<li>60Hz&#x5149;&#x6E90;&#xFF0C;&#x80FD;&#x91CF;&#x79EF;&#x7D2F;&#x7684;&#x5468;&#x671F;&#x662F;T=1/(60*2)=8.3ms</li>
+</ul>
+<p>&#x3000;&#x3000;&#x8FD9;&#x4E24;&#x4E2A;&#x6570;&#x503C;&#xFF0C;&#x6211;&#x4EEC;&#x4E5F;&#x53EB;&#x505A;Base Shutter&#x3002;&#x5728;&#x5BF9;&#x5E94;&#x7684;&#x5149;&#x6E90;&#x4E0B;&#xFF0C;&#x5982;&#x679C;&#x66DD;&#x5149;&#x65F6;&#x95F4;&#x5C0F;&#x4E8E;Base Shutter&#xFF0C;&#x80FD;&#x91CF;&#x79EF;&#x7D2F;&#x4E0D;&#x4E00;&#x81F4;&#x5C31;&#x53EF;&#x80FD;&#x4F1A;&#x51FA;&#x73B0;Banding&#x3002;&#x76EE;&#x524D;&#x5E76;&#x6CA1;&#x6709;&#x53EF;&#x4EE5;&#x6539;&#x5584;&#x7684;&#x65B9;&#x6CD5;&#x3002;</p>
+<p>&#x3000;&#x3000;&#x62CD;&#x7167;&#x65F6;&#x901A;&#x8FC7;&#x8BBE;&#x7F6E;EV&#x4E3A;&#x8D1F;&#x503C;&#xFF0C;&#x6216;&#x8BBE;&#x5B9A;&#x56FA;&#x5B9A;High ISO&#xFF0C;&#x90FD;&#x53EF;&#x80FD;&#x9020;&#x6210;&#x66DD;&#x5149;&#x65F6;&#x95F4;&#x88AB;&#x4EBA;&#x4E3A;&#x7684;&#x7F29;&#x77ED;&#xFF0C;&#x5728;&#x6B63;&#x5E38;&#x4EAE;&#x5EA6;&#x4E0B;&#x5C31;&#x6709;&#x66F4;&#x5927;&#x7684;&#x51E0;&#x7387;&#x4F1A;&#x5F15;&#x53D1;Banding&#x73B0;&#x8C61;&#xFF0C;&#x4E0A;&#x56FE;&#x4E2D;Banding&#x56FE;&#x7247;&#x5C31;&#x662F;&#x901A;&#x8FC7;&#x8BBE;&#x7F6E;ISO 1600&#x5728;&#x65E5;&#x5149;&#x706F;&#x4E0B;&#x62CD;&#x6444;&#x7684;&#x3002;</p>
+
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/13/Android性能优化-电量分析工具BatteryHistorian概述/">Android性能优化-电量分析工具BatteryHistorian概述</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/04/12/Android性能优化-电量/" class="archive-article-date">
-  <time datetime="2016-04-12T11:04:00.000Z" itemprop="datePublished">4月 12</time>
-</a>
+    </div>
+    <footer class="article-footer">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/12/Android性能优化-电量/">Android性能优化-电量</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/03/30/Android性能优化-功耗问题分析/" class="archive-article-date">
-  <time datetime="2016-03-30T13:06:00.000Z" itemprop="datePublished">3月 30</time>
-</a>
+        <a data-url="http://www.laiwangyo.com/2016/10/29/Camera学习-调试篇-Banding&Flicker产生的原因/" data-id="ciuux8ath0000b8moslshfezy" class="article-share-link" data-share="baidu">分享到</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/30/Android性能优化-功耗问题分析/">Android性能优化-功耗问题分析</a>
-    </h1>
-  
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/03/22/Android性能优化-基于Hook机制的FPS检测与统计实现/" class="archive-article-date">
-  <time datetime="2016-03-22T03:09:00.000Z" itemprop="datePublished">3月 22</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/22/Android性能优化-基于Hook机制的FPS检测与统计实现/">Android性能优化-基于Hook机制的FPS检测与统计实现</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/03/18/Android性能优化-基于Hook机制的FPS检测与统计原理/" class="archive-article-date">
-  <time datetime="2016-03-18T03:10:00.000Z" itemprop="datePublished">3月 18</time>
-</a>
+        <a href="http://www.laiwangyo.com/2016/10/29/Camera学习-调试篇-Banding&Flicker产生的原因/#ds-thread" class="article-comment-link">评论</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/18/Android性能优化-基于Hook机制的FPS检测与统计原理/">Android性能优化-基于Hook机制的FPS检测与统计原理</a>
-    </h1>
-  
 
-    </header>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Camera/">Camera</a></li></ul>
+
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/10/29/Camera学习-调试篇-如何提升细节和清晰度/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">Camera学习-调试篇-如何提升细节和清晰度</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2016/10/29/Camera学习-调试篇-Banding&amp;Flicker产生的原因/" data-title="Camera学习-调试篇-Banding&amp;Flicker产生的原因" data-url="http://www.laiwangyo.com/2016/10/29/Camera学习-调试篇-Banding&amp;Flicker产生的原因/"></div>
+  </section>
 </section>
       
       <aside id="sidebar">
