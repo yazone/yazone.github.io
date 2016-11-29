@@ -4,14 +4,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>图南的学鸠</title>
+  <title>【网络相关】Where is com.android.okhttp? | 图南的学鸠</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="图南的学鸠">
-<meta property="og:url" content="http://www.laiwangyo.com/page/4/index.html">
+  <meta name="description" content="&amp;#x3000;&amp;#x3000;Android 4.4&amp;#x7248;&amp;#x672C;&amp;#x5F00;&amp;#x59CB;&amp;#x7684;&amp;#x7F51;&amp;#x7EDC;&amp;#x8BF7;&amp;#x6C42;&amp;#x65B9;&amp;#x5F0F;HttpURLConnection&amp;#x7684;HTTP&amp;#x5B9E;&amp;#x73B0;&amp;#x90E8;&amp;#x5206;&amp;#x66FF;&amp;#x6362;&amp;#x4E3A;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【网络相关】Where is com.android.okhttp?">
+<meta property="og:url" content="http://www.laiwangyo.com/2016/11/29/Where is com.android.okhttp/index.html">
 <meta property="og:site_name" content="图南的学鸠">
+<meta property="og:description" content="&amp;#x3000;&amp;#x3000;Android 4.4&amp;#x7248;&amp;#x672C;&amp;#x5F00;&amp;#x59CB;&amp;#x7684;&amp;#x7F51;&amp;#x7EDC;&amp;#x8BF7;&amp;#x6C42;&amp;#x65B9;&amp;#x5F0F;HttpURLConnection&amp;#x7684;HTTP&amp;#x5B9E;&amp;#x73B0;&amp;#x90E8;&amp;#x5206;&amp;#x66FF;&amp;#x6362;&amp;#x4E3A;">
+<meta property="og:image" content="http://www.laiwangyo.com/okhttp调用.png">
+<meta property="og:updated_time" content="2016-11-29T06:40:53.552Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="图南的学鸠">
+<meta name="twitter:title" content="【网络相关】Where is com.android.okhttp?">
+<meta name="twitter:description" content="&amp;#x3000;&amp;#x3000;Android 4.4&amp;#x7248;&amp;#x672C;&amp;#x5F00;&amp;#x59CB;&amp;#x7684;&amp;#x7F51;&amp;#x7EDC;&amp;#x8BF7;&amp;#x6C42;&amp;#x65B9;&amp;#x5F0F;HttpURLConnection&amp;#x7684;HTTP&amp;#x5B9E;&amp;#x73B0;&amp;#x90E8;&amp;#x5206;&amp;#x66FF;&amp;#x6362;&amp;#x4E3A;">
+<meta name="twitter:image" content="http://www.laiwangyo.com/okhttp调用.png">
   
     <link rel="alternative" href="/atom.xml" title="图南的学鸠" type="application/atom+xml">
   
@@ -70,16 +76,14 @@
   </div>
 </header>
     <div class="outer">
-      <section id="main">
-  
-    <article id="post-Android开源项目分析-LruCache" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-Where is com.android.okhttp" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/02/24/Android开源项目分析-LruCache/" class="article-date">
-  <time datetime="2016-02-24T12:45:00.000Z" itemprop="datePublished">2016-02-24</time>
+    <a href="/2016/11/29/Where is com.android.okhttp/" class="article-date">
+  <time datetime="2016-11-29T06:13:00.000Z" itemprop="datePublished">2016-11-29</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Android开源项目分析/">Android开源项目分析</a>
+    <a class="article-category-link" href="/categories/Android系统/">Android系统</a>
   </div>
 
   </div>
@@ -89,8 +93,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/24/Android开源项目分析-LruCache/">Android开源项目分析-LruCache</a>
+    <h1 class="article-title" itemprop="name">
+      【网络相关】Where is com.android.okhttp?
     </h1>
   
 
@@ -98,144 +102,57 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>&#x6458;&#x8981;&#xFF1A;&#x672C;&#x6587;&#x5BF9;&#x5F00;&#x6E90;&#x4EE3;&#x7801;LruCache&#x6E90;&#x7801;&#x8FDB;&#x884C;&#x5206;&#x6790;&#x3002;</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/02/24/Android开源项目分析-LruCache/#more">更多</a>
-          </p>
-        
+        <div class="toc-wrap">
+        	<div class="toc-title">Index</div>
+        	
+    		</div>
+
+        <p>&#x3000;&#x3000;Android 4.4&#x7248;&#x672C;&#x5F00;&#x59CB;&#x7684;&#x7F51;&#x7EDC;&#x8BF7;&#x6C42;&#x65B9;&#x5F0F;HttpURLConnection&#x7684;HTTP&#x5B9E;&#x73B0;&#x90E8;&#x5206;&#x66FF;&#x6362;&#x4E3A;&#x4E86;OKHttp&#x3002;&#x4EE5;&#x4E00;&#x4E2A;&#x7F51;&#x7EDC;&#x8BF7;&#x6C42;&#x5B9E;&#x73B0;&#x4E3A;&#x4F8B;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> String <span class="title">getURLResponse</span><span class="params">(String urlString)</span></span>{</div><div class="line">	HttpURLConnection conn = <span class="keyword">null</span>;</div><div class="line">	String resultData = <span class="string">&quot;&quot;</span>;</div><div class="line">	<span class="keyword">try</span> {</div><div class="line">		URL url = <span class="keyword">new</span> URL(urlString);</div><div class="line">		conn = (HttpURLConnection)url.openConnection();</div><div class="line">		...</div><div class="line"></div><div class="line">	} <span class="keyword">catch</span> (Exception e) {</div><div class="line">		..</div><div class="line">	}<span class="keyword">finally</span>{</div><div class="line">		...</div><div class="line">	}</div><div class="line"></div><div class="line">	<span class="keyword">return</span> resultData;</div><div class="line">}</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>&#x3000;&#x3000;&#x901A;&#x8FC7;URL&#x5BF9;&#x8C61;&#x6765;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;HttpURLConnection&#x5B50;&#x7C7B;&#x5BF9;&#x8C61;&#x6765;&#x5904;&#x7406;&#x7F51;&#x7EDC;&#xFF0C;&#x67E5;&#x770B;URL&#x6784;&#x9020;&#x51FD;&#x6570;&#xFF08;/libcore/luni/src/main/java/java/net/URL.java&#xFF09;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">URL</span><span class="params">(URL context, String spec, URLStreamHandler handler)</span> <span class="keyword">throws</span> MalformedURLException </span>{</div><div class="line">        ...</div><div class="line">        <span class="keyword">if</span> (streamHandler == <span class="keyword">null</span>) {</div><div class="line">            setupStreamHandler();</div><div class="line">            <span class="keyword">if</span> (streamHandler == <span class="keyword">null</span>) {</div><div class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> MalformedURLException(<span class="string">&quot;Unknown protocol: &quot;</span> + protocol);</div><div class="line">            }</div><div class="line">        }</div><div class="line">        ...</div><div class="line">    }</div></pre></td></tr></table></figure>
+<p>&#x3000;&#x3000;&#x5B83;&#x5C06;&#x4F1A;&#x901A;&#x8FC7;setupStreamHandler()&#x6765;&#x521B;&#x5EFA;&#x6570;&#x636E;&#x6D41;&#x5904;&#x7406;&#x5BF9;&#x8C61;&#x3002;&#x5BF9;&#x6BD4;4.4&#x4E4B;&#x524D;&#x7248;&#x672C;&#xFF0C;http&#x5904;&#x7406;&#x7C7B;&#x7531;libcore.net.http.HttpHandler;&#x53D8;&#x4E3A;&#x4E86;com.android.okhttp.HttpHandler&#xFF1B;https&#x5904;&#x7406;&#x7C7B;&#x7531;libcore.net.http.HttpsHandler&#x53D8;&#x4E3A;&#x4E86;com.android.okhttp.HttpsHandler&#x3002;&#x5982;&#x4E0B;&#x56FE;&#xFF1A;</p>
+<p><img src="okhttp&#x8C03;&#x7528;.png" alt="okhttp&#x8C03;&#x7528;"></p>
+<p>&#x3000;&#x3000;&#x63A5;&#x4E0B;&#x6765;&#x4F1A;&#x53D1;&#x73B0;&#x641C;&#x7D22;&#x6574;&#x4E2A;Android&#x6E90;&#x7801;&#x90FD;&#x641C;&#x4E0D;&#x5230;com.android.okhttp.HttpHandler&#x548C;com.android.okhttp.HttpsHandler&#x3002;Where is the class&#xFF1F;<br>&#x3000;&#x3000;&#x8FD8;&#x662F;&#x56DE;&#x5230;okhttp&#xFF0C;&#x4F1A;&#x53D1;&#x73B0;/external/okhttp&#x76EE;&#x5F55;&#x4E0B;&#x6709;&#x4E2A;&#x6587;&#x4EF6;jarjar-rules.txt&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rule com.squareup.** com.android.@1</div><div class="line">rule okio.** com.android.okio.@1</div></pre></td></tr></table></figure>
+<p>&#x3000;&#x3000;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x8FD9;&#x91CC;&#x901A;&#x8FC7;jarjar&#x89C4;&#x5219;&#x5C06;&#x5305;&#x540D;com.squareup&#x66F4;&#x6539;&#x4E3A;&#x4E86;com.android&#xFF0C;&#x56E0;&#x6B64;com.android.okhttp.HttpHandler&#x5BF9;&#x5E94;&#x7684;&#x4EE3;&#x7801;&#x4E3A;com.squareup.okhttp.HttpHandler&#x3002;<br>&#x3000;&#x3000;&#x5173;&#x4E8E;jarjar&#x76F8;&#x5173;&#x4ECB;&#x7ECD;&#x53EF;&#x4EE5;&#x67E5;&#x770B;<a href="http://www.cnblogs.com/yejiurui/p/4283505.html" target="_blank" rel="external">&#x300A;&#x901A;&#x8FC7;jarjar.jar&#x6765;&#x66FF;&#x6362;jar&#x5305;&#x540D;&#x7684;&#x8BE6;&#x7EC6;&#x4ECB;&#x7ECD;&#x300B;</a>&#x3002;</p>
+
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://www.laiwangyo.com/2016/02/24/Android开源项目分析-LruCache/" data-id="ciugk6vid0001n0mo498v3q91" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://www.laiwangyo.com/2016/11/29/Where is com.android.okhttp/" data-id="ciw347drm000kycmotsok712r" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
-        <a href="http://www.laiwangyo.com/2016/02/24/Android开源项目分析-LruCache/#ds-thread" class="article-comment-link">评论</a>
+        <a href="http://www.laiwangyo.com/2016/11/29/Where is com.android.okhttp/#ds-thread" class="article-comment-link">评论</a>
       
 
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HttpURLConnection/">HttpURLConnection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OkHttp/">OkHttp</a></li></ul>
 
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-Android开源项目分析-计划" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/02/24/Android开源项目分析-计划/" class="article-date">
-  <time datetime="2016-02-24T02:51:10.000Z" itemprop="datePublished">2016-02-24</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Android开源项目分析/">Android开源项目分析</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/24/Android开源项目分析-计划/">Android开源项目分析计划</a>
-    </h1>
+    <a href="/2016/11/25/Android Netd处理流程分析/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">Android Netd处理流程分析</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&#x6458;&#x8981;&#xFF1A;&#x5236;&#x5B9A;&#x8BA1;&#x5212;&#xFF0C;&#x5BF9;&#x5F53;&#x524D;&#x4E3B;&#x6D41;&#x7684;Android&#x5F00;&#x6E90;&#x9879;&#x76EE;&#x6838;&#x5FC3;&#x70B9;&#x8FDB;&#x884C;&#x5206;&#x6790;&#x3002;</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/02/24/Android开源项目分析-计划/#more">更多</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://www.laiwangyo.com/2016/02/24/Android开源项目分析-计划/" data-id="ciugk6vii0004n0motyasen4e" class="article-share-link" data-share="baidu">分享到</a>
-      
-
-      
-        <a href="http://www.laiwangyo.com/2016/02/24/Android开源项目分析-计划/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
 
 
-  
-    <article id="post-Openfire系列之管理员登录" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/03/10/Openfire系列之管理员登录/" class="article-date">
-  <time datetime="2015-03-10T06:17:16.000Z" itemprop="datePublished">2015-03-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Openfire/">Openfire</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/03/10/Openfire系列之管理员登录/">Openfire系列之管理员登录</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&#x6458;&#x8981;&#xFF1A;&#x4E3B;&#x8981;&#x5206;&#x6790;Openfire&#x7BA1;&#x7406;&#x5458;&#x540E;&#x53F0;&#x65E0;&#x6CD5;&#x767B;&#x9646;&#x95EE;&#x9898;</p>
-        
-          <p class="article-more-link">
-            <a href="/2015/03/10/Openfire系列之管理员登录/#more">更多</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://www.laiwangyo.com/2015/03/10/Openfire系列之管理员登录/" data-id="ciugk6vje000xn0modllqe1d5" class="article-share-link" data-share="baidu">分享到</a>
-      
-
-      
-        <a href="http://www.laiwangyo.com/2015/03/10/Openfire系列之管理员登录/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Openfire/">Openfire</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
-    </nav>
-  
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2016/11/29/Where is com.android.okhttp/" data-title="【网络相关】Where is com.android.okhttp?" data-url="http://www.laiwangyo.com/2016/11/29/Where is com.android.okhttp/"></div>
+  </section>
 </section>
       
       <aside id="sidebar">
