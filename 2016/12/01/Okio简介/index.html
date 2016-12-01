@@ -1,0 +1,327 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android开源项目分析-Okio简介 | 图南的学鸠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="&amp;#x6982;&amp;#x8FF0;Okio&amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x7528;&amp;#x6765;&amp;#x8865;&amp;#x5145; java.io and java.nio &amp;#x7684;&amp;#x5E93;&amp;#xFF0C;&amp;#x5B83;&amp;#x4F7F;&amp;#x8BBF;&amp;#x95EE;&amp;#x3001;&amp;#x5B58;&amp;#x50A8;&amp;#x4EE5;&amp;#x53CA;&amp;#x590">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android开源项目分析-Okio简介">
+<meta property="og:url" content="http://www.laiwangyo.com/2016/12/01/Okio简介/index.html">
+<meta property="og:site_name" content="图南的学鸠">
+<meta property="og:description" content="&amp;#x6982;&amp;#x8FF0;Okio&amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x7528;&amp;#x6765;&amp;#x8865;&amp;#x5145; java.io and java.nio &amp;#x7684;&amp;#x5E93;&amp;#xFF0C;&amp;#x5B83;&amp;#x4F7F;&amp;#x8BBF;&amp;#x95EE;&amp;#x3001;&amp;#x5B58;&amp;#x50A8;&amp;#x4EE5;&amp;#x53CA;&amp;#x590">
+<meta property="og:updated_time" content="2016-12-01T09:20:31.474Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android开源项目分析-Okio简介">
+<meta name="twitter:description" content="&amp;#x6982;&amp;#x8FF0;Okio&amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x7528;&amp;#x6765;&amp;#x8865;&amp;#x5145; java.io and java.nio &amp;#x7684;&amp;#x5E93;&amp;#xFF0C;&amp;#x5B83;&amp;#x4F7F;&amp;#x8BBF;&amp;#x95EE;&amp;#x3001;&amp;#x5B58;&amp;#x50A8;&amp;#x4EE5;&amp;#x53CA;&amp;#x590">
+  
+    <link rel="alternative" href="/atom.xml" title="图南的学鸠" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="icon" href="/img/logo.png">
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">图南的学鸠</a><img src="/img/logo.png" width="40px"/>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">代码中带点唏嘘，生命中带点惊喜</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">文章列表</a>
+        
+          <a class="main-nav-link" href="/me">关于我</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="www.laiwangyo.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-Okio简介" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/01/Okio简介/" class="article-date">
+  <time datetime="2016-12-01T09:18:00.000Z" itemprop="datePublished">2016-12-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android开源项目分析/">Android开源项目分析</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android开源项目分析-Okio简介
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div class="toc-wrap">
+        	<div class="toc-title">Index</div>
+        	<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ByteStrings-和-Buffers"><span class="toc-number">1.1.</span> <span class="toc-text">ByteStrings 和 Buffers</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sources-和-Sinks"><span class="toc-number">1.2.</span> <span class="toc-text">Sources 和 Sinks</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#示例：一个PNG解码器"><span class="toc-number">2.</span> <span class="toc-text">示例：一个PNG解码器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#相关链接"><span class="toc-number">3.</span> <span class="toc-text">相关链接</span></a></li></ol>
+    		</div>
+
+        <h1 id="&#x6982;&#x8FF0;"><a href="#&#x6982;&#x8FF0;" class="headerlink" title="&#x6982;&#x8FF0;"></a>&#x6982;&#x8FF0;</h1><p>Okio&#x662F;&#x4E00;&#x4E2A;&#x7528;&#x6765;&#x8865;&#x5145; <code>java.io</code> and <code>java.nio</code> &#x7684;&#x5E93;&#xFF0C;&#x5B83;&#x4F7F;&#x8BBF;&#x95EE;&#x3001;&#x5B58;&#x50A8;&#x4EE5;&#x53CA;&#x5904;&#x7406;&#x6570;&#x636E;&#x66F4;&#x52A0;&#x65B9;&#x4FBF;&#x3002;</p>
+<a id="more"></a>
+<h2 id="ByteStrings-&#x548C;-Buffers"><a href="#ByteStrings-&#x548C;-Buffers" class="headerlink" title="ByteStrings &#x548C; Buffers"></a>ByteStrings &#x548C; Buffers</h2><p>Okio&#x56F4;&#x7ED5;&#x4E24;&#x79CD;&#x7C7B;&#x578B;&#x6784;&#x5EFA;&#xFF0C;&#x5B83;&#x4EEC;&#x5C01;&#x88C5;&#x4E86;&#x5927;&#x91CF;&#x529F;&#x80FD;&#x5E76;&#x63D0;&#x4F9B;&#x4E86;&#x7B80;&#x5355;&#x7684;API&#xFF1A;</p>
+<ul>
+<li><p><a href="http://square.github.io/okio/1.x/okio/okio/ByteString.html" target="_blank" rel="external"><strong>ByteString</strong></a>&#x662F;&#x4E00;&#x4E2A;&#x4E0D;&#x53D8;&#x7684;&#x5B57;&#x8282;&#x5E8F;&#x5217;&#x3002;&#x5BF9;&#x4E8E;&#x5B57;&#x7B26;&#x6570;&#x636E;&#xFF0C;<code>String</code>&#x662F;&#x6700;&#x57FA;&#x7840;&#x7684;&#x3002; <code>ByteString</code> &#x53EF;&#x4EE5;&#x770B;&#x505A;&#x662F;Sring&#x957F;&#x671F;&#x5931;&#x6563;&#x7684;&#x5144;&#x5F1F;&#xFF0C;&#x5B83;&#x5C06;String&#x4E2D;&#x7684;&#x5B57;&#x7B26;&#x6570;&#x636E;&#x4EE5;&#x4E8C;&#x8FDB;&#x5236;&#x6570;&#x636E;&#x5F62;&#x5F0F;&#x770B;&#x5F85;&#x3002;&#x8FD9;&#x4E2A;&#x7C7B;&#x77E5;&#x9053;&#x5982;&#x4F55;&#x4EE5;&#x5341;&#x516D;&#x8FDB;&#x5236;&#x3001;base64&#x3001;utf-8&#x7F16;&#x7801;&#x548C;&#x89E3;&#x7801;&#x81EA;&#x8EAB;&#x3002;</p>
+</li>
+<li><p><a href="http://square.github.io/okio/1.x/okio/okio/Buffer.html" target="_blank" rel="external"><strong>Buffer</strong></a> &#x662F;&#x4E00;&#x4E2A;&#x53EF;&#x53D8;&#x7684;&#x5B57;&#x8282;&#x5E8F;&#x5217;&#x3002;&#x6709;&#x70B9;&#x50CF;<code>ArrayList</code>&#xFF0C;&#x4F60;&#x4E0D;&#x9700;&#x8981;&#x53BB;&#x5173;&#x5FC3;buffer&#x5927;&#x5C0F;&#x3002;&#x4EE5;&#x961F;&#x5217;&#x5F62;&#x5F0F;&#x8BFB;&#x5199;&#x7F13;&#x5B58;&#xFF1A;&#x5199;&#x6570;&#x636E;&#x5230;&#x961F;&#x5217;&#x672B;&#x5C3E;&#xFF0C;&#x4ECE;&#x961F;&#x5217;&#x5934;&#x8BFB;&#x53D6;&#x6570;&#x636E;&#x3002;&#x8FD9;&#x91CC;&#x65E0;&#x9700;&#x7BA1;&#x7406;&#x4F4D;&#x7F6E;&#x3001;&#x9650;&#x5236;&#x548C;&#x5BB9;&#x91CF;&#x3002;</p>
+</li>
+</ul>
+<p>&#x5185;&#x90E8;&#x6765;&#x8BB2;, <code>ByteString</code>&#x548C;<code>Buffer</code>&#x7528;&#x4E86;&#x4E00;&#x4E9B;&#x5C0F;&#x6280;&#x5DE7;&#x6765;&#x8282;&#x7701;CPU&#x548C;&#x5185;&#x5B58;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x4EE5;<code>ByteString</code>&#x5F62;&#x5F0F;&#x7F16;&#x7801;&#x4E00;&#x4E2A;UTF-8&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5B83;&#x4F1A;&#x7F13;&#x5B58;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x5F15;&#x7528;&#xFF0C;&#x8FD9;&#x6837;&#x5728;&#x540E;&#x9762;&#x89E3;&#x7801;&#x65F6;&#x5C31;&#x4E0D;&#x9700;&#x8981;&#x505A;&#x4EFB;&#x4F55;&#x4E8B;&#x3002;</p>
+<p><code>Buffer</code>&#x7528;&#x7247;&#x6BB5;&#x7684;&#x94FE;&#x8868;&#x6765;&#x5B9E;&#x73B0;&#x3002;&#x5F53;&#x5728;&#x7F13;&#x5B58;&#x95F4;&#x79FB;&#x52A8;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x65E0;&#x9700;&#x62F7;&#x8D1D;&#x6570;&#x636E;&#xFF0C;&#x53EA;&#x9700;&#x8BBE;&#x7F6E;&#x7247;&#x6BB5;&#x7684;&#x76F8;&#x5173;&#x503C;&#x3002;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x5BF9;&#x591A;&#x7EBF;&#x7A0B;&#x7F16;&#x7A0B;&#x975E;&#x5E38;&#x6709;&#x5E2E;&#x52A9;&#xFF1A;&#x7F51;&#x7EDC;&#x7EBF;&#x7A0B;&#x80FD;&#x591F;&#x548C;&#x5DE5;&#x4F5C;&#x7EBF;&#x7A0B;&#x4EA4;&#x6362;&#x6570;&#x636E;&#x800C;&#x65E0;&#x9700;&#x4EFB;&#x4F55;&#x5185;&#x5B58;&#x62F7;&#x8D1D;&#x3002;</p>
+<h2 id="Sources-&#x548C;-Sinks"><a href="#Sources-&#x548C;-Sinks" class="headerlink" title="Sources &#x548C; Sinks"></a>Sources &#x548C; Sinks</h2><p><code>java.io</code>&#x8BBE;&#x8BA1;&#x4E2D;&#x4F18;&#x96C5;&#x7684;&#x90E8;&#x5206;&#x662F;&#x5982;&#x4F55;&#x5C06;&#x8F6C;&#x6362;&#x8FDB;&#x884C;&#x5206;&#x5C42;&#xFF0C;&#x5C31;&#x50CF;&#x52A0;&#x5BC6;&#x548C;&#x538B;&#x7F29;&#x3002;Okio&#x5305;&#x542B;&#x5B83;&#x81EA;&#x5DF1;&#x7684;&#x6D41;&#x7C7B;&#x578B;&#x79F0;&#x4E3A;<a href="http://square.github.io/okio/1.x/okio/okio/Source.html" target="_blank" rel="external"><code>Source</code></a> &#x548C; <a href="http://square.github.io/okio/1.x/okio/okio/Sink.html" target="_blank" rel="external"><code>Sink</code></a> &#xFF0C;&#x7C7B;&#x4F3C;&#x4E8E;<code>InputStream</code> &#x548C; <code>OutputStream</code>,&#x4F46;&#x662F;&#x6709;&#x4E00;&#x4E9B;&#x5173;&#x952E;&#x4E0D;&#x4E00;&#x6837;&#xFF1A;</p>
+<ul>
+<li><p><strong>&#x8D85;&#x65F6;.</strong> &#x6D41;&#x63D0;&#x4F9B;&#x4E86;&#x8BBF;&#x95EE;&#x6F5C;&#x5728;&#x7684;I/O&#x8D85;&#x65F6;&#x673A;&#x5236;&#x3002;&#x4E0D;&#x50CF;<code>java.io</code> socket&#x6D41;&#xFF0C;<code>read()</code> &#x548C; <code>write()</code>&#x53EA;&#x662F;&#x540D;&#x4E49;&#x4E0A;&#x7684;&#x8D85;&#x65F6;&#x3002;The streams provide access to the timeouts of the underlying<br>I/O mechanism. Unlike the <code>java.io</code> socket streams, both <code>read()</code> and<br><code>write()</code> calls honor timeouts.</p>
+</li>
+<li><p><strong>&#x6613;&#x4E8E;&#x5B9E;&#x73B0;.</strong> <code>Source</code>&#x5B9A;&#x4E49;&#x4E86;&#x4E09;&#x4E2A;&#x65B9;&#x6CD5;&#xFF1A;<code>read()</code>, <code>close()</code>&#x548C; <code>timeout()</code>&#x3002;&#x5B83;&#x6CA1;&#x6709;&#x50CF;<code>available()</code>&#x4E00;&#x6837;&#x7684;&#x5371;&#x9669;&#x56E0;&#x7D20;&#x6216;&#x5355;&#x4E2A;&#x5B57;&#x8282;&#x8BFB;&#x5199;&#x5BFC;&#x81F4;&#x6B63;&#x786E;&#x6027;&#x548C;&#x6027;&#x80FD;&#x7684;&#x95EE;&#x9898;&#x3002;</p>
+</li>
+<li><p><strong>&#x6613;&#x4E8E;&#x4F7F;&#x7528;.</strong> &#x5C3D;&#x7BA1;<code>Source</code> &#x548C; <code>Sink</code>&#x7684; <em>&#x5B9E;&#x73B0;</em> &#x53EA;&#x6709;&#x4E09;&#x79CD;&#x65B9;&#x6CD5;&#x53BB;&#x5199;&#xFF0C;&#x4F46;&#x662F; <em>&#x8C03;&#x7528;&#x8005;</em> &#x6709;&#x4E00;&#x5806;&#x4E30;&#x5BCC;&#x7684; <a href="http://square.github.io/okio/1.x/okio/okio/BufferedSource.html" target="_blank" rel="external"><code>BufferedSource</code></a> &#x548C; <a href="http://square.github.io/okio/1.x/okio/okio/BufferedSink.html" target="_blank" rel="external"><code>BufferedSink</code></a>&#x7684;API&#x63A5;&#x53E3;&#x3002;&#x8FD9;&#x4E9B;&#x63A5;&#x53E3;&#x5728;&#x67D0;&#x4E9B;&#x65B9;&#x9762;&#x80FD;&#x5B9E;&#x73B0;&#x4EFB;&#x4F55;&#x4F60;&#x60F3;&#x8981;&#x7684;&#x3002;</p>
+</li>
+<li><p><strong>&#x6CA1;&#x6709;&#x5B57;&#x8282;&#x6D41;&#x548C;&#x5B57;&#x7B26;&#x6D41;&#x4E4B;&#x95F4;&#x7684;&#x533A;&#x522B;.</strong> &#x90FD;&#x4EE5;&#x6570;&#x636E;&#x5F62;&#x5F0F;&#x770B;&#x5F85;&#x3002;&#x8BFB;&#x548C;&#x5199;&#x90FD;&#x4EE5;&#x5B57;&#x8282;&#x3001;UTF-8&#x5B57;&#x7B26;&#x4E32;&#x3001;&#x5927;&#x7AEF;32&#x4F4D;&#x6574;&#x6570;&#xFF0C;&#x5C0F;&#x6BB5;short&#x3002;&#x4E0D;&#x518D;&#x9700;&#x8981; <code>InputStreamReader</code>!</p>
+</li>
+<li><p><strong>&#x6613;&#x4E8E;&#x6D4B;&#x8BD5;.</strong> <code>Buffer</code>&#x7C7B;&#x540C;&#x65F6;&#x5B9E;&#x73B0;&#x4E86;<code>BufferedSource</code>&#x548C;   <code>BufferedSink</code>&#xFF0C;&#x56E0;&#x6B64;&#x6D4B;&#x8BD5;&#x4EE3;&#x7801;&#x7B80;&#x5355;&#x660E;&#x4E86;&#x3002;</p>
+</li>
+</ul>
+<p>Sources &#x548C; sinks &#x80FD;&#x591F;&#x4E0E;<code>InputStream</code> &#x548C; <code>OutputStream</code>&#x8FDB;&#x884C;&#x4E92;&#x64CD;&#x4F5C;&#x3002;&#x4F60;&#x80FD;&#x591F;&#x5C06;&#x4EFB;&#x4F55; <code>Source</code>&#x770B;&#x505A;&#x662F;<code>InputStream</code>,&#x540C;&#x65F6;&#x4E5F;&#x80FD;&#x591F;&#x5C06;&#x4EFB;&#x4F55;<code>InputStream</code>&#x770B;&#x505A;&#x662F;<code>Source</code>&#x3002;<code>Sink</code> &#x548C; <code>OutputStream</code>&#x4E5F;&#x662F;&#x4E00;&#x6837;&#x3002;</p>
+<h1 id="&#x793A;&#x4F8B;&#xFF1A;&#x4E00;&#x4E2A;PNG&#x89E3;&#x7801;&#x5668;"><a href="#&#x793A;&#x4F8B;&#xFF1A;&#x4E00;&#x4E2A;PNG&#x89E3;&#x7801;&#x5668;" class="headerlink" title="&#x793A;&#x4F8B;&#xFF1A;&#x4E00;&#x4E2A;PNG&#x89E3;&#x7801;&#x5668;"></a>&#x793A;&#x4F8B;&#xFF1A;&#x4E00;&#x4E2A;PNG&#x89E3;&#x7801;&#x5668;</h1><p>&#x4E0B;&#x9762;&#x662F;&#x7528;Okio&#x6765;&#x89E3;&#x7801;PNG&#x6587;&#x4EF6;&#x7684;&#x793A;&#x4F8B;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ByteString PNG_HEADER = ByteString.decodeHex(<span class="string">&quot;89504e470d0a1a0a&quot;</span>);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">decodePng</span><span class="params">(InputStream in)</span> <span class="keyword">throws</span> IOException </span>{</div><div class="line">  BufferedSource pngSource = Okio.buffer(Okio.source(in));</div><div class="line"></div><div class="line">  ByteString header = pngSource.readByteString(PNG_HEADER.size());</div><div class="line">  <span class="keyword">if</span> (!header.equals(PNG_HEADER)) {</div><div class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> IOException(<span class="string">&quot;Not a PNG.&quot;</span>);</div><div class="line">  }</div><div class="line"></div><div class="line">  <span class="keyword">while</span> (<span class="keyword">true</span>) {</div><div class="line">    Buffer chunk = <span class="keyword">new</span> Buffer();</div><div class="line"></div><div class="line">    <span class="comment">// Each chunk is a length, type, data, and CRC offset.</span></div><div class="line">    <span class="keyword">int</span> length = pngSource.readInt();</div><div class="line">    String type = pngSource.readUtf8(<span class="number">4</span>);</div><div class="line">    pngSource.readFully(chunk, length);</div><div class="line">    <span class="keyword">int</span> crc = pngSource.readInt();</div><div class="line"></div><div class="line">    decodeChunk(type, chunk);</div><div class="line">    <span class="keyword">if</span> (type.equals(<span class="string">&quot;IEND&quot;</span>)) <span class="keyword">break</span>;</div><div class="line">  }</div><div class="line"></div><div class="line">  pngSource.close();</div><div class="line">}</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">decodeChunk</span><span class="params">(String type, Buffer chunk)</span> </span>{</div><div class="line">  <span class="keyword">if</span> (type.equals(<span class="string">&quot;IHDR&quot;</span>)) {</div><div class="line">    <span class="keyword">int</span> width = chunk.readInt();</div><div class="line">    <span class="keyword">int</span> height = chunk.readInt();</div><div class="line">    System.out.printf(<span class="string">&quot;%08x: %s %d x %d%n&quot;</span>, chunk.size(), type, width, height);</div><div class="line">  } <span class="keyword">else</span> {</div><div class="line">    System.out.printf(<span class="string">&quot;%08x: %s%n&quot;</span>, chunk.size(), type);</div><div class="line">  }</div><div class="line">}</div></pre></td></tr></table></figure>
+<h1 id="&#x76F8;&#x5173;&#x94FE;&#x63A5;"><a href="#&#x76F8;&#x5173;&#x94FE;&#x63A5;" class="headerlink" title="&#x76F8;&#x5173;&#x94FE;&#x63A5;"></a>&#x76F8;&#x5173;&#x94FE;&#x63A5;</h1><p>&#x3010;1&#x3011;<a href="https://github.com/square/okio" target="_blank" rel="external">https://github.com/square/okio</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://www.laiwangyo.com/2016/12/01/Okio简介/" data-id="ciw65cw430004h8mold6wy4la" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://www.laiwangyo.com/2016/12/01/Okio简介/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OkHttp/">OkHttp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Okio/">Okio</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/12/01/OkHttp简介/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">Android开源项目分析-OkHttp简介</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2016/12/01/Okio简介/" data-title="Android开源项目分析-Okio简介" data-url="http://www.laiwangyo.com/2016/12/01/Okio简介/"></div>
+  </section>
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android开源项目分析/">Android开源项目分析</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android性能优化/">Android性能优化</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android技术文章摘录/">Android技术文章摘录</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android破解的那些破事/">Android破解的那些破事</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android系统/">Android系统</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Camera/">Camera</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Openfire/">Openfire</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/XModeEngine脚本引擎/">XModeEngine脚本引擎</a><span class="category-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Camera/">Camera</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HttpURLConnection/">HttpURLConnection</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OkHttp/">OkHttp</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Okio/">Okio</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Openfire/">Openfire</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能/">性能</a><span class="tag-list-count">8</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Camera/" style="font-size: 18px;">Camera</a> <a href="/tags/HttpURLConnection/" style="font-size: 10px;">HttpURLConnection</a> <a href="/tags/OkHttp/" style="font-size: 14px;">OkHttp</a> <a href="/tags/Okio/" style="font-size: 12px;">Okio</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/性能/" style="font-size: 16px;">性能</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/12/01/Okio简介/">Android开源项目分析-Okio简介</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/01/OkHttp简介/">Android开源项目分析-OkHttp简介</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/29/Where is com.android.okhttp/">【网络相关】Where is com.android.okhttp?</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/25/Android Netd处理流程分析/">Android Netd处理流程分析</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/22/Camera学习-概念篇-色彩校正矩阵/">Camera学习-概念篇-色彩校正矩阵</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://taoyuanxiaoqi.com" target="_blank">桃园小七</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Powered by <a href=http://www.laiwangyo.com target="_blank">yazone</a><br>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">文章列表</a>
+  
+    <a href="/me" class="mobile-nav-link">关于我</a>
+  
+</nav>
+  <!-- totop start -->
+
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"yazone"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+</div>
+</body>
+</html>
