@@ -4,21 +4,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Camera学习-调试篇-基本流程 | 图南的学鸠</title>
+  <title>Android Wifi服务框架描述 | 图南的学鸠</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="&amp;#x672C;&amp;#x6587;&amp;#x4ECB;&amp;#x7ECD;MTK Camera Tuning&amp;#x7684;&amp;#x57FA;&amp;#x672C;&amp;#x6D41;&amp;#x7A0B;&amp;#x3002;">
+  <meta name="description" content="&amp;#x6458;&amp;#x8981;&amp;#xFF1A;&amp;#x672C;&amp;#x6587;&amp;#x7B80;&amp;#x5355;&amp;#x7684;&amp;#x63CF;&amp;#x8FF0;&amp;#x4E86;Android WifiManager&amp;#x3001;WifiService&amp;#x4EE5;&amp;#x53CA;wpa_supplicant&amp;#x4E4B;&amp;#x95F4;&amp;#x7684;&amp;#x5173;&amp;#x7CFB;&amp;#x3">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Camera学习-调试篇-基本流程">
-<meta property="og:url" content="http://www.laiwangyo.com/2016/10/21/Camera学习-调试篇-基本流程/index.html">
+<meta property="og:title" content="Android Wifi服务框架描述">
+<meta property="og:url" content="http://www.laiwangyo.com/2017/01/11/Android Wifi服务框架描述/index.html">
 <meta property="og:site_name" content="图南的学鸠">
-<meta property="og:description" content="&amp;#x672C;&amp;#x6587;&amp;#x4ECB;&amp;#x7ECD;MTK Camera Tuning&amp;#x7684;&amp;#x57FA;&amp;#x672C;&amp;#x6D41;&amp;#x7A0B;&amp;#x3002;">
-<meta property="og:image" content="http://www.laiwangyo.com/2016/10/21/Camera学习-调试篇-基本流程/Image处理流程.png">
-<meta property="og:image" content="http://www.laiwangyo.com/2016/10/21/Camera学习-调试篇-基本流程/Tuning流程.png">
-<meta property="og:updated_time" content="2017-01-05T01:51:44.259Z">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;&amp;#xFF1A;&amp;#x672C;&amp;#x6587;&amp;#x7B80;&amp;#x5355;&amp;#x7684;&amp;#x63CF;&amp;#x8FF0;&amp;#x4E86;Android WifiManager&amp;#x3001;WifiService&amp;#x4EE5;&amp;#x53CA;wpa_supplicant&amp;#x4E4B;&amp;#x95F4;&amp;#x7684;&amp;#x5173;&amp;#x7CFB;&amp;#x3">
+<meta property="og:image" content="http://www.laiwangyo.com/2017/01/11/Android Wifi服务框架描述/Wifi服务框架.png">
+<meta property="og:updated_time" content="2017-02-03T10:00:45.827Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Camera学习-调试篇-基本流程">
-<meta name="twitter:description" content="&amp;#x672C;&amp;#x6587;&amp;#x4ECB;&amp;#x7ECD;MTK Camera Tuning&amp;#x7684;&amp;#x57FA;&amp;#x672C;&amp;#x6D41;&amp;#x7A0B;&amp;#x3002;">
-<meta name="twitter:image" content="http://www.laiwangyo.com/2016/10/21/Camera学习-调试篇-基本流程/Image处理流程.png">
+<meta name="twitter:title" content="Android Wifi服务框架描述">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;&amp;#xFF1A;&amp;#x672C;&amp;#x6587;&amp;#x7B80;&amp;#x5355;&amp;#x7684;&amp;#x63CF;&amp;#x8FF0;&amp;#x4E86;Android WifiManager&amp;#x3001;WifiService&amp;#x4EE5;&amp;#x53CA;wpa_supplicant&amp;#x4E4B;&amp;#x95F4;&amp;#x7684;&amp;#x5173;&amp;#x7CFB;&amp;#x3">
+<meta name="twitter:image" content="http://www.laiwangyo.com/2017/01/11/Android Wifi服务框架描述/Wifi服务框架.png">
   
     <link rel="alternative" href="/atom.xml" title="图南的学鸠" type="application/atom+xml">
   
@@ -77,14 +76,14 @@
   </div>
 </header>
     <div class="outer">
-      <section id="main"><article id="post-Camera学习-调试篇-基本流程" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-Android Wifi服务框架描述" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/10/21/Camera学习-调试篇-基本流程/" class="article-date">
-  <time datetime="2016-10-21T06:34:00.000Z" itemprop="datePublished">2016-10-21</time>
+    <a href="/2017/01/11/Android Wifi服务框架描述/" class="article-date">
+  <time datetime="2017-01-11T07:24:00.000Z" itemprop="datePublished">2017-01-11</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/计算机/">计算机</a>►<a class="article-category-link" href="/categories/计算机/Camera/">Camera</a>
+    <a class="article-category-link" href="/categories/计算机/">计算机</a>►<a class="article-category-link" href="/categories/计算机/无线通信/">无线通信</a>
   </div>
 
   </div>
@@ -95,7 +94,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Camera学习-调试篇-基本流程
+      Android Wifi服务框架描述
     </h1>
   
 
@@ -105,38 +104,87 @@
       
         <div class="toc-wrap">
         	<div class="toc-title">Index</div>
-        	<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Image处理流程"><span class="toc-number">1.</span> <span class="toc-text">Image处理流程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#校准-amp-Tuning流程"><span class="toc-number">2.</span> <span class="toc-text">校准&Tuning流程</span></a></li></ol>
+        	<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-框架结构"><span class="toc-number">1.</span> <span class="toc-text">1. 框架结构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-框架描述"><span class="toc-number">2.</span> <span class="toc-text">2. 框架描述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-相关文件"><span class="toc-number">3.</span> <span class="toc-text">3. 相关文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-参考"><span class="toc-number">4.</span> <span class="toc-text">4. 参考</span></a></li></ol>
     		</div>
 
-        <p>&#x672C;&#x6587;&#x4ECB;&#x7ECD;MTK Camera Tuning&#x7684;&#x57FA;&#x672C;&#x6D41;&#x7A0B;&#x3002;<a id="more"></a></p>
-<h1 id="Image&#x5904;&#x7406;&#x6D41;&#x7A0B;"><a href="#Image&#x5904;&#x7406;&#x6D41;&#x7A0B;" class="headerlink" title="Image&#x5904;&#x7406;&#x6D41;&#x7A0B;"></a>Image&#x5904;&#x7406;&#x6D41;&#x7A0B;</h1><p>&#x9996;&#x5148;&#x4E86;&#x89E3;&#x6570;&#x636E;&#x4ECE;Sensor&#x4E2D;&#x8F93;&#x51FA;&#x540E;&#x662F;&#x5982;&#x4F55;&#x5904;&#x7406;&#x7684;&#xFF0C;&#x5982;&#x4E0B;&#x56FE;&#xFF1A;<br><img src="/2016/10/21/Camera&#x5B66;&#x4E60;-&#x8C03;&#x8BD5;&#x7BC7;-&#x57FA;&#x672C;&#x6D41;&#x7A0B;/Image&#x5904;&#x7406;&#x6D41;&#x7A0B;.png" alt="Image&#x5904;&#x7406;&#x6D41;&#x7A0B;"></p>
-<ul>
-<li>OB&#x4E3A;&#x5149;&#x5B66;&#x9ED1;,&#x6D88;&#x9664;&#x5168;&#x9ED1;&#x7684;&#x73AF;&#x5883;&#x4E0B;&#x4ECD;&#x7136;&#x56E0;&#x4E3A;&#x6709;&#x6697;&#x7535;&#x6D41;&#x7B49;&#x539F;&#x56E0;&#x5BFC;&#x81F4;&#x7684;&#x4EAE;&#x70B9;&#xFF1B;</li>
-<li>Shading&#x6821;&#x51C6;&#x4E2D;&#x95F4;&#x4EAE;&#xFF0C;&#x8FB9;&#x7F18;&#x6697;&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x5206;&#x4E3A;OTP&#x3001;LSC&#x3001;TSF&#x4E09;&#x90E8;&#x5206;&#xFF1B;</li>
-<li>AE&#x5904;&#x7406;&#x81EA;&#x52A8;&#x66DD;&#x5149;&#xFF1B;</li>
-<li>AF&#x5904;&#x7406;&#x81EA;&#x52A8;&#x5BF9;&#x7126;&#xFF0C;&#x524D;&#x7F6E;&#x6444;&#x50CF;&#x5934;&#x901A;&#x5E38;&#x6CA1;&#x6709;&#x81EA;&#x52A8;&#x5BF9;&#x7126;&#x4E5F;&#x5C31;&#x4E0D;&#x4F1A;&#x6709;&#x5904;&#x7406;&#xFF1B;</li>
-<li>AWB&#x5904;&#x7406;&#x81EA;&#x52A8;&#x767D;&#x5E73;&#x8861;&#xFF1B;</li>
-<li>Gamma&#x5904;&#x7406;&#x4EBA;&#x773C;&#x4E0E;sensor&#x5BF9;&#x6697;&#x90E8;&#x548C;&#x4EAE;&#x90E8;&#x5DEE;&#x5F02;&#xFF08;&#x4EBA;&#x773C;&#x6697;&#x90E8;&#x4E0E;&#x4EAE;&#x90E8;&#x975E;&#x7EBF;&#x6027;&#xFF0C;&#x800C;sensor&#x4E3A;&#x7EBF;&#x6027;&#xFF09;&#xFF1B;</li>
-<li>EE&amp;NR&#x5904;&#x7406;&#x8FB9;&#x7F18;&#x52A0;&#x5F3A;&#x548C;&#x964D;&#x566A;&#xFF0C;&#x4E3B;&#x8981;&#x8C03;&#x8282;&#x6E05;&#x6670;&#x5EA6;&#x4E0E;&#x566A;&#x70B9;&#x7684;&#x5E73;&#x8861;&#xFF1B;</li>
-<li>Color&#x5904;&#x7406;&#x8272;&#x5F69;&#x504F;&#x5DEE;&#x3002;</li>
-</ul>
-<p>Sensor&#x8F93;&#x51FA;(raw&#x56FE;&#xFF09;&#x683C;&#x5F0F;&#x4E4B;&#x524D;&#x6709;&#x4ECB;&#x7ECD;&#x8FC7;&#x6709;&#x4E09;&#x79CD;&#x57FA;&#x672C;&#x683C;&#x5F0F;&#xFF0C;&#x5206;&#x522B;&#x4E3A;RGB&#x3001;YUV&#x6216;Bayer Pattern&#xFF0C;&#x8BBE;&#x7F6E;&#x54EA;&#x79CD;&#x683C;&#x5F0F;&#x9700;&#x8981;&#x67E5;&#x770B;&#x6A21;&#x7EC4;&#x5382;&#x7ED9;&#x7684;&#x6587;&#x6863;&#x6765;&#x51B3;&#x5B9A;&#x3002;</p>
-<h1 id="&#x6821;&#x51C6;-amp-Tuning&#x6D41;&#x7A0B;"><a href="#&#x6821;&#x51C6;-amp-Tuning&#x6D41;&#x7A0B;" class="headerlink" title="&#x6821;&#x51C6;&amp;Tuning&#x6D41;&#x7A0B;"></a>&#x6821;&#x51C6;&amp;Tuning&#x6D41;&#x7A0B;</h1><p><img src="/2016/10/21/Camera&#x5B66;&#x4E60;-&#x8C03;&#x8BD5;&#x7BC7;-&#x57FA;&#x672C;&#x6D41;&#x7A0B;/Tuning&#x6D41;&#x7A0B;.png" alt="&#x6821;&#x51C6;&amp;Tuning&#x6D41;&#x7A0B;"></p>
-<p>&#x5BA2;&#x89C2;&#x6821;&#x51C6;&#x6B65;&#x9AA4;&#x5206;&#x4E3A;Sensor&#x6821;&#x51C6;&#x3001;Shading&#x6821;&#x51C6;&#xFF08;OTP&#x3001;LSC&#x3001;TSF&#xFF09;&#x3001;AF&#x6821;&#x51C6;&#x3001;AE&#x6821;&#x51C6;&#x3001;AWB&#x6821;&#x51C6;&#x3001;CCM&#x6821;&#x51C6;&#x3002;</p>
+        <p>&#x6458;&#x8981;&#xFF1A;&#x672C;&#x6587;&#x7B80;&#x5355;&#x7684;&#x63CF;&#x8FF0;&#x4E86;Android WifiManager&#x3001;WifiService&#x4EE5;&#x53CA;wpa_supplicant&#x4E4B;&#x95F4;&#x7684;&#x5173;&#x7CFB;&#x3002;</p>
+<h1 id="1-&#x6846;&#x67B6;&#x7ED3;&#x6784;"><a href="#1-&#x6846;&#x67B6;&#x7ED3;&#x6784;" class="headerlink" title="1. &#x6846;&#x67B6;&#x7ED3;&#x6784;"></a>1. &#x6846;&#x67B6;&#x7ED3;&#x6784;</h1><p><img src="/2017/01/11/Android Wifi&#x670D;&#x52A1;&#x6846;&#x67B6;&#x63CF;&#x8FF0;/Wifi&#x670D;&#x52A1;&#x6846;&#x67B6;.png" alt="Wifi&#x670D;&#x52A1;&#x6846;&#x67B6;"></p>
+<a id="more"></a>
+<h1 id="2-&#x6846;&#x67B6;&#x63CF;&#x8FF0;"><a href="#2-&#x6846;&#x67B6;&#x63CF;&#x8FF0;" class="headerlink" title="2. &#x6846;&#x67B6;&#x63CF;&#x8FF0;"></a>2. &#x6846;&#x67B6;&#x63CF;&#x8FF0;</h1><p>&#x2460; &#x5E94;&#x7528;&#x8FDB;&#x7A0B;&#x8C03;&#x7528;Android API&#xFF0C;&#x901A;&#x8FC7;&#x4F8B;&#x5982;&#x5F00;&#x5173;&#x64CD;&#x4F5C;WifiManager.setWifiEnabled()&#x5BF9;wifi&#x8FDB;&#x884C;&#x63A7;&#x5236;&#x3002;</p>
+<p>&#x2461; &#x5E94;&#x7528;&#x8FDB;&#x7A0B;&#x8C03;&#x7528;API&#x540E;&#x5C06;&#x901A;&#x8FC7;Binder&#x901A;&#x4FE1;&#x65B9;&#x5F0F;&#x5C06;&#x64CD;&#x4F5C;&#x4F20;&#x9012;&#x7ED9;WifiService&#x4E2D;&#x7684;WifiServiceImpl&#xFF08;IWifiManager&#x63A5;&#x53E3;&#x5B9E;&#x73B0;&#xFF09;&#x3002;</p>
+<p>&#x2462; Wifi&#x670D;&#x52A1;&#x63A7;&#x5236;&#x662F;&#x901A;&#x8FC7;&#x72B6;&#x6001;&#x673A;&#x673A;&#x5236;&#x7684;WifiStateMachine&#x6765;&#x5B9E;&#x73B0;&#x7684;&#xFF0C;&#x4E00;&#x662F;&#x5B83;&#x5B9E;&#x73B0;&#x4E86;&#x72B6;&#x6001;&#x5207;&#x6362;&#x540E;&#x5BF9;&#x5E94;&#x7684;&#x5404;&#x79CD;&#x72B6;&#x6001;&#x5B50;&#x7C7B;&#xFF0C;&#x4F8B;&#x5982;&#x9ED8;&#x8BA4;&#x72B6;&#x6001;&#x4E0B;&#x6536;&#x5230;&#x6D88;&#x606F;&#x5E94;&#x8BE5;&#x8FDB;&#x884C;&#x4F55;&#x79CD;&#x5904;&#x7406;&#xFF0C;&#x8FDE;&#x63A5;&#x72B6;&#x6001;&#x4E0B;&#x6536;&#x5230;&#x6D88;&#x606F;&#x5E94;&#x8BE5;&#x5982;&#x4F55;&#x5904;&#x7406;&#xFF0C;&#x5982;&#x662F;&#x800C;&#x5DF2;&#xFF1B;&#x4E8C;&#x662F;&#x5B83;&#x5305;&#x542B;&#x4E86;WifiNative&#x3001;WifiMonitor&#x4E24;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;WifiNative&#x5BF9;&#x5E94;&#x4E86;wifi&#x64CD;&#x4F5C;&#x7684;JNI&#x884C;&#x4E3A;&#xFF0C;WifiMonitor&#x901A;&#x8FC7;JNI&#x4FA6;&#x542C;&#x6765;&#x81EA;&#x4E0B;&#x5C42;wpa_supplicant&#x7684;&#x4E8B;&#x4EF6;&#x3002;</p>
+<p>&#x2463; com_android_server_wifi_WifiNative&#x4E3A;JNI&#x5B9E;&#x73B0;&#x90E8;&#x5206;&#xFF0C;&#x5B83;&#x901A;&#x8FC7;wpa_ctrl&#x6765;&#x521B;&#x5EFA;&#x4E24;&#x4E2A;socket&#x4F5C;&#x4E3A;wpa_supplicant&#x7684;&#x5BA2;&#x6237;&#x7AEF;&#xFF0C;&#x4E00;&#x4E2A;&#x7528;&#x6765;&#x53D1;&#x9001;&#x63A7;&#x5236;&#x547D;&#x4EE4;&#xFF0C;&#x4E00;&#x4E2A;&#x7528;&#x6765;&#x4FA6;&#x542C;&#xFF0C;&#x53EF;&#x4EE5;&#x5206;&#x522B;&#x8BA4;&#x4E3A;&#x5BF9;&#x5E94;&#x4E86;WifiNative&#x548C;WifiMonitor&#x529F;&#x80FD;&#x3002;</p>
+<p>&#x2464; wpa_supplicant&#x4F5C;&#x4E3A;&#x670D;&#x52A1;&#x7AEF;&#x901A;&#x8FC7;socket&#x63A5;&#x6536;&#x6765;&#x81EA;&#x4E0A;&#x5C42;&#x7684;&#x63A7;&#x5236;&#xFF0C;&#x540C;&#x65F6;&#x901A;&#x8FC7;socket&#x4F20;&#x9012;wifi&#x72B6;&#x6001;&#x4FE1;&#x606F;&#x7ED9;&#x4E0A;&#x5C42;&#x3002;</p>
+<p>&#x2465; wpa_supplicant&#x4E0E;&#x5E95;&#x5C42;&#x9A71;&#x52A8;&#x8FDB;&#x884C;&#x4EA4;&#x4E92;&#x6765;&#x5B9E;&#x73B0;&#x5BF9;&#x65E0;&#x7EBF;&#x7F51;&#x7EDC;&#x8FDB;&#x884C;&#x7BA1;&#x7406;&#x548C;&#x63A7;&#x5236;&#x7684;&#x529F;&#x80FD;&#x3002;</p>
+<h1 id="3-&#x76F8;&#x5173;&#x6587;&#x4EF6;"><a href="#3-&#x76F8;&#x5173;&#x6587;&#x4EF6;" class="headerlink" title="3. &#x76F8;&#x5173;&#x6587;&#x4EF6;"></a>3. &#x76F8;&#x5173;&#x6587;&#x4EF6;</h1><table>
+<thead>
+<tr>
+<th>&#x6587;&#x4EF6;&#x540D;</th>
+<th>&#x5B8C;&#x6574;&#x8DEF;&#x5F84;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>WifiManager.java</td>
+<td>frameworks/base/wifi/java/android/net/wifi/WifiManager.java</td>
+</tr>
+<tr>
+<td>WifiService.java</td>
+<td>frameworks/opt/net/wifi/service/java/com/android/server/wifi/WifiService.java</td>
+</tr>
+<tr>
+<td>WifiServiceImpl.java</td>
+<td>frameworks/opt/net/wifi/service/java/com/android/server/wifi/WifiServiceImpl.java</td>
+</tr>
+<tr>
+<td>WifiStateMachine.java</td>
+<td>frameworks/opt/net/wifi/service/java/com/android/server/wifi/WifiStateMachine.java</td>
+</tr>
+<tr>
+<td>WifiMonitor.java</td>
+<td>frameworks/opt/net/wifi/service/java/com/android/server/wifi/WifiMonitor.java</td>
+</tr>
+<tr>
+<td>WifiNative.java</td>
+<td>frameworks/opt/net/wifi/service/java/com/android/server/wifi/WifiNative.java</td>
+</tr>
+<tr>
+<td>com_android_server_wifi_WifiNative.cpp</td>
+<td>frameworks/opt/net/wifi/service/jni/com_android_server_wifi_WifiNative.cpp</td>
+</tr>
+<tr>
+<td>wpa_ctrl.c</td>
+<td>external/wpa_supplicant_8/src/common/wpa_ctrl.c</td>
+</tr>
+<tr>
+<td>wifi.c</td>
+<td>hardware/libhardware_legacy/wifi/wifi.c</td>
+</tr>
+<tr>
+<td>main.c</td>
+<td>external/wpa_supplicant_8/wpa_supplicant/main.c</td>
+</tr>
+<tr>
+<td>wpa_supplicant.c</td>
+<td>external/wpa_supplicant_8/wpa_supplicant/wpa_supplicant.c</td>
+</tr>
+</tbody>
+</table>
+<h1 id="4-&#x53C2;&#x8003;"><a href="#4-&#x53C2;&#x8003;" class="headerlink" title="4. &#x53C2;&#x8003;"></a>4. &#x53C2;&#x8003;</h1><p><a href="http://www.cnblogs.com/snake-hand/p/3174650.html" target="_blank" rel="external">http://www.cnblogs.com/snake-hand/p/3174650.html</a><br><a href="http://www.cnblogs.com/chenbin7/category/503027.html" target="_blank" rel="external">http://www.cnblogs.com/chenbin7/category/503027.html</a></p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://www.laiwangyo.com/2016/10/21/Camera学习-调试篇-基本流程/" data-id="cixjrlw59003pjwmojs207ynt" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://www.laiwangyo.com/2017/01/11/Android Wifi服务框架描述/" data-id="ciypmtkgb00002kmo87nozfa1" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
-        <a href="http://www.laiwangyo.com/2016/10/21/Camera学习-调试篇-基本流程/#ds-thread" class="article-comment-link">评论</a>
+        <a href="http://www.laiwangyo.com/2017/01/11/Android Wifi服务框架描述/#ds-thread" class="article-comment-link">评论</a>
       
 
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Camera/">Camera</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android系统/">Android系统</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/无线网络/">无线网络</a></li></ul>
 
     </footer>
   </div>
@@ -144,19 +192,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/10/28/Camera学习-概念篇-Sensor介绍/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">
-        
-          Camera学习-概念篇-Sensor介绍
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/10/21/Camera学习-概念篇-标准光源/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/01/05/IEEE 802.11无线局域网标准简介/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">Camera学习-概念篇-标准光源</div>
+      <div class="article-nav-title">IEEE 802.11无线局域网标准简介</div>
     </a>
   
 </nav>
@@ -166,7 +205,7 @@
 
 
   <section id="comments">
-    <div id="ds-thread" class="ds-thread" data-thread-key="2016/10/21/Camera学习-调试篇-基本流程/" data-title="Camera学习-调试篇-基本流程" data-url="http://www.laiwangyo.com/2016/10/21/Camera学习-调试篇-基本流程/"></div>
+    <div id="ds-thread" class="ds-thread" data-thread-key="2017/01/11/Android Wifi服务框架描述/" data-title="Android Wifi服务框架描述" data-url="http://www.laiwangyo.com/2017/01/11/Android Wifi服务框架描述/"></div>
   </section>
 </section>
       
