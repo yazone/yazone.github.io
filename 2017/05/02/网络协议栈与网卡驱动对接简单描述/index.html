@@ -4,22 +4,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Camera学习-概念篇-MTK_Camera_软件架构 | 图南的学鸠</title>
+  <title>网络协议栈与网卡驱动对接简单描述 | 图南的学鸠</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="&amp;#x3000;&amp;#x3000;&amp;#x672C;&amp;#x6587;&amp;#x4E3B;&amp;#x8981;&amp;#x4ECB;&amp;#x7ECD;MTK Camera&amp;#x8F6F;&amp;#x4EF6;&amp;#x67B6;&amp;#x6784;&amp;#xFF0C;&amp;#x4E3B;&amp;#x8981;&amp;#x5305;&amp;#x542B;&amp;#x4E09;&amp;#x4E2A;&amp;#x90E8;&amp;#x5206;&amp;#x7684;&amp;#x4ECB;&amp;#x7EC">
+  <meta name="description" content="&amp;#x6458;&amp;#x8981;&amp;#xFF1A;&amp;#x672C;&amp;#x6587;&amp;#x7B80;&amp;#x5355;&amp;#x63CF;&amp;#x8FF0;&amp;#x4E86;&amp;#x7F51;&amp;#x7EDC;&amp;#x534F;&amp;#x8BAE;&amp;#x6808;&amp;#x4E0E;&amp;#x9A71;&amp;#x52A8;&amp;#x8C03;&amp;#x7528;&amp;#x65B9;&amp;#x5F0F;&amp;#x3002;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Camera学习-概念篇-MTK_Camera_软件架构">
-<meta property="og:url" content="http://www.laiwangyo.com/2016/10/28/Camera学习-概念篇-MTK_Camera_软件架构/index.html">
+<meta property="og:title" content="网络协议栈与网卡驱动对接简单描述">
+<meta property="og:url" content="http://www.laiwangyo.com/2017/05/02/网络协议栈与网卡驱动对接简单描述/index.html">
 <meta property="og:site_name" content="图南的学鸠">
-<meta property="og:description" content="&amp;#x3000;&amp;#x3000;&amp;#x672C;&amp;#x6587;&amp;#x4E3B;&amp;#x8981;&amp;#x4ECB;&amp;#x7ECD;MTK Camera&amp;#x8F6F;&amp;#x4EF6;&amp;#x67B6;&amp;#x6784;&amp;#xFF0C;&amp;#x4E3B;&amp;#x8981;&amp;#x5305;&amp;#x542B;&amp;#x4E09;&amp;#x4E2A;&amp;#x90E8;&amp;#x5206;&amp;#x7684;&amp;#x4ECB;&amp;#x7EC">
-<meta property="og:image" content="http://www.laiwangyo.com/2016/10/28/Camera学习-概念篇-MTK_Camera_软件架构/Android Camera架构.png">
-<meta property="og:image" content="http://www.laiwangyo.com/2016/10/28/Camera学习-概念篇-MTK_Camera_软件架构/MTK Camare架构.png">
-<meta property="og:image" content="http://www.laiwangyo.com/2016/10/28/Camera学习-概念篇-MTK_Camera_软件架构/Camera Data Path.png">
-<meta property="og:updated_time" content="2017-01-05T01:51:52.571Z">
+<meta property="og:description" content="&amp;#x6458;&amp;#x8981;&amp;#xFF1A;&amp;#x672C;&amp;#x6587;&amp;#x7B80;&amp;#x5355;&amp;#x63CF;&amp;#x8FF0;&amp;#x4E86;&amp;#x7F51;&amp;#x7EDC;&amp;#x534F;&amp;#x8BAE;&amp;#x6808;&amp;#x4E0E;&amp;#x9A71;&amp;#x52A8;&amp;#x8C03;&amp;#x7528;&amp;#x65B9;&amp;#x5F0F;&amp;#x3002;">
+<meta property="og:updated_time" content="2017-05-02T03:03:16.547Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Camera学习-概念篇-MTK_Camera_软件架构">
-<meta name="twitter:description" content="&amp;#x3000;&amp;#x3000;&amp;#x672C;&amp;#x6587;&amp;#x4E3B;&amp;#x8981;&amp;#x4ECB;&amp;#x7ECD;MTK Camera&amp;#x8F6F;&amp;#x4EF6;&amp;#x67B6;&amp;#x6784;&amp;#xFF0C;&amp;#x4E3B;&amp;#x8981;&amp;#x5305;&amp;#x542B;&amp;#x4E09;&amp;#x4E2A;&amp;#x90E8;&amp;#x5206;&amp;#x7684;&amp;#x4ECB;&amp;#x7EC">
-<meta name="twitter:image" content="http://www.laiwangyo.com/2016/10/28/Camera学习-概念篇-MTK_Camera_软件架构/Android Camera架构.png">
+<meta name="twitter:title" content="网络协议栈与网卡驱动对接简单描述">
+<meta name="twitter:description" content="&amp;#x6458;&amp;#x8981;&amp;#xFF1A;&amp;#x672C;&amp;#x6587;&amp;#x7B80;&amp;#x5355;&amp;#x63CF;&amp;#x8FF0;&amp;#x4E86;&amp;#x7F51;&amp;#x7EDC;&amp;#x534F;&amp;#x8BAE;&amp;#x6808;&amp;#x4E0E;&amp;#x9A71;&amp;#x52A8;&amp;#x8C03;&amp;#x7528;&amp;#x65B9;&amp;#x5F0F;&amp;#x3002;">
   
     <link rel="alternative" href="/atom.xml" title="图南的学鸠" type="application/atom+xml">
   
@@ -78,14 +74,14 @@
   </div>
 </header>
     <div class="outer">
-      <section id="main"><article id="post-Camera学习-概念篇-MTK_Camera_软件架构" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-网络协议栈与网卡驱动对接简单描述" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/10/28/Camera学习-概念篇-MTK_Camera_软件架构/" class="article-date">
-  <time datetime="2016-10-28T08:39:00.000Z" itemprop="datePublished">2016-10-28</time>
+    <a href="/2017/05/02/网络协议栈与网卡驱动对接简单描述/" class="article-date">
+  <time datetime="2017-05-02T02:56:00.000Z" itemprop="datePublished">2017-05-02</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/计算机/">计算机</a>►<a class="article-category-link" href="/categories/计算机/Camera/">Camera</a>
+    <a class="article-category-link" href="/categories/计算机/">计算机</a>►<a class="article-category-link" href="/categories/计算机/无线通信/">无线通信</a>
   </div>
 
   </div>
@@ -96,7 +92,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Camera学习-概念篇-MTK_Camera_软件架构
+      网络协议栈与网卡驱动对接简单描述
     </h1>
   
 
@@ -106,50 +102,53 @@
       
         <div class="toc-wrap">
         	<div class="toc-title">Index</div>
-        	<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Android-Camera架构"><span class="toc-number">1.</span> <span class="toc-text">Android Camera架构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MTK-Camare架构"><span class="toc-number">2.</span> <span class="toc-text">MTK Camare架构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Camera数据流"><span class="toc-number">3.</span> <span class="toc-text">Camera数据流</span></a></li></ol>
+        	<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#数据从协议栈往驱动传输"><span class="toc-number">1.</span> <span class="toc-text">数据从协议栈往驱动传输</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据从驱动往协议栈传输"><span class="toc-number">2.</span> <span class="toc-text">数据从驱动往协议栈传输</span></a></li></ol>
     		</div>
 
-        <p>&#x3000;&#x3000;&#x672C;&#x6587;&#x4E3B;&#x8981;&#x4ECB;&#x7ECD;MTK Camera&#x8F6F;&#x4EF6;&#x67B6;&#x6784;&#xFF0C;&#x4E3B;&#x8981;&#x5305;&#x542B;&#x4E09;&#x4E2A;&#x90E8;&#x5206;&#x7684;&#x4ECB;&#x7ECD;&#xFF1A;</p>
-<ul>
-<li>1) Android Camera &#x67B6;&#x6784;&#xFF1A;Android&#x7CFB;&#x7EDF;&#x539F;&#x751F;&#x67B6;&#x6784;&#x7B80;&#x8981;&#x4ECB;&#x7ECD;&#x3002;</li>
-<li>2) MTK Camera&#x67B6;&#x6784;: &#x7B80;&#x8981;&#x4ECB;&#x7ECD;Mediatek&#x5E73;&#x53F0;&#x5728;Android&#x7CFB;&#x7EDF;&#x57FA;&#x7840;&#x4E0A;Camera &#x7684;&#x67B6;&#x6784;&#x3002;</li>
-<li>3) Camera&#x6570;&#x636E;&#x6D41;: &#x4ECB;&#x7ECD;&#x5728;&#x5E73;&#x53F0;&#x7AEF;Camera&#x7684;&#x6570;&#x636E;&#x6D41;&#x3002;<a id="more"></a>
-<h1 id="Android-Camera&#x67B6;&#x6784;"><a href="#Android-Camera&#x67B6;&#x6784;" class="headerlink" title="Android Camera&#x67B6;&#x6784;"></a>Android Camera&#x67B6;&#x6784;</h1><img src="/2016/10/28/Camera&#x5B66;&#x4E60;-&#x6982;&#x5FF5;&#x7BC7;-MTK_Camera_&#x8F6F;&#x4EF6;&#x67B6;&#x6784;/Android Camera&#x67B6;&#x6784;.png" alt="Android Camera&#x67B6;&#x6784;"></li>
-</ul>
-<p>Camera&#x6839;&#x636E;Android &#x67B6;&#x6784;&#x4ECE;&#x4E0A;&#x81F3;&#x4E0B;&#x53EF;&#x5206;&#x4E3A;</p>
-<ul>
-<li>1) Applications: &#x6700;&#x4E0A;&#x5C42;&#x7684;&#x5E94;&#x7528;&#xFF0C;&#x7F16;&#x8BD1;&#x540E;&#x751F;&#x6210;Camera APK&#xFF1B;</li>
-<li>2) Application Framework: &#x4E3B;&#x8981;&#x4E3A;Applications&#x63D0;&#x4F9B;API;</li>
-<li>3) JNI: &#x4F7F;Application Framework&#x548C;Libraries&#x53EF;&#x4EA4;&#x4E92;;</li>
-<li>4) Libraries: &#x5305;&#x62EC;Camera Framework&#x548C;Camera Service(camera service&#x548C;camera client);</li>
-<li>5) HAL: &#x786C;&#x4EF6;&#x62BD;&#x8C61;&#x5C42;, &#x7528;&#x6765;&#x94FE;&#x63A5;driver&#x548C; Camera Service;</li>
-<li>6) Kernel: image sensor driver&#x7684;&#x5B9E;&#x4F5C;&#x3002;</li>
-</ul>
-<p>&#x5176;&#x4E2D;2)&#xFF5E;4)&#x7684;&#x90E8;&#x5206;&#x57FA;&#x672C;&#x4E3A;Android&#x539F;&#x751F;&#x7684;&#x67B6;&#x6784;&#x548C;code&#xFF0C;Mediatek&#x4F1A;&#x6709;&#x4E00;&#x4E9B;&#x62D3;&#x5C55;,&#x800C;HAL&#x548C;Kernel&#x5C42;&#x4E3A;Mediatek&#x4E3B;&#x8981;&#x5B9E;&#x4F5C;&#x7684;&#x90E8;&#x5206;&#xFF0C;Camera APK&#x662F;Mediatek&#x57FA;&#x4E8E;Android &#x539F;&#x751F;Camera APK&#x4FEE;&#x6539;&#x7684;&#x5E94;&#x7528;&#x3002;</p>
-<h1 id="MTK-Camare&#x67B6;&#x6784;"><a href="#MTK-Camare&#x67B6;&#x6784;" class="headerlink" title="MTK Camare&#x67B6;&#x6784;"></a>MTK Camare&#x67B6;&#x6784;</h1><p>&#x4E0B;&#x56FE;&#x4E3A;MT6589/82/72/92/88&#x5E73;&#x53F0;&#x57FA;&#x4E8E;Android&#x67B6;&#x6784;&#x4E0A;, &#xFF0C;Camera&#x4ECE;application&#x5230;kernel&#x5C42;&#x8BE6;&#x7EC6;&#x7684;&#x67B6;&#x6784;&#x3002;<br><img src="/2016/10/28/Camera&#x5B66;&#x4E60;-&#x6982;&#x5FF5;&#x7BC7;-MTK_Camera_&#x8F6F;&#x4EF6;&#x67B6;&#x6784;/MTK Camare&#x67B6;&#x6784;.png" alt="MTK Camare&#x67B6;&#x6784;"></p>
-<ul>
-<li>1)&#x84DD;&#x8272;&#x90E8;&#x5206;&#x4E3B;&#x8981;&#x7531;Java&#x5B9E;&#x73B0;(&#x504F;&#x5411;&#x5E94;&#x7528;&#x5C42;)&#x3001;&#x9EC4;&#x8272;&#x4E3A;JNI&#x5B9E;&#x73B0;(C++&#xFF0C;&#x8854;&#x63A5;Java&#x5C42;&#x548C;Native&#x5C42;)&#xFF0C; &#x7EFF;&#x8272;&#x7531;C++&#x5B9E;&#x73B0;(&#x901A;&#x5E38;&#x79F0;&#x4E3A;Native&#x5C42;)&#xFF0C;&#x800C;&#x67A3;&#x7EA2;&#x8272;&#x4E3A;C&#x5B9E;&#x73B0;(Kernel &#x5C42;)&#x3002;</li>
-<li>2) HAL libraries&#x4E3A;Mediatek&#x5728;HAL&#x5C42;&#x7684;&#x5B9E;&#x73B0;,&#x4E3B;&#x8981;&#x5206;Camera HAL&#x548C;Camera Core&#x4E24;&#x5927;&#x90E8;&#x5206;&#x3002;Camera HAL&#x8854;&#x63A5;Camera Service&#x5E76;&#x54CD;&#x5E94;&#x5B83;&#x7684;&#x9700;&#x6C42;,&#x5B9E;&#x73B0;&#x5404;&#x4E2A;feature&#x7684;scenario; &#x800C;Camera Core&#x63D0;&#x4F9B;&#x5E73;&#x53F0;&#x4E00;&#x4E9B;&#x901A;&#x7528;&#x7684;&#x6570;&#x636E;&#x6D41;&#x63A7;&#x5236;&#x63A5;&#x53E3;&#x3002;</li>
-</ul>
-<h1 id="Camera&#x6570;&#x636E;&#x6D41;"><a href="#Camera&#x6570;&#x636E;&#x6D41;" class="headerlink" title="Camera&#x6570;&#x636E;&#x6D41;"></a>Camera&#x6570;&#x636E;&#x6D41;</h1><p><img src="/2016/10/28/Camera&#x5B66;&#x4E60;-&#x6982;&#x5FF5;&#x7BC7;-MTK_Camera_&#x8F6F;&#x4EF6;&#x67B6;&#x6784;/Camera Data Path.png" alt="Camera Data Path"><br>&#x8BF4;&#x660E;&#xFF1A;</p>
-<ul>
-<li>1) TG(Timing Generate):&#x4ECE;sensor&#x83B7;&#x53D6;&#x6570;&#x636E;&#xFF0C;&#x5E76;&#x9001;&#x7ED9;ISP&#x5904;&#x7406;&#x3002;</li>
-<li>2) Platform Data Processor: &#x5305;&#x62EC;&#x5E73;&#x53F0;&#x5728;&#x540E;&#x7AEF;&#x5BF9;&#x56FE;&#x50CF;&#x6570;&#x636E;&#x8FDB;&#x884C;resize&#x3001;rotate&#x3001;flip&#x3001;format convert&#x7B49;&#x5904;&#x7406;&#xFF0C;&#x5B83;&#x53EF;&#x4EE5;&#x540C;&#x65F6;&#x6709;&#x4E24;&#x4E2A;buffer&#x8F93;&#x51FA;&#x3002;<br>   &#x5F53;normal preview&#x65F6;&#xFF0C;port1&#x8F93;&#x51FA;&#x7ED9;display&#xFF0C;port2&#x8F93;&#x51FA;&#x7ED9;face detection&#x6216;&#x8005;app preview callback<br>   &#x5F53;normal capture&#x65F6;&#xFF0C;port1&#x8F93;&#x51FA;&#x5927;&#x56FE;&#x7ED9;jpeg encoder&#xFF0C;port2&#x8F93;&#x51FA;&#x5C0F;&#x56FE;&#x7ED9;&#x56DE;&#x663E;&#x548C;thumbnail encode&#x3002;<br>   &#x5F53;video record&#x65F6;&#xFF0C;port1&#x8F93;&#x51FA;&#x7ED9;display&#xFF0C;port2&#x8F93;&#x51FA;&#x7ED9;video encoder&#x3002;</li>
-</ul>
+        <p>&#x6458;&#x8981;&#xFF1A;&#x672C;&#x6587;&#x7B80;&#x5355;&#x63CF;&#x8FF0;&#x4E86;&#x7F51;&#x7EDC;&#x534F;&#x8BAE;&#x6808;&#x4E0E;&#x9A71;&#x52A8;&#x8C03;&#x7528;&#x65B9;&#x5F0F;&#x3002;<a id="more"></a></p>
+<h1 id="&#x6570;&#x636E;&#x4ECE;&#x534F;&#x8BAE;&#x6808;&#x5F80;&#x9A71;&#x52A8;&#x4F20;&#x8F93;"><a href="#&#x6570;&#x636E;&#x4ECE;&#x534F;&#x8BAE;&#x6808;&#x5F80;&#x9A71;&#x52A8;&#x4F20;&#x8F93;" class="headerlink" title="&#x6570;&#x636E;&#x4ECE;&#x534F;&#x8BAE;&#x6808;&#x5F80;&#x9A71;&#x52A8;&#x4F20;&#x8F93;"></a>&#x6570;&#x636E;&#x4ECE;&#x534F;&#x8BAE;&#x6808;&#x5F80;&#x9A71;&#x52A8;&#x4F20;&#x8F93;</h1><p>&#x7F51;&#x7EDC;&#x4E0A;&#x5C42;&#x6570;&#x636E;&#xFF08;TCP&#x3001;UDP&#xFF09;&#x7ECF;&#x8FC7;&#x8DEF;&#x7531;&#x7B49;&#x5904;&#x7406;&#x8C03;&#x7528;&#x6D41;&#x7A0B;&#xFF1A;<br>1&#x3001;dev_queue_xmit&#xFF08;net/core/dev.c&#xFF09;<br>2&#x3001;netdev_start_xmit&amp;__netdev_start_xmit&#xFF08;include/linux/netdevice.h&#xFF09;<br>3&#x3001;net_device_ops-&gt;ndo_start_xmit&#xFF08;include/linux/netdevice.h&#xFF09;</p>
+<p>ndo_start_xmit&#x4E3A;&#x5404;&#x5382;&#x5546;&#x9A71;&#x52A8;&#x90E8;&#x5206;&#x5B9E;&#x73B0;&#x3002;<br>MTK&#x5E73;&#x53F0;&#x4E3A;&#xFF1A;</p>
+<pre><code class="c"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">struct</span> net_device_ops wlan_netdev_ops = {
+    .ndo_open = wlanOpen,
+    .ndo_stop = wlanStop,
+    .ndo_set_rx_mode = wlanSetMulticastList,
+    .ndo_get_stats = wlanGetStats,
+    .ndo_do_ioctl = wlanDoIOCTL,
+    .ndo_start_xmit = wlanHardStartXmit,
+    .ndo_init = wlanInit,
+    .ndo_uninit = wlanUninit,
+    .ndo_select_queue = wlanSelectQueue,
+};
+</code></pre>
+<p>MTK&#x7F51;&#x7EDC;&#x76F8;&#x5173;&#x9A71;&#x52A8;&#x4F4D;&#x4E8E;&#xFF1A;drivers/misc/mediatek/connectivity/wlan/&#xFF0C;&#x5B83;&#x4F7F;&#x7528;&#x5957;&#x7247;&#x65B9;&#x5F0F;&#xFF0C;&#x5728;connectivity&#x76EE;&#x5F55;&#x4E0B;&#x6574;&#x5408;&#x4E86;&#x84DD;&#x7259;&#x3001;GPRS&#x7B49;&#x591A;&#x79CD;&#x9A71;&#x52A8;&#x3002;</p>
+<p>&#x535A;&#x901A;&#x9A71;&#x52A8;&#x5219;&#x4E3A;&#xFF1A;</p>
+<pre><code class="c"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">struct</span> net_device_ops ieee80211_dataif_ops = {
+    .ndo_open        = ieee80211_open,
+    .ndo_stop        = ieee80211_stop,
+    .ndo_uninit        = ieee80211_uninit,
+    .ndo_start_xmit        = ieee80211_subif_start_xmit,
+    .ndo_set_rx_mode    = ieee80211_set_multicast_list,
+    .ndo_change_mtu     = ieee80211_change_mtu,
+    .ndo_set_mac_address     = ieee80211_change_mac,
+    .ndo_select_queue    = ieee80211_netdev_select_queue,
+};
+</code></pre>
+<p>&#x6700;&#x7EC8;&#x8C03;&#x7528;ieee80211_ops-&gt;brcms_ops_tx&#xFF08;drivers/net/wireless/brcm80211/brcmsmac/mac80211_if.c&#xFF09;<br>&#xFF08;&#x591A;&#x79CD;&#x6A21;&#x5F0F;&#x4E0B;&#x63A5;&#x53E3;&#x64CD;&#x4F5C;&#x4F1A;&#x4E0D;&#x4E00;&#x6837;&#xFF09;</p>
+<h1 id="&#x6570;&#x636E;&#x4ECE;&#x9A71;&#x52A8;&#x5F80;&#x534F;&#x8BAE;&#x6808;&#x4F20;&#x8F93;"><a href="#&#x6570;&#x636E;&#x4ECE;&#x9A71;&#x52A8;&#x5F80;&#x534F;&#x8BAE;&#x6808;&#x4F20;&#x8F93;" class="headerlink" title="&#x6570;&#x636E;&#x4ECE;&#x9A71;&#x52A8;&#x5F80;&#x534F;&#x8BAE;&#x6808;&#x4F20;&#x8F93;"></a>&#x6570;&#x636E;&#x4ECE;&#x9A71;&#x52A8;&#x5F80;&#x534F;&#x8BAE;&#x6808;&#x4F20;&#x8F93;</h1><p>&#x9A71;&#x52A8;&#x53EA;&#x9700;&#x8981;&#x8C03;&#x7528;netif_rx_ni-&gt;do_soft_irq&#xFF08;net/core/Dev.c&#xFF09;&#x89E6;&#x53D1;&#x8F6F;&#x4E2D;&#x65AD;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x7531;&#x534F;&#x8BAE;&#x6808;&#x5904;&#x7406;&#x3002;</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://www.laiwangyo.com/2016/10/28/Camera学习-概念篇-MTK_Camera_软件架构/" data-id="cj26v3951002714mos524urh5" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://www.laiwangyo.com/2017/05/02/网络协议栈与网卡驱动对接简单描述/" data-id="cj26yqt9h000028mo7t1jrse3" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
-        <a href="http://www.laiwangyo.com/2016/10/28/Camera学习-概念篇-MTK_Camera_软件架构/#ds-thread" class="article-comment-link">评论</a>
+        <a href="http://www.laiwangyo.com/2017/05/02/网络协议栈与网卡驱动对接简单描述/#ds-thread" class="article-comment-link">评论</a>
       
 
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Camera/">Camera</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/无线网络/">无线网络</a></li></ul>
 
     </footer>
   </div>
@@ -157,19 +156,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/10/29/Camera学习-调试篇-Color Shading产生的原因/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">
-        
-          Camera学习-调试篇-Color Shading产生的原因
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/10/28/Camera学习-概念篇-Sensor介绍/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/05/02/IEEE 802.11理论速率计算/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">Camera学习-概念篇-Sensor介绍</div>
+      <div class="article-nav-title">IEEE 802.11理论速率计算</div>
     </a>
   
 </nav>
@@ -179,7 +169,7 @@
 
 
   <section id="comments">
-    <div id="ds-thread" class="ds-thread" data-thread-key="2016/10/28/Camera学习-概念篇-MTK_Camera_软件架构/" data-title="Camera学习-概念篇-MTK_Camera_软件架构" data-url="http://www.laiwangyo.com/2016/10/28/Camera学习-概念篇-MTK_Camera_软件架构/"></div>
+    <div id="ds-thread" class="ds-thread" data-thread-key="2017/05/02/网络协议栈与网卡驱动对接简单描述/" data-title="网络协议栈与网卡驱动对接简单描述" data-url="http://www.laiwangyo.com/2017/05/02/网络协议栈与网卡驱动对接简单描述/"></div>
   </section>
 </section>
       
