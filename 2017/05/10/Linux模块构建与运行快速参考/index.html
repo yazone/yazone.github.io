@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://www.laiwangyo.com/2017/05/10/Linux模块构建与运行快速参考/index.html">
 <meta property="og:site_name" content="图南的学鸠">
 <meta property="og:description" content="&amp;#x672C;&amp;#x6587;&amp;#x7B80;&amp;#x5355;&amp;#x63CF;&amp;#x8FF0;Linux&amp;#x6A21;&amp;#x5757;&amp;#x6784;&amp;#x5EFA;&amp;#x4E2D;&amp;#x76F8;&amp;#x5173;&amp;#x51FD;&amp;#x6570;&amp;#x3001;&amp;#x5B8F;&amp;#x3001;&amp;#x5934;&amp;#x6587;&amp;#x4EF6;&amp;#x7B49;&amp;#xFF0C;&amp;#x4F9B;&amp;#x">
-<meta property="og:updated_time" content="2017-05-10T09:33:45.285Z">
+<meta property="og:updated_time" content="2017-05-17T09:30:28.518Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux模块构建与运行快速参考">
 <meta name="twitter:description" content="&amp;#x672C;&amp;#x6587;&amp;#x7B80;&amp;#x5355;&amp;#x63CF;&amp;#x8FF0;Linux&amp;#x6A21;&amp;#x5757;&amp;#x6784;&amp;#x5EFA;&amp;#x4E2D;&amp;#x76F8;&amp;#x5173;&amp;#x51FD;&amp;#x6570;&amp;#x3001;&amp;#x5B8F;&amp;#x3001;&amp;#x5934;&amp;#x6587;&amp;#x4EF6;&amp;#x7B49;&amp;#xFF0C;&amp;#x4F9B;&amp;#x">
@@ -107,24 +107,70 @@
 
         <p>&#x672C;&#x6587;&#x7B80;&#x5355;&#x63CF;&#x8FF0;Linux&#x6A21;&#x5757;&#x6784;&#x5EFA;&#x4E2D;&#x76F8;&#x5173;&#x51FD;&#x6570;&#x3001;&#x5B8F;&#x3001;&#x5934;&#x6587;&#x4EF6;&#x7B49;&#xFF0C;&#x4F9B;&#x540E;&#x7EED;&#x5FEB;&#x901F;&#x67E5;&#x770B;&#x3002;&#x53C2;&#x8003;&#x81EA;&#x300A;Linux&#x8BBE;&#x5907;&#x9A71;&#x52A8;&#x7A0B;&#x5E8F;&#xFF08;&#x7B2C;&#x4E09;&#x7248;&#xFF09;&#x300B;&#x7B2C;&#x4E8C;&#x7AE0;&#x3002;</p>
 <a id="more"></a>
-<h1 id="&#x5934;&#x6587;&#x4EF6;"><a href="#&#x5934;&#x6587;&#x4EF6;" class="headerlink" title="&#x5934;&#x6587;&#x4EF6;"></a>&#x5934;&#x6587;&#x4EF6;</h1><p>#include &lt;linux/sched.h&gt;<br><em>&#x6700;&#x91CD;&#x8981;&#x7684;&#x5934;&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x3002;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x5305;&#x542B;&#x9A71;&#x52A8;&#x7A0B;&#x5E8F;&#x4F7F;&#x7528;&#x7684;&#x5927;&#x591A;&#x6570;&#x5185;&#x6838; API &#x7684;&#x5B9A;&#x4E49;, &#x5305;&#x62EC;&#x7761;&#x7720;&#x51FD;&#x6570;&#x548C;&#x8BB8;&#x591A;&#x53D8;&#x91CF;&#x58F0;&#x660E;&#x3002;</em></p>
-<p>#include &lt;linux/module.h&gt;<br><em>&#x5FC5;&#x9700;&#x7684;&#x5934;&#x6587;&#x4EF6;. &#x5B83;&#x5FC5;&#x987B;&#x5728;&#x4E00;&#x4E2A;&#x6A21;&#x5757;&#x6E90;&#x7801;&#x4E2D;&#x5305;&#x542B;&#x3002;</em></p>
-<p>#include &lt;linux/version.h&gt;<br><em>&#x5305;&#x542B;&#x6240;&#x6784;&#x9020;&#x5185;&#x6838;&#x7248;&#x672C;&#x4FE1;&#x606F;&#x7684;&#x5934;&#x6587;&#x4EF6;&#x3002;</em></p>
-<h1 id="&#x5B8F;"><a href="#&#x5B8F;" class="headerlink" title="&#x5B8F;"></a>&#x5B8F;</h1><p>LINUX_VERSION_CODE<br><em>&#x6574;&#x578B;&#x5B8F;, &#x5728;&#x5904;&#x7406;&#x7248;&#x672C;&#x4F9D;&#x8D56;&#x7684;&#x9884;&#x5904;&#x7406;&#x6761;&#x4EF6;&#x8BED;&#x53E5;&#x4E0B;&#x975E;&#x5E38;&#x6709;&#x7528;&#x3002;</em></p>
-<p>EXPORT_SYMBOL (symbol);<br>EXPORT_SYMBOL_GPL (symbol);<br><em>&#x7528;&#x6765;&#x5BFC;&#x51FA;&#x5355;&#x4E2A;&#x7B26;&#x53F7;&#x5230;&#x5185;&#x6838;&#x7684;&#x5B8F;&#x3002;&#x7B2C;&#x4E8C;&#x4E2A;&#x5B8F;&#x5C06;&#x5BFC;&#x51FA;&#x7684;&#x7B26;&#x53F7;&#x7684;&#x4F7F;&#x7528;&#x9650;&#x4E8E;GPL&#x8BB8;&#x53EF;&#x8BC1;&#x4E0B;&#x7684;&#x6A21;&#x5757;&#x3002;</em></p>
-<p>MODULE_AUTHOR(author);<br>MODULE_DESCRIPTION(description);<br>MODULE_VERSION(version_string);<br>MODULE_DEVICE_TABLE(table_info);<br>MODULE_ALIAS(alternate_name);<br><em>&#x5728;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x4E2D;&#x6DFB;&#x52A0;&#x5173;&#x4E8E;&#x6A21;&#x5757;&#x7684;&#x6587;&#x6863;&#x4FE1;&#x606F;&#x3002;</em></p>
-<p>#include &lt;linux/init.h&gt;<br>module_init(init_function);<br>module_exit(exit_function);<br><em>&#x5B8F;&#x5B9A;&#x4E49;, &#x58F0;&#x660E;&#x4E00;&#x4E2A;&#x6A21;&#x5757;&#x7684;&#x521D;&#x59CB;&#x5316;&#x548C;&#x6E05;&#x9664;&#x51FD;&#x6570;&#x3002;</em></p>
-<p>#include &lt;linux/moduleparam.h&gt;<br>module_param(variable, type, perm);<br><em>&#x7528;&#x6765;&#x521B;&#x5EFA;&#x6A21;&#x5757;&#x53C2;&#x6570;&#x7684;&#x5B8F;, &#x7528;&#x6237;&#x53EF;&#x4EE5;&#x5728;&#x6A21;&#x5757;&#x52A0;&#x8F7D;&#x65F6;( &#x6216;&#x8005;&#x5BF9;&#x5185;&#x5EFA;&#x4EE3;&#x7801;&#x5F15;&#x5BFC;&#x65F6;)&#x8C03;&#x6574;&#x8FD9;&#x4E9B;&#x53C2;&#x6570;&#x7684;&#x503C;&#x3002;&#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x662F; bool, charp, int, invbool, short, ushort, uint, ulong, &#x6216;&#x8005; intarray&#x3002;</em></p>
-<h1 id="&#x6807;&#x8BB0;"><a href="#&#x6807;&#x8BB0;" class="headerlink" title="&#x6807;&#x8BB0;"></a>&#x6807;&#x8BB0;</h1><p><strong>init 
-</strong>initdata<br><strong>exit 
-</strong>exitdata<br><em>&#x4EC5;&#x7528;&#x4E8E;&#x6A21;&#x5757;&#x521D;&#x59CB;&#x5316;&#x6216;&#x6E05;&#x9664;&#x9636;&#x6BB5;&#x7684;&#x51FD;&#x6570;( <strong>init &#x548C; </strong>exit )&#x548C;&#x6570;&#x636E; (<strong>initdata &#x548C; </strong>exitdata)&#x6807;&#x8BB0;&#x3002;&#x6807;&#x8BB0;&#x4E3A;&#x521D;&#x59CB;&#x5316;&#x7684;&#x9879;&#x76EE;&#x4F1A;&#x5728;&#x521D;&#x59CB;&#x5316;&#x7ED3;&#x675F;&#x540E;&#x4E22;&#x5F03;&#xFF1B;&#x800C;&#x9000;&#x51FA;&#x9879;&#x76EE;&#x5728;&#x5185;&#x6838;&#x672A;&#x88AB;&#x914D;&#x7F6E;&#x4E3A;&#x53EF;&#x5378;&#x8F7D;&#x6A21;&#x5757;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x88AB;&#x4E22;&#x5F03;&#x3002;&#x5185;&#x6838;&#x901A;&#x8FC7;&#x5C06;&#x76F8;&#x5E94;&#x7684;&#x76EE;&#x6807;&#x5BF9;&#x8C61;&#x653E;&#x7F6E;&#x5728;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x7684;&#x7279;&#x6B8A;ELF&#x65AD;&#x79CD;&#x800C;&#x8BA9;&#x8FD9;&#x4E9B;&#x6807;&#x8BB0;&#x8D77;&#x4F5C;&#x7528;&#x3002;</em></p>
-<h1 id="&#x6A21;&#x5757;&#x6784;&#x5EFA;"><a href="#&#x6A21;&#x5757;&#x6784;&#x5EFA;" class="headerlink" title="&#x6A21;&#x5757;&#x6784;&#x5EFA;"></a>&#x6A21;&#x5757;&#x6784;&#x5EFA;</h1><p>obj-m<br><em>Makefile&#x4E2D;&#x4F7F;&#x7528;&#x7684;&#x7B26;&#x53F7;, &#x7528;&#x6765;&#x786E;&#x5B9A;&#x5728;&#x5F53;&#x524D;&#x76EE;&#x5F55;&#x4E2D;&#x5E94;&#x6784;&#x5EFA;&#x54EA;&#x4E9B;&#x6A21;&#x5757;&#x3002;</em></p>
-<p>vermagic.o<br><em>&#x5185;&#x6838;&#x6E90;&#x7801;&#x76EE;&#x5F55;&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x76EE;&#x6807;&#x6587;&#x4EF6;, &#x5B83;&#x63CF;&#x8FF0;&#x6A21;&#x5757;&#x7684;&#x6784;&#x9020;&#x73AF;&#x5883;&#x3002;</em></p>
-<h1 id="&#x6A21;&#x5757;&#x76EE;&#x5F55;"><a href="#&#x6A21;&#x5757;&#x76EE;&#x5F55;" class="headerlink" title="&#x6A21;&#x5757;&#x76EE;&#x5F55;"></a>&#x6A21;&#x5757;&#x76EE;&#x5F55;</h1><p>/sys/module<br>/proc/modules<br><em>/sys/module &#x662F;sysfs &#x76EE;&#x5F55;&#x5C42;&#x6B21;&#x7ED3;&#x6784;&#x4E2D;&#x5305;&#x62EC;&#x5F53;&#x524D;&#x5DF2;&#x52A0;&#x8F7D;&#x6A21;&#x5757;&#x7684;&#x76EE;&#x5F55;&#x3002; /proc/moudles &#x662F;&#x65E9;&#x671F;&#x7528;&#x6CD5;, &#x53EA;&#x5728;&#x5355;&#x4E2A;&#x6587;&#x4EF6;&#x4E2D;&#x5305;&#x62EC;&#x8FD9;&#x4E9B;&#x4FE1;&#x606F;&#xFF0C;&#x5176;&#x4E2D;&#x5305;&#x62EC;&#x4E86;&#x6A21;&#x5757;&#x540D;&#x79F0;, &#x6BCF;&#x4E2A;&#x6A21;&#x5757;&#x5360;&#x7528;&#x7684;&#x5185;&#x5B58;&#x603B;&#x91CF;&#x4EE5;&#x53CA;&#x4F7F;&#x7528;&#x8BA1;&#x6570;&#x7B49;&#x3002;&#x6BCF;&#x4E00;&#x884C;&#x6EDE;&#x540E;&#x8FD8;&#x8FFD;&#x52A0;&#x6709;&#x989D;&#x5916;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x7528;&#x6765;&#x6307;&#x5B9A;&#x6A21;&#x5757;&#x7684;&#x5F53;&#x524D;&#x6D3B;&#x52A8;&#x6807;&#x5FD7;&#x3002;</em></p>
-<h1 id="&#x5185;&#x6838;&#x51FD;&#x6570;"><a href="#&#x5185;&#x6838;&#x51FD;&#x6570;" class="headerlink" title="&#x5185;&#x6838;&#x51FD;&#x6570;"></a>&#x5185;&#x6838;&#x51FD;&#x6570;</h1><p>#include &lt;linux/kernel.h&gt;<br>int printk(const char * fmt, &#x2026;);<br><em>&#x5728;&#x5185;&#x6838;&#x4E2D;&#x6253;&#x5370;&#x4FE1;&#x606F;&#x4E0D;&#x80FD;&#x4F7F;&#x7528;printf&#xFF0C;&#x9700;&#x8981;&#x4F7F;&#x7528;printk&#x3002;</em></p>
-<h1 id="&#x6A21;&#x5757;&#x53D8;&#x91CF;"><a href="#&#x6A21;&#x5757;&#x53D8;&#x91CF;" class="headerlink" title="&#x6A21;&#x5757;&#x53D8;&#x91CF;"></a>&#x6A21;&#x5757;&#x53D8;&#x91CF;</h1><p>struct task_struct *current;<br><em>&#x5F53;&#x524D;&#x8FDB;&#x7A0B;&#x3002;</em></p>
-<p>current-&gt;pid<br>current-&gt;comm<br><em>&#x8FDB;&#x7A0B; ID &#x548C; &#x5F53;&#x524D;&#x8FDB;&#x7A0B;&#x7684;&#x547D;&#x4EE4;&#x540D;&#x3002;</em></p>
-<h1 id="&#x6A21;&#x5757;&#x5DE5;&#x5177;"><a href="#&#x6A21;&#x5757;&#x5DE5;&#x5177;" class="headerlink" title="&#x6A21;&#x5757;&#x5DE5;&#x5177;"></a>&#x6A21;&#x5757;&#x5DE5;&#x5177;</h1><p>insmod<br>modprobe<br>rmmod<br><em>&#x7528;&#x6237;&#x7A7A;&#x95F4;&#x5DE5;&#x5177;, &#x52A0;&#x8F7D;&#x6A21;&#x5757;&#x5230;&#x8FD0;&#x884C;&#x4E2D;&#x7684;&#x5185;&#x6838;&#x4EE5;&#x53CA;&#x53BB;&#x9664;&#x5B83;&#x4EEC;&#x3002;</em></p>
+<h1 id="&#x5934;&#x6587;&#x4EF6;"><a href="#&#x5934;&#x6587;&#x4EF6;" class="headerlink" title="&#x5934;&#x6587;&#x4EF6;"></a>&#x5934;&#x6587;&#x4EF6;</h1><p>#include &lt;linux/sched.h&gt;  </p>
+<blockquote>
+<p>&#x6700;&#x91CD;&#x8981;&#x7684;&#x5934;&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x3002;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x5305;&#x542B;&#x9A71;&#x52A8;&#x7A0B;&#x5E8F;&#x4F7F;&#x7528;&#x7684;&#x5927;&#x591A;&#x6570;&#x5185;&#x6838; API &#x7684;&#x5B9A;&#x4E49;, &#x5305;&#x62EC;&#x7761;&#x7720;&#x51FD;&#x6570;&#x548C;&#x8BB8;&#x591A;&#x53D8;&#x91CF;&#x58F0;&#x660E;&#x3002;</p>
+</blockquote>
+<p>#include &lt;linux/module.h&gt; </p>
+<blockquote>
+<p>&#x5FC5;&#x9700;&#x7684;&#x5934;&#x6587;&#x4EF6;. &#x5B83;&#x5FC5;&#x987B;&#x5728;&#x4E00;&#x4E2A;&#x6A21;&#x5757;&#x6E90;&#x7801;&#x4E2D;&#x5305;&#x542B;&#x3002;</p>
+</blockquote>
+<p>#include &lt;linux/version.h&gt; </p>
+<blockquote>
+<p>&#x5305;&#x542B;&#x6240;&#x6784;&#x9020;&#x5185;&#x6838;&#x7248;&#x672C;&#x4FE1;&#x606F;&#x7684;&#x5934;&#x6587;&#x4EF6;&#x3002;</p>
+</blockquote>
+<h1 id="&#x5B8F;"><a href="#&#x5B8F;" class="headerlink" title="&#x5B8F;"></a>&#x5B8F;</h1><p>LINUX_VERSION_CODE </p>
+<blockquote>
+<p>&#x6574;&#x578B;&#x5B8F;, &#x5728;&#x5904;&#x7406;&#x7248;&#x672C;&#x4F9D;&#x8D56;&#x7684;&#x9884;&#x5904;&#x7406;&#x6761;&#x4EF6;&#x8BED;&#x53E5;&#x4E0B;&#x975E;&#x5E38;&#x6709;&#x7528;&#x3002;</p>
+</blockquote>
+<p>EXPORT_SYMBOL (symbol);<br>EXPORT_SYMBOL_GPL (symbol); </p>
+<blockquote>
+<p>&#x7528;&#x6765;&#x5BFC;&#x51FA;&#x5355;&#x4E2A;&#x7B26;&#x53F7;&#x5230;&#x5185;&#x6838;&#x7684;&#x5B8F;&#x3002;&#x7B2C;&#x4E8C;&#x4E2A;&#x5B8F;&#x5C06;&#x5BFC;&#x51FA;&#x7684;&#x7B26;&#x53F7;&#x7684;&#x4F7F;&#x7528;&#x9650;&#x4E8E;GPL&#x8BB8;&#x53EF;&#x8BC1;&#x4E0B;&#x7684;&#x6A21;&#x5757;&#x3002;</p>
+</blockquote>
+<p>MODULE_AUTHOR(author);<br>MODULE_DESCRIPTION(description);<br>MODULE_VERSION(version_string);<br>MODULE_DEVICE_TABLE(table_info);<br>MODULE_ALIAS(alternate_name); </p>
+<blockquote>
+<p>&#x5728;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x4E2D;&#x6DFB;&#x52A0;&#x5173;&#x4E8E;&#x6A21;&#x5757;&#x7684;&#x6587;&#x6863;&#x4FE1;&#x606F;&#x3002;</p>
+</blockquote>
+<p>#include &lt;linux/init.h&gt;<br>module_init(init_function);<br>module_exit(exit_function); </p>
+<blockquote>
+<p>&#x5B8F;&#x5B9A;&#x4E49;, &#x58F0;&#x660E;&#x4E00;&#x4E2A;&#x6A21;&#x5757;&#x7684;&#x521D;&#x59CB;&#x5316;&#x548C;&#x6E05;&#x9664;&#x51FD;&#x6570;&#x3002;</p>
+</blockquote>
+<p>#include &lt;linux/moduleparam.h&gt;<br>module_param(variable, type, perm); </p>
+<blockquote>
+<p>&#x7528;&#x6765;&#x521B;&#x5EFA;&#x6A21;&#x5757;&#x53C2;&#x6570;&#x7684;&#x5B8F;, &#x7528;&#x6237;&#x53EF;&#x4EE5;&#x5728;&#x6A21;&#x5757;&#x52A0;&#x8F7D;&#x65F6;( &#x6216;&#x8005;&#x5BF9;&#x5185;&#x5EFA;&#x4EE3;&#x7801;&#x5F15;&#x5BFC;&#x65F6;)&#x8C03;&#x6574;&#x8FD9;&#x4E9B;&#x53C2;&#x6570;&#x7684;&#x503C;&#x3002;&#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x662F; bool, charp, int, invbool, short, ushort, uint, ulong, &#x6216;&#x8005; intarray&#x3002;</p>
+</blockquote>
+<h1 id="&#x6807;&#x8BB0;"><a href="#&#x6807;&#x8BB0;" class="headerlink" title="&#x6807;&#x8BB0;"></a>&#x6807;&#x8BB0;</h1><p>__init<br>__initdata<br>__exit<br>__exitdata </p>
+<blockquote>
+<p>&#x4EC5;&#x7528;&#x4E8E;&#x6A21;&#x5757;&#x521D;&#x59CB;&#x5316;&#x6216;&#x6E05;&#x9664;&#x9636;&#x6BB5;&#x7684;&#x51FD;&#x6570;( __init &#x548C; __exit )&#x548C;&#x6570;&#x636E; (__initdata &#x548C; __exitdata)&#x6807;&#x8BB0;&#x3002;&#x6807;&#x8BB0;&#x4E3A;&#x521D;&#x59CB;&#x5316;&#x7684;&#x9879;&#x76EE;&#x4F1A;&#x5728;&#x521D;&#x59CB;&#x5316;&#x7ED3;&#x675F;&#x540E;&#x4E22;&#x5F03;&#xFF1B;&#x800C;&#x9000;&#x51FA;&#x9879;&#x76EE;&#x5728;&#x5185;&#x6838;&#x672A;&#x88AB;&#x914D;&#x7F6E;&#x4E3A;&#x53EF;&#x5378;&#x8F7D;&#x6A21;&#x5757;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x88AB;&#x4E22;&#x5F03;&#x3002;&#x5185;&#x6838;&#x901A;&#x8FC7;&#x5C06;&#x76F8;&#x5E94;&#x7684;&#x76EE;&#x6807;&#x5BF9;&#x8C61;&#x653E;&#x7F6E;&#x5728;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x7684;&#x7279;&#x6B8A;ELF&#x65AD;&#x79CD;&#x800C;&#x8BA9;&#x8FD9;&#x4E9B;&#x6807;&#x8BB0;&#x8D77;&#x4F5C;&#x7528;&#x3002;</p>
+</blockquote>
+<h1 id="&#x6A21;&#x5757;&#x6784;&#x5EFA;"><a href="#&#x6A21;&#x5757;&#x6784;&#x5EFA;" class="headerlink" title="&#x6A21;&#x5757;&#x6784;&#x5EFA;"></a>&#x6A21;&#x5757;&#x6784;&#x5EFA;</h1><p>obj-m </p>
+<blockquote>
+<p>Makefile&#x4E2D;&#x4F7F;&#x7528;&#x7684;&#x7B26;&#x53F7;, &#x7528;&#x6765;&#x786E;&#x5B9A;&#x5728;&#x5F53;&#x524D;&#x76EE;&#x5F55;&#x4E2D;&#x5E94;&#x6784;&#x5EFA;&#x54EA;&#x4E9B;&#x6A21;&#x5757;&#x3002;</p>
+</blockquote>
+<p>vermagic.o </p>
+<blockquote>
+<p>&#x5185;&#x6838;&#x6E90;&#x7801;&#x76EE;&#x5F55;&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x76EE;&#x6807;&#x6587;&#x4EF6;, &#x5B83;&#x63CF;&#x8FF0;&#x6A21;&#x5757;&#x7684;&#x6784;&#x9020;&#x73AF;&#x5883;&#x3002;</p>
+</blockquote>
+<h1 id="&#x6A21;&#x5757;&#x76EE;&#x5F55;"><a href="#&#x6A21;&#x5757;&#x76EE;&#x5F55;" class="headerlink" title="&#x6A21;&#x5757;&#x76EE;&#x5F55;"></a>&#x6A21;&#x5757;&#x76EE;&#x5F55;</h1><p>/sys/module<br>/proc/modules </p>
+<blockquote>
+<p>/sys/module &#x662F;sysfs &#x76EE;&#x5F55;&#x5C42;&#x6B21;&#x7ED3;&#x6784;&#x4E2D;&#x5305;&#x62EC;&#x5F53;&#x524D;&#x5DF2;&#x52A0;&#x8F7D;&#x6A21;&#x5757;&#x7684;&#x76EE;&#x5F55;&#x3002; /proc/moudles &#x662F;&#x65E9;&#x671F;&#x7528;&#x6CD5;, &#x53EA;&#x5728;&#x5355;&#x4E2A;&#x6587;&#x4EF6;&#x4E2D;&#x5305;&#x62EC;&#x8FD9;&#x4E9B;&#x4FE1;&#x606F;&#xFF0C;&#x5176;&#x4E2D;&#x5305;&#x62EC;&#x4E86;&#x6A21;&#x5757;&#x540D;&#x79F0;, &#x6BCF;&#x4E2A;&#x6A21;&#x5757;&#x5360;&#x7528;&#x7684;&#x5185;&#x5B58;&#x603B;&#x91CF;&#x4EE5;&#x53CA;&#x4F7F;&#x7528;&#x8BA1;&#x6570;&#x7B49;&#x3002;&#x6BCF;&#x4E00;&#x884C;&#x6EDE;&#x540E;&#x8FD8;&#x8FFD;&#x52A0;&#x6709;&#x989D;&#x5916;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x7528;&#x6765;&#x6307;&#x5B9A;&#x6A21;&#x5757;&#x7684;&#x5F53;&#x524D;&#x6D3B;&#x52A8;&#x6807;&#x5FD7;&#x3002;</p>
+</blockquote>
+<h1 id="&#x5185;&#x6838;&#x51FD;&#x6570;"><a href="#&#x5185;&#x6838;&#x51FD;&#x6570;" class="headerlink" title="&#x5185;&#x6838;&#x51FD;&#x6570;"></a>&#x5185;&#x6838;&#x51FD;&#x6570;</h1><p>#include &lt;linux/kernel.h&gt;<br>int printk(const char * fmt, &#x2026;);</p>
+<blockquote>
+<p>&#x5728;&#x5185;&#x6838;&#x4E2D;&#x6253;&#x5370;&#x4FE1;&#x606F;&#x4E0D;&#x80FD;&#x4F7F;&#x7528;printf&#xFF0C;&#x9700;&#x8981;&#x4F7F;&#x7528;printk&#x3002;</p>
+</blockquote>
+<h1 id="&#x6A21;&#x5757;&#x53D8;&#x91CF;"><a href="#&#x6A21;&#x5757;&#x53D8;&#x91CF;" class="headerlink" title="&#x6A21;&#x5757;&#x53D8;&#x91CF;"></a>&#x6A21;&#x5757;&#x53D8;&#x91CF;</h1><p>struct task_struct *current; </p>
+<blockquote>
+<p>&#x5F53;&#x524D;&#x8FDB;&#x7A0B;&#x3002;</p>
+</blockquote>
+<p>current-&gt;pid<br>current-&gt;comm </p>
+<blockquote>
+<p>&#x8FDB;&#x7A0B; ID &#x548C; &#x5F53;&#x524D;&#x8FDB;&#x7A0B;&#x7684;&#x547D;&#x4EE4;&#x540D;&#x3002;</p>
+</blockquote>
+<h1 id="&#x6A21;&#x5757;&#x5DE5;&#x5177;"><a href="#&#x6A21;&#x5757;&#x5DE5;&#x5177;" class="headerlink" title="&#x6A21;&#x5757;&#x5DE5;&#x5177;"></a>&#x6A21;&#x5757;&#x5DE5;&#x5177;</h1><p>insmod<br>modprobe<br>rmmod</p>
+<blockquote>
+<p>&#x7528;&#x6237;&#x7A7A;&#x95F4;&#x5DE5;&#x5177;, &#x52A0;&#x8F7D;&#x6A21;&#x5757;&#x5230;&#x8FD0;&#x884C;&#x4E2D;&#x7684;&#x5185;&#x6838;&#x4EE5;&#x53CA;&#x53BB;&#x9664;&#x5B83;&#x4EEC;&#x3002;</p>
+</blockquote>
 
       
     </div>
@@ -145,6 +191,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2017/05/17/Linux驱动快速参考/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          Linux驱动快速参考
+        
+      </div>
+    </a>
   
   
     <a href="/2017/05/02/网络协议栈与网卡驱动对接简单描述/" id="article-nav-older" class="article-nav-link-wrap">
@@ -169,7 +224,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/计算机/">计算机</a><span class="category-list-count">40</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/计算机/Android/">Android</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机/Camera/">Camera</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机/Hacker/">Hacker</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机/XModeEngine脚本引擎/">XModeEngine脚本引擎</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机/无线通信/">无线通信</a><span class="category-list-count">4</span></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/计算机/">计算机</a><span class="category-list-count">41</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/计算机/Android/">Android</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机/Camera/">Camera</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机/Hacker/">Hacker</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机/Linux/">Linux</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机/XModeEngine脚本引擎/">XModeEngine脚本引擎</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机/无线通信/">无线通信</a><span class="category-list-count">4</span></li></ul></li></ul>
     </div>
   </div>
 
@@ -179,7 +234,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android系统/">Android系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Camera/">Camera</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HttpURLConnection/">HttpURLConnection</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OkHttp/">OkHttp</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Okio/">Okio</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Openfire/">Openfire</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开源项目/">开源项目</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能优化/">性能优化</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/无线网络/">无线网络</a><span class="tag-list-count">4</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android系统/">Android系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Camera/">Camera</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HttpURLConnection/">HttpURLConnection</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OkHttp/">OkHttp</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Okio/">Okio</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Openfire/">Openfire</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开源项目/">开源项目</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能优化/">性能优化</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/无线网络/">无线网络</a><span class="tag-list-count">4</span></li></ul>
     </div>
   </div>
 
@@ -188,7 +243,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android系统/" style="font-size: 11.43px;">Android系统</a> <a href="/tags/Camera/" style="font-size: 18.57px;">Camera</a> <a href="/tags/HttpURLConnection/" style="font-size: 10px;">HttpURLConnection</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/OkHttp/" style="font-size: 12.86px;">OkHttp</a> <a href="/tags/Okio/" style="font-size: 11.43px;">Okio</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/开源项目/" style="font-size: 15.71px;">开源项目</a> <a href="/tags/性能优化/" style="font-size: 17.14px;">性能优化</a> <a href="/tags/无线网络/" style="font-size: 14.29px;">无线网络</a>
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android系统/" style="font-size: 11.43px;">Android系统</a> <a href="/tags/Camera/" style="font-size: 18.57px;">Camera</a> <a href="/tags/HttpURLConnection/" style="font-size: 10px;">HttpURLConnection</a> <a href="/tags/Linux/" style="font-size: 11.43px;">Linux</a> <a href="/tags/OkHttp/" style="font-size: 12.86px;">OkHttp</a> <a href="/tags/Okio/" style="font-size: 11.43px;">Okio</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/开源项目/" style="font-size: 15.71px;">开源项目</a> <a href="/tags/性能优化/" style="font-size: 17.14px;">性能优化</a> <a href="/tags/无线网络/" style="font-size: 14.29px;">无线网络</a>
     </div>
   </div>
 
@@ -197,7 +252,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -207,6 +262,10 @@
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/05/17/Linux驱动快速参考/">Linux驱动快速参考</a>
+          </li>
         
           <li>
             <a href="/2017/05/10/Linux模块构建与运行快速参考/">Linux模块构建与运行快速参考</a>
@@ -222,10 +281,6 @@
         
           <li>
             <a href="/2017/01/11/Android Wifi服务框架描述/">Android Wifi服务框架描述</a>
-          </li>
-        
-          <li>
-            <a href="/2017/01/05/IEEE 802.11无线局域网标准简介/">IEEE 802.11无线局域网标准简介</a>
           </li>
         
       </ul>
